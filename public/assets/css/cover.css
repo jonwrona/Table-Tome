@@ -70,6 +70,7 @@ body#background {
 /*
  * Header
  */
+
 .masthead-brand {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -108,7 +109,7 @@ body#background {
     float: left;
   }
   .masthead-nav {
-    float: right;
+    float: center;
   }
 }
 
@@ -139,7 +140,49 @@ body#background {
  * Affix and center
  */
 
-@media (min-width: 150px) {
+@media (min-width: 0px) {
+  .site-wrapper-inner {
+    vertical-align: middle;
+  }
+  .masthead {
+    position: fixed;
+    top: 0;
+  }
+  .mastfoot {
+    position: fixed;
+    bottom: 0;
+  }
+  /* Handle the widths */
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 95%; /* Must be percentage or pixels for horizontal alignment */
+  }
+}
+
+@media (min-width: 768p x) {
+  .site-wrapper-inner {
+    vertical-align: middle;
+  }
+
+  .masthead {
+    position: fixed;
+    top: 0;
+  }
+  .mastfoot {
+    position: fixed;
+    bottom: 0;
+  }
+
+  /* Handle the widths */
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 80%; /* Must be percentage or pixels for horizontal alignment */
+  }
+}
+
+@media (min-width: 600px) {
   /* Pull out the header and footer */
   .masthead {
     position: fixed;
@@ -157,7 +200,7 @@ body#background {
   .masthead,
   .mastfoot,
   .cover-container {
-    width: 100%; /* Must be percentage or pixels for horizontal alignment */
+    width: 70%; /* Must be percentage or pixels for horizontal alignment */
   }
 }
 
