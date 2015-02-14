@@ -112,7 +112,6 @@ body#background {
   }
 }
 
-
 /*
  * Cover
  */
@@ -140,7 +139,7 @@ body#background {
  * Affix and center
  */
 
-@media (min-width: 768px) {
+@media (min-width: 150px) {
   /* Pull out the header and footer */
   .masthead {
     position: fixed;
