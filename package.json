@@ -1,0 +1,16 @@
+{
+  "name": "Table Tome",
+  "version": "0.1.0",
+  "description": "A Dungeons & Dragons 5th edition toolbox.",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonwrona/Table-Tome.git"
+  },
+  "author": "Jonathan Wrona",
+  "license": "Apache License, Version 2.0",
+  "bugs": {
+    "url": "https://github.com/jonwrona/Table-Tome/issues"
+  },
+  "homepage": "https://github.com/jonwrona/Table-Tome"
+}
