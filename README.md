@@ -1,10 +1,10 @@
-# TOME
+# TABLE TOME
 
-<em>Tome</em> is a Dungeons &amp; Dragons 5th edition toolbox.
+<em>Table Tome</em> is a Dungeons &amp; Dragons 5th edition toolbox.
 Its goal is to increase the speed at which players can access
 important information while crawling dungeons, in order to encourage
 more exciting combat and role playing by reducing the time spent
-turning pages. It is built using MEAN, a full javascript stack.
+turning pages. It is built with MEAN, a full javascript stack.
 
 
 ## Features
