@@ -6,7 +6,7 @@ var bcrypt = require('bcrypt-nodejs');
 var UserSchema = new Schema({
 	username: { type: String, required: true, index: { unique: true } },
 	password: { type: String, required: true, select: false },
-	permissions: { type: String, required: true }
+	permissions: { type: String, default: 'basic', required: true }
 	// custom spell slots will be added here?
 });
 
