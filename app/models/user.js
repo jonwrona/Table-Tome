@@ -2,17 +2,20 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 
-// the following are the user permission levels
-//   basic  :  access to only basic rules
-//	 full   :  access to all content from dnd players handbook
-//   paid   :  access to custom spellbooks and additional features
-//   admin  :  access to full app functionality including administration
+
+// accessContent defines whether a user has access to official dnd content other
+//   than the basic rules.
+// accessCustom defines whether a user has access to creating custom content on
+//   TableTome. A paid user can do this.
+// admin users have access to everything by default including administration tools
 
 // user schema 
 var UserSchema = new Schema({
 	username: { type: String, required: true, index: { unique: true } },
 	password: { type: String, required: true, select: false },
-	permissions: { type: String, default: 'basic', required: true }
+	accessContent: { type: Boolean, default: false, required: true },
+	accessCustom: {type: Boolean, default: false, required: true},
+	admin: {type: Boolean, default: false, required: true},
 	// custom spell slots will be added here?
 });
 

@@ -78,14 +78,17 @@ module.exports = function(app, express) {
 		var user = new User();
 		user.username = req.body.username;
 		user.password = req.body.password;
+		if (req.body.admin) user.admin = req.body.admin;
+		if (req.body.accessContent) user.accessContent = req.body.accessContent;
+		if (req.body.accessCustom) user.accessCustom = req.body.accessCustom;
 		user.save(function(err){
-			if (err) res.send(err);
+			if (err) return res.send(err);
 			res.json({ message: 'User created!' });
 		});
 	})
 	.get(function(req, res) {
 		User.find(function(err, users){
-			if (err) res.send(err);
+			if (err) return res.send(err);
 			res.json(users);
 		});
 	});
@@ -95,18 +98,20 @@ module.exports = function(app, express) {
 	apiRouter.route('/users/:user_id')
 	.get(function(req, res) {
 		User.findById(req.params.user_id, function(err, user) {
-			if (err) res.send(err);
+			if (err) return res.send(err);
 			res.json(user);
 		});
 	})
 	.put(function(req, res) {
 		User.findById(req.params.user_id, function(err, user) {
-			if (err) res.send(err);
+			if (err) return res.send(err);
 			if (req.body.username) user.username = req.body.username;
 			if (req.body.password) user.password = req.body.password;
-			if (req.body.permissions) user.permissions = req.body.permissions;
+			if (req.body.admin) user.admin = req.body.admin;
+			if (req.body.accessContent) user.accessContent = req.body.accessContent;
+			if (req.body.accessCustom) user.accessCustom = req.body.accessCustom;
 			user.save(function(err) {
-				if (err) res.send(err);
+				if (err) return res.send(err);
 				res.json({ message: 'User updated!' });
 			});
 		});
@@ -115,8 +120,17 @@ module.exports = function(app, express) {
 		User.remove({
 			_id: req.params.user_id
 		}, function(err, user) {
-			if (err) res.send(err);
+			if (err) return res.send(err);
 			res.json({ message: 'Successfully deleted' });
+		});
+	});
+
+	apiRouter.route('/users/:user_id/spells')
+	.get(function(req, res) {
+		User.findById(req.params.user_id, function(err, user) {
+			if (err) return res.send(err);
+			// get custom spells here
+			res.json({ message: 'Getting users custom spells!' });
 		});
 	});
 
@@ -131,10 +145,10 @@ module.exports = function(app, express) {
 	apiRouter.route('/spells')
 	.post(function(req, res) {
 		var spell = new Spell();
-		spell.userlvl = req.body.userlvl;
+		spell.basic = req.body.basic;
 		spell.name = req.body.name;
 		spell.level = req.body.level;
-		spell.schools = req.body.schools;
+		spell.school = req.body.school;
 		spell.ritual = req.body.ritual;
 		spell.classes = req.body.classes;
 		spell.castingTime = req.body.castingTime;
@@ -145,14 +159,34 @@ module.exports = function(app, express) {
 		spell.material = req.body.material;
 		spell.description = req.body.description;
 		spell.page = req.body.page;
+
 		spell.save(function(err) {
-			if (err) res.send(err);
+			if (err) return res.send(err);
 			res.json({ message: 'Spell created!' });
 		});
 	})
 	.get(function(req, res) {
 		Spell.find(function(err, spells){
-			if (err) res.send(err);
+			if (err) return res.send(err);
+			res.json(spells);
+		});
+	});
+
+	// on routes that end in '/spells/:contentType'
+	// ----------------------------------------------
+	apiRouter.route('/spells/:contentType')
+	.get(function(req, res) {
+		basic = false;
+		if (req.params.contentType == 'basic') {
+			basic = true;
+		} else if (req.params.contentType != 'standard') {
+			res.json({
+				success: false,
+				message: 'contentType undefined.'
+			});
+		}
+		Spell.find({ 'basic': basic }, function(err, spells) {
+			if (err) return res.send(err);
 			res.json(spells);
 		});
 	});
