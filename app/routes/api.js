@@ -145,7 +145,10 @@ module.exports = function(app, express) {
 	apiRouter.route('/spells')
 	.post(function(req, res) {
 		var spell = new Spell();
-		spell.basic = req.body.basic;
+		spell.permissionLvl = req.body.permissionLvl
+		spell.custom = req.body.custom;
+		if (spell.custom) spell.author = req.body.author;
+		if (!spell.custom) spell.books = req.body.books;
 		spell.name = req.body.name;
 		spell.level = req.body.level;
 		spell.school = req.body.school;
@@ -158,7 +161,6 @@ module.exports = function(app, express) {
 		spell.somatic = req.body.somatic;
 		spell.material = req.body.material;
 		spell.description = req.body.description;
-		spell.page = req.body.page;
 
 		spell.save(function(err) {
 			if (err) return res.send(err);
@@ -174,18 +176,9 @@ module.exports = function(app, express) {
 
 	// on routes that end in '/spells/:contentType'
 	// ----------------------------------------------
-	apiRouter.route('/spells/:contentType')
+	apiRouter.route('/spells/:permLvl')
 	.get(function(req, res) {
-		basic = false;
-		if (req.params.contentType == 'basic') {
-			basic = true;
-		} else if (req.params.contentType != 'standard') {
-			res.json({
-				success: false,
-				message: 'contentType undefined.'
-			});
-		}
-		Spell.find({ 'basic': basic }, function(err, spells) {
+		Spell.find({ 'permissionLvl': req.params.permLvl }, function(err, spells) {
 			if (err) return res.send(err);
 			res.json(spells);
 		});
