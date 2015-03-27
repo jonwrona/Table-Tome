@@ -25,7 +25,7 @@ angular.module('authService', [])
 	};
 
 	// get the logged in user
-	authFactor.getUser = function() {
+	authFactory.getUser = function() {
 		if (AuthToken.getToken())
 			return $http.get('/api/me', { cache: true });
 		else
@@ -35,7 +35,7 @@ angular.module('authService', [])
 	// return
 	return authFactory;
 })
-.factory('AuthToken', function($window)) {
+.factory('AuthToken', function($window) {
 	var authTokenFactory = {};
 
 	// get the token from local storage

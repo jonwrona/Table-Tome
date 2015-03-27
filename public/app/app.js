@@ -1,13 +1,4 @@
-angular.module('app', [
-	'ngAnimate',
-	'app.routes',
-
-	'authService',
-	'userService',
-
-	'mainCtrl',
-	'spellsCtrl',
-])
+angular.module('app', ['ngAnimate', 'app.routes', 'authService', 'mainCtrl'])
 .config(function($httpProvider) {
 	$httpProvider.interceptors.push('AuthInterceptor');
 });

@@ -1,0 +1,19 @@
+main 					{
+	padding-top:30px;	
+}
+
+/* HEADER 
+===================== */
+header .navbar 		{ 
+	border-radius:0;
+}
+
+/* NGANIMATE
+====================== */
+
+/* show and hide */
+.show-hide-message.ng-hide-remove {
+	-webkit-animation:zoomIn 0.3s both ease;
+	-moz-animation:zoomIn 0.3s both ease;
+	animation:zoomIn 0.3s both ease;
+}

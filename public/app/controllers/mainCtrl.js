@@ -4,25 +4,29 @@ angular.module('mainCtrl', [])
 
 	// get info if logged in
 	vm.loggedIn = Auth.isLoggedIn();
+	console.log(vm.loggedIn);
 
 	// check to see if logged in on every request
 	$rootScope.$on('$routeChangeStart', function() {
 		vm.loggedIn = Auth.isLoggedIn();
-		Auth.getUser()
-		.success(function(data) {
+		Auth.getUser().then(function(data) {
 			vm.user = data;
 		});
 	});
 
 	vm.doLogin = function() {
+		vm.processing = true;
 		Auth.login(vm.loginData.username, vm.loginData.password)
 		.success(function(data) {
-			// if a user successfully logs in?
+			if (data.success) $location.path('/');
+			else vm.error = data.message;
+			console.log(data.message);
 		});
+		vm.processing = false;
 	};
 
 	vm.doLogout = function() {
 		Auth.logout();
-		$location.ath('/login');
+		$location.path('/login');
 	};
 });
