@@ -8,7 +8,7 @@
     <base href="/">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/sandstone/bootstrap.min.css" >
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" >
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" >
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" >
     <link rel="stylesheet" href="assets/css/style.css" >
@@ -33,10 +33,9 @@
 </head>
 
 <body ng-app="app" ng-controllers="mainController as main">
-	
 
     <header>
-    	<div class="navbar">
+    	<div class="navbar navbar-inverse navbar-static-top">
     		<div class="container">
     			<div class="navbar-header">
     				<a href="/" class="navbar-brand"><i class="fa fa-fire"></i></span> Table Tome</a>
@@ -57,9 +56,15 @@
     <main class="container">
     	<!-- ANGULAR VIEWS -->
     	<div ng-view></div>
+
+        <hr>
+
+        <footer>
+            <p>&copy; Company 2014</p>
+        </footer>
     </main>
 
-
+    
 </body>
 
 </html>

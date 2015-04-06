@@ -1,7 +1,3 @@
-main 					{
-	padding-top:30px;	
-}
-
 /* HEADER 
 ===================== */
 header .navbar 		{ 
@@ -16,4 +12,23 @@ header .navbar 		{
 	-webkit-animation:zoomIn 0.3s both ease;
 	-moz-animation:zoomIn 0.3s both ease;
 	animation:zoomIn 0.3s both ease;
+}
+
+
+/* medium+ screen sizes */
+@media (min-width:992px) {
+    .desktop-only {
+        display:block !important;
+    }
+}
+ 
+/* small screen sizes */
+@media (max-width: 991px) {
+    .mobile-only {
+        display:block !important;
+    }
+ 
+    .desktop-only {
+        display:none !important;
+    }
 }
