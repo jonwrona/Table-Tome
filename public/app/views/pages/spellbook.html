@@ -68,7 +68,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Classes <span class="caret"></span></a>
                                 <ul class="dropdown-menu noclose">
-                                    <li>
+                                    <li> 
                                         <input type="checkbox" id="bard" ng-click="spellCtrl.includeClass('Bard')">
                                         <label for="bard">Bard</label>
                                     </li>
@@ -170,7 +170,7 @@
                         </thead>
 
                         <tbody data-link="row" class="rowlink">
-                        	<tr ng-repeat="spell in items | filter:search | filter:levelFilter | filter:classFilter | filter:schoolFilter">
+                        	<tr ng-repeat="spell in spellCtrl.items | filter:search | filter:spellCtrl.levelFilter | filter:spellCtrl.classFilter | filter:spellCtrl.schoolFilter">
                         		<td><a href ng-click="spellCtrl.setSpell(spell)" data-toggle="modal" data-target="#spellModal">{{spell.name}}</a></td>
                         		<td>{{spell.level}}</td>
                                 <td>{{spell.school}}</td>
@@ -194,7 +194,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times; </span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="myModalLabel">{{modalSpell.name | uppercase}} <small>... level {{modalSpell.level}}, {{modalSpell.school}}</small></h4>
+                        <h4 class="modal-title" id="myModalLabel">{{spellCtrl.modalSpell.name | uppercase}} <small>... level {{spellCtrl.modalSpell.level}}, {{spellCtrl.modalSpell.school}}</small></h4>
                     </div>
                     <div class="modal-body">
                     </div>

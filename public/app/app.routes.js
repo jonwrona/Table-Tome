@@ -14,7 +14,7 @@ angular.module('app.routes', ['ngRoute'])
 		templateUrl: 'app/views/pages/spellbook.html',
 		controller: 'spellController',
 		controllerAs: 'spellCtrl'
-	})
+	});
 
 	$locationProvider.html5Mode(true);
 });
