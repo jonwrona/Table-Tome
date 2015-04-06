@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/jonwrona/Table-Tome/issues"
   },
-  "homepage": "https://github.com/jonwrona/Table-Tome",
+  "homepage": "http://tabletome.com",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.12.0",

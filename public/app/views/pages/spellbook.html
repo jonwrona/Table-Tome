@@ -1,0 +1,204 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><i class="fa fa-magic"></i> Spellbook</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <nav class="navbar navbar" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <b1 class="navbar-brand">Filtering</b1>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <p class="navbar-text"><em>Levels:</em></p>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Levels <span class="caret"></span></a>
+                                <ul class="dropdown-menu noclose">
+                                    <li>
+                                        <input type="checkbox" id="cantrip" ng-click="spellCtrl.includeLevel('0')">
+                                        <label for="cantrip">Cantrip</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="lvl1" ng-click="spellCtrl.includeLevel('1')">
+                                        <label for="lvl1">Level 1</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="lvl2" ng-click="spellCtrl.includeLevel('2')">
+                                        <label for="lvl2">Level 2</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="lvl3" ng-click="spellCtrl.includeLevel('3')">
+                                        <label for="lvl3">Level 3</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="lvl4" ng-click="spellCtrl.includeLevel('4')">
+                                        <label for="lvl4">Level 4</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="lvl5" ng-click="spellCtrl.includeLevel('5')">
+                                        <label for="lvl5">Level 5</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="lvl6" ng-click="spellCtrl.includeLevel('6')">
+                                        <label for="lvl6">Level 6</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="lvl7" ng-click="spellCtrl.includeLevel('7')">
+                                        <label for="lvl7">Level 7</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="lvl8" ng-click="spellCtrl.includeLevel('8')">
+                                        <label for="lvl8">Level 8</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="lvl9" ng-click="spellCtrl.includeLevel('9')">
+                                        <label for="lvl9">Level 9</label>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p class="navbar-text"><em>Classes:</em>
+                                </p>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Classes <span class="caret"></span></a>
+                                <ul class="dropdown-menu noclose">
+                                    <li>
+                                        <input type="checkbox" id="bard" ng-click="spellCtrl.includeClass('Bard')">
+                                        <label for="bard">Bard</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="cleric" ng-click="spellCtrl.includeClass('Cleric')">
+                                        <label for="cleric">Cleric</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="druid" ng-click="spellCtrl.includeClass('Druid')">
+                                        <label for="druid">Druid</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="paladin" ng-click="spellCtrl.includeClass('Paladin')">
+                                        <label for="paladin">Paladin</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="ranger" ng-click="spellCtrl.includeClass('Ranger')">
+                                        <label for="ranger">Ranger</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="sorcerer" ng-click="spellCtrl.includeClass('Sorcerer')">
+                                        <label for="sorcerer">Sorcerer</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="warlock" ng-click="spellCtrl.includeClass('Warlock')">
+                                        <label for="warlock">Warlock</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="wizard" ng-click="spellCtrl.includeClass('Wizard')">
+                                        <label for="wizard">Wizard</label>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p class="navbar-text"><em>Schools:</em>
+                                </p>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Schools<s></s><span class="caret"></span></a>
+                                <ul class="dropdown-menu noclose">
+                                    <li>
+                                        <input type="checkbox" id="abjuration" ng-click="spellCtrl.includeSchool('Abjuration')">
+                                        <label for="abjuration">Abjuration</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="conjuration" ng-click="spellCtrl.includeSchool('Conjuration')">
+                                        <label for="conjuration">Conjuration</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="divination" ng-click="spellCtrl.includeSchool('Divination')">
+                                        <label for="divination">Divination</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="enchantment" ng-click="spellCtrl.includeSchool('Enchantment')">
+                                        <label for="enchantment">Enchantment</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="evocation" ng-click="spellCtrl.includeSchool('Evocation')">
+                                        <label for="evocation">Evocation</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="illusion" ng-click="spellCtrl.includeSchool('Illusion')">
+                                        <label for="illusion">Illusion</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="necromancy" ng-click="spellCtrl.includeSchool('Necromancy')">
+                                        <label for="necromancy">Necromancy</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="transmutation" ng-click="spellCtrl.includeSchool('Transmutation')">
+                                        <label for="transmutation">Transmutation</label>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="navbar-form navbar-right" role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search" ng-model="search">
+                            </div>
+                        </form>
+                    </div>
+            </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Spell</th>
+                                <th>Level</th>
+                                <th>School</th>
+                                <th>Classes</th>
+                                <th>Casting Time</th>
+                                <th>Range</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+
+                        <tbody data-link="row" class="rowlink">
+                        	<tr ng-repeat="spell in items | filter:search | filter:levelFilter | filter:classFilter | filter:schoolFilter">
+                        		<td><a href ng-click="spellCtrl.setSpell(spell)" data-toggle="modal" data-target="#spellModal">{{spell.name}}</a></td>
+                        		<td>{{spell.level}}</td>
+                                <td>{{spell.school}}</td>
+                        		<td>
+                        			<ul class="list-unstyled">
+                        				<li ng-repeat="class in spell.classes">{{class}}</li>
+                        			</ul>
+                        		</td>
+                        		<td>{{spell.castingTime}}</td>
+                        		<td>{{spell.range}}</td>
+                        		<td>{{spell.duration}}</td>
+                        	</tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- modal -->
+        <div class="modal fade" id="spellModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times; </span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{{modalSpell.name | uppercase}} <small>... level {{modalSpell.level}}, {{modalSpell.school}}</small></h4>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

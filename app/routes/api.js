@@ -10,10 +10,9 @@ module.exports = function(app, express) {
 	var apiRouter = express.Router();
 
 	apiRouter.post('/authenticate', function(req, res) {
-		console.log(req.body.username);
 		User.findOne({
 			username: req.body.username
-		}).select('password').exec(function(err, user){
+		}).select('name username password').exec(function(err, user){
 			if (err) throw err;
 
 			if (!user) {
@@ -26,10 +25,12 @@ module.exports = function(app, express) {
 				if (!validPassword) {
 					res.json({
 						success: false,
-						message: 'Authentication failed. Incorrect password.'
+						message: 'Authentication failed! Password is incorrect.'
 					});
 				} else {
-					var token = jwt.sign(user, superSecret, {
+					var token = jwt.sign({
+						username: user.username
+					}, superSecret, {
 						expiresInMinutes: 1440 // 24 hours
 					});
 					res.json({
