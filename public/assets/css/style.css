@@ -1,31 +1,59 @@
 /* HEADER 
 ===================== */
-header .navbar 		{ 
-	border-radius:0;
-}
 
+header .navbar {
+    border-radius: 0;
+}
 /* NGANIMATE
 ====================== */
-
 /* show and hide */
-.show-hide-message.ng-hide-remove {
-	-webkit-animation:zoomIn 0.3s both ease;
-	-moz-animation:zoomIn 0.3s both ease;
-	animation:zoomIn 0.3s both ease;
-}
 
+.show-hide-message.ng-hide-remove {
+    -webkit-animation: zoomIn 0.3s both ease;
+    -moz-animation: zoomIn 0.3s both ease;
+    animation: zoomIn 0.3s both ease;
+}
 /* BOOK PAGE LINKS
 ====================== */
 /* for modal link to basic rules etc */
+
 .book-page-link {
     color: white;
     text-decoration: none;
 }
+
 .book-page-link:hover {
     color: white;
     text-decoration: underline;
 }
+
 .book-page-link:visited {
     color: white;
     text-decoration: none;
+}
+/* SSTICKY FOOTER
+====================== */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 100px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+.footer p {
+    margin: 20px 0;
 }

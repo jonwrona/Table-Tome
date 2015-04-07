@@ -4,17 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Table Tome</title>
-
     <base href="/">
-
     <!-- CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/yeti/bootstrap.min.css" >
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" >
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" >
-    <link rel="stylesheet" href="assets/css/style.css" >
-    <link rel="stylesheet" href="assets/css/jasny-bootstrap.min.css" >
-    <link rel="stylesheet" href="assets/css/dropdowns-enhancement.css" >
-
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/yeti/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/jasny-bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/dropdowns-enhancement.css">
     <!-- JS -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-route.js"></script>
@@ -23,58 +20,55 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="assets/js/jasny-bootstrap.min.js"></script>
     <script src="assets/js/dropdowns-enhancement.js"></script>
-
     <!-- controllers -->
     <script src="app/controllers/mainCtrl.js"></script>
     <script src="app/controllers/spellCtrl.js"></script>
-
     <!-- services -->
     <script src="app/services/authService.js"></script>
     <script src="app/services/spellService.js"></script>
-
     <!-- main Angular app files -->
     <script src="app/app.routes.js"></script>
     <script src="app/app.js"></script>
 </head>
 
 <body ng-app="tabletome" ng-controllers="mainController as main">
-
     <header>
-    	<div class="navbar navbar-default navbar-static-top">
-		<div class="container">
-			<div class="navbar-header">
-				<a href="/" class="navbar-brand"><i class="fa fa-fire"></i> Table Tome</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="/spellbook"><i class="fa fa-book"></i> Spellbook</a></li>
-			</ul>
-            <!-- 
-			<ul class="nav navbar-nav navbar-right" ng-if="false">
-				<li><a href="/login">Login</a></li>
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="/" class="navbar-brand"><i class="fa fa-fire"></i> Table Tome</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/spellbook"><i class="fa fa-book"></i> Spellbook</a></li>
+                </ul>
+                <!-- 
+            <ul class="nav navbar-nav navbar-right" ng-if="false">
+                <li><a href="/login">Login</a></li>
                 <li><a href="/join">Create Account</a></li>
-			</ul>
+            </ul>
             <ul class="nav navbar-nav navbar-right" ng-if="false">
                 <li><a href="/account">My Account</a></li>
                 <li><a href="#" ng-click="main.doLogout()">Logout</a></li>
             </ul> -->
-		</div>
-    	</div>
+            </div>
+        </div>
     </header>
-
     <main class="container">
-    	<!-- ANGULAR VIEWS -->
-    	<div ng-view></div>
-
-        <hr>
+        <!-- ANGULAR VIEWS -->
+        <div ng-view></div>
     </main>
-        
-    <footer class="container">
-        <center>
-            <p><i class="fa fa-copyright"></i> Company 2015 ... <a href="https://github.com/jonwrona/Table-Tome"><i class="fa fa-github"></i> Github</a></p>
-        </center>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6">
+                    <p class="text-left text-muted"><i class="fa fa-copyright"></i> Table Tome 2015</p>
+                </div>
+                <div class="col-xs-6">
+                    <p class="text-right"><a href="https://github.com/jonwrona/Table-Tome"><i class="fa fa-github"></i> Github</a></p>
+                </div>
+            </div>
+        </div>
     </footer>
-
-    
 </body>
 
 </html>
