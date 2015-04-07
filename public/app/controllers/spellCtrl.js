@@ -62,7 +62,6 @@ angular.module('spellCtrl', [])
     };
 
 	vm.setSpell = function(spell) {
-		console.log('setting spell to ' + spell.name);
 		vm.modalSpell = spell;
 	};
 });

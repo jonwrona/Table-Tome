@@ -68,7 +68,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Classes <span class="caret"></span></a>
                                 <ul class="dropdown-menu noclose">
-                                    <li> 
+                                    <li>
                                         <input type="checkbox" id="bard" ng-click="spellCtrl.includeClass('Bard')">
                                         <label for="bard">Bard</label>
                                     </li>
@@ -168,21 +168,20 @@
                                 <th>Duration</th>
                             </tr>
                         </thead>
-
                         <tbody data-link="row" class="rowlink">
-                        	<tr ng-repeat="spell in spellCtrl.items | filter:search | filter:spellCtrl.levelFilter | filter:spellCtrl.classFilter | filter:spellCtrl.schoolFilter">
-                        		<td><a href ng-click="spellCtrl.setSpell(spell)" data-toggle="modal" data-target="#spellModal">{{spell.name}}</a></td>
-                        		<td>{{spell.level}}</td>
+                            <tr ng-repeat="spell in spellCtrl.items | filter:search | filter:spellCtrl.levelFilter | filter:spellCtrl.classFilter | filter:spellCtrl.schoolFilter">
+                                <td><a href ng-click="spellCtrl.setSpell(spell)" data-toggle="modal" data-target="#spellModal">{{spell.name}}</a></td>
+                                <td>{{spell.level}}</td>
                                 <td>{{spell.school}}</td>
-                        		<td>
-                        			<ul class="list-unstyled">
-                        				<li ng-repeat="class in spell.classes">{{class}}</li>
-                        			</ul>
-                        		</td>
-                        		<td>{{spell.castingTime}}</td>
-                        		<td>{{spell.range}}</td>
-                        		<td>{{spell.duration}}</td>
-                        	</tr>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li ng-repeat="class in spell.classes">{{class}}</li>
+                                    </ul>
+                                </td>
+                                <td>{{spell.castingTime}}</td>
+                                <td>{{spell.range}}</td>
+                                <td>{{spell.duration}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -197,6 +196,46 @@
                         <h4 class="modal-title" id="myModalLabel">{{spellCtrl.modalSpell.name | uppercase}} <small>... level {{spellCtrl.modalSpell.level}}, {{spellCtrl.modalSpell.school}}</small></h4>
                     </div>
                     <div class="modal-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Classes</th>
+                                        <th>Casting Time</th>
+                                        <th>Range</th>
+                                        <th>Components</th>
+                                        <th>Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <ul class="list-unstyled">
+                                                <li ng-repeat="class in spellCtrl.modalSpell.classes">{{class}}</li>
+                                            </ul>
+                                        </td>
+                                        <td>{{spellCtrl.modalSpell.castingTime}}</td>
+                                        <td>{{spellCtrl.modalSpell.range}}</td>
+                                        <td>
+                                            <ul class="list-unstyled">
+                                                <li ng-if="spellCtrl.modalSpell.verbal">Verbal</li>
+                                                <li ng-if="spellCtrl.modalSpell.somatic">Somatic</li>
+                                                <li ng-if="spellCtrl.modalSpell.material.has">Material: <em>{{spellCtrl.modalSpell.material.items}}</em></li>
+                                            </ul>
+                                        </td>
+                                        <td>{{spellCtrl.modalSpell.duration}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="well">
+                            <p ng-repeat="paragraph in spellCtrl.modalSpell.description">
+                                <strong>{{paragraph.title}}</strong> {{paragraph.text}}
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
