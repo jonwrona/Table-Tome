@@ -46,24 +46,24 @@ module.exports = function(app, express) {
 	apiRouter.use(function(req, res, next) {
 		console.log('somebody just came to our app!');
 
-		var token = req.body.token || req.param('token') || req.headers['x-access-token'];
-		if (token) {
-			jwt.verify(token, superSecret, function(err, decoded) {
-				if (err) {
-					return res.json({
-						success: false,
-						message: 'Failed to authenticate token.'
-					});
-				} else {
-					req.decoded = decoded;
-				}
-			});
-		} else {
-			return res.status(403).send({
-				success: false,
-				message: 'No token provided.'
-			});
-		}
+		// var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+		// if (token) {
+		// 	jwt.verify(token, superSecret, function(err, decoded) {
+		// 		if (err) {
+		// 			return res.json({
+		// 				success: false,
+		// 				message: 'Failed to authenticate token.'
+		// 			});
+		// 		} else {
+		// 			req.decoded = decoded;
+		// 		}
+		// 	});
+		// } else {
+		// 	return res.status(403).send({
+		// 		success: false,
+		// 		message: 'No token provided.'
+		// 	});
+		// }
 
 		next();
 	});
