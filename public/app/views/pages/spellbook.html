@@ -196,6 +196,7 @@
                         <h4 class="modal-title" id="myModalLabel">{{spellCtrl.modalSpell.name | uppercase}} <small>... level {{spellCtrl.modalSpell.level}}, {{spellCtrl.modalSpell.school}}</small></h4>
                     </div>
                     <div class="modal-body">
+
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -228,14 +229,20 @@
                                 </tbody>
                             </table>
                         </div>
+                        
                         <div class="well">
                             <p ng-repeat="paragraph in spellCtrl.modalSpell.description">
                                 <strong>{{paragraph.title}}</strong> {{paragraph.text}}
                             </p>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="book in spellCtrl.modalSpell.books">{{book.book}} <span class="badge">{{book.page}}</span></li>
+                        </ul>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
