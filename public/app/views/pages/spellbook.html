@@ -20,43 +20,43 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Levels <span class="caret"></span></a>
                                 <ul class="dropdown-menu noclose">
                                     <li>
-                                        <input type="checkbox" id="cantrip" ng-click="spellCtrl.includeLevel('0')">
+                                        <input type="checkbox" id="cantrip" ng-click="spellCtrl.includeLevel(0)">
                                         <label for="cantrip">Cantrip</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl1" ng-click="spellCtrl.includeLevel('1')">
+                                        <input type="checkbox" id="lvl1" ng-click="spellCtrl.includeLevel(1)">
                                         <label for="lvl1">Level 1</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl2" ng-click="spellCtrl.includeLevel('2')">
+                                        <input type="checkbox" id="lvl2" ng-click="spellCtrl.includeLevel(2)">
                                         <label for="lvl2">Level 2</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl3" ng-click="spellCtrl.includeLevel('3')">
+                                        <input type="checkbox" id="lvl3" ng-click="spellCtrl.includeLevel(3)">
                                         <label for="lvl3">Level 3</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl4" ng-click="spellCtrl.includeLevel('4')">
+                                        <input type="checkbox" id="lvl4" ng-click="spellCtrl.includeLevel(4)">
                                         <label for="lvl4">Level 4</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl5" ng-click="spellCtrl.includeLevel('5')">
+                                        <input type="checkbox" id="lvl5" ng-click="spellCtrl.includeLevel(5)">
                                         <label for="lvl5">Level 5</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl6" ng-click="spellCtrl.includeLevel('6')">
+                                        <input type="checkbox" id="lvl6" ng-click="spellCtrl.includeLevel(6)">
                                         <label for="lvl6">Level 6</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl7" ng-click="spellCtrl.includeLevel('7')">
+                                        <input type="checkbox" id="lvl7" ng-click="spellCtrl.includeLevel(7)">
                                         <label for="lvl7">Level 7</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl8" ng-click="spellCtrl.includeLevel('8')">
+                                        <input type="checkbox" id="lvl8" ng-click="spellCtrl.includeLevel(8)">
                                         <label for="lvl8">Level 8</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl9" ng-click="spellCtrl.includeLevel('9')">
+                                        <input type="checkbox" id="lvl9" ng-click="spellCtrl.includeLevel(9)">
                                         <label for="lvl9">Level 9</label>
                                     </li>
                                 </ul>
@@ -240,7 +240,7 @@
                                 <span class="badge" ng-switch-when="Basic Rules"><a class="book-page-link" href="/assets/docs/PlayerDnDBasicRules_v0.2.pdf#page={{book.page}}" target="_blank">{{book.page}}</a></span>
 
                                 <!-- Display when link to EE player's companion -->
-                                <span ng-switch-when="Elemental Evil Player's Companion"><a href="/assets/docs/EE_PlayersCompanion.pdf">{{book.book}}</a></span>
+                                <span ng-switch-when="Elemental Evil Player's Companion"><a href="/assets/docs/EE_PlayersCompanion.pdf" target="_blank">{{book.book}}</a></span>
                                 <span class="badge" ng-switch-when="Elemental Evil Player's Companion"><a class="book-page-link" href="/assets/docs/EE_PlayersCompanion.pdf#page={{book.page}}" target="_blank">{{book.page}}</a></span>
 
                                 <!-- Display when no link to pdf -->
