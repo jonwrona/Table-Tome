@@ -7,8 +7,8 @@ var Schema = mongoose.Schema;
 //   custom : custom spells
 
 var permissionLvls = ['basic', 'core']
-var books = ['Basic Rules', 'Player\'s Handbook'];
-var schools = ['Abjuration', 'Conjuration', 'Divination', 'Enchantment', 'Evocation', 'Illusion', 'necromancy', 'transmutation'];
+var books = ['Basic Rules', 'Player\'s Handbook', 'Elemental Evil Player\'s Companion'];
+var schools = ['Abjuration', 'Conjuration', 'Divination', 'Enchantment', 'Evocation', 'Illusion', 'Necromancy', 'Transmutation'];
 var classes = ['Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Sorcerer', 'Warlock', 'Wizard'];
 
 
@@ -27,7 +27,7 @@ var SpellSchema = new Schema({
 	castingTime: { type: String, required: true },
 	duration: { type: String, required: true },
 	range: { type: String, required: true },
-	visual: { type: Boolean, required: true},
+	verbal: { type: Boolean, required: true},
 	somatic: { type: Boolean, required: true },
 	material: { has: {type: Boolean, required: true}, items: String },
 	description: [ { title: String, text: { type: String, required: true } } ]

@@ -14,21 +14,18 @@ header .navbar 		{
 	animation:zoomIn 0.3s both ease;
 }
 
-
-/* medium+ screen sizes */
-@media (min-width:992px) {
-    .desktop-only {
-        display:block !important;
-    }
+/* BOOK PAGE LINKS
+====================== */
+/* for modal link to basic rules etc */
+.book-page-link {
+    color: white;
+    text-decoration: none;
 }
- 
-/* small screen sizes */
-@media (max-width: 991px) {
-    .mobile-only {
-        display:block !important;
-    }
- 
-    .desktop-only {
-        display:none !important;
-    }
+.book-page-link:hover {
+    color: white;
+    text-decoration: underline;
+}
+.book-page-link:visited {
+    color: white;
+    text-decoration: none;
 }

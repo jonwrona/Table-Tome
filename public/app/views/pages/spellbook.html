@@ -189,14 +189,13 @@
         </div>
         <!-- modal -->
         <div class="modal fade" id="spellModal">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times; </span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="myModalLabel">{{spellCtrl.modalSpell.name | uppercase}} <small>... level {{spellCtrl.modalSpell.level}}, {{spellCtrl.modalSpell.school}}</small></h4>
+                        <h4 class="modal-title" id="myModalLabel">{{spellCtrl.modalSpell.name | uppercase}} <small>... level {{spellCtrl.modalSpell.level}}, {{spellCtrl.modalSpell.school}}</small><small ng-if="spellCtrl.modalSpell.ritual">, Ritual</small></h4>
                     </div>
                     <div class="modal-body">
-
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -229,17 +228,26 @@
                                 </tbody>
                             </table>
                         </div>
-                        
                         <div class="well">
                             <p ng-repeat="paragraph in spellCtrl.modalSpell.description">
                                 <strong>{{paragraph.title}}</strong> {{paragraph.text}}
                             </p>
                         </div>
-
                         <ul class="list-group">
-                            <li class="list-group-item" ng-repeat="book in spellCtrl.modalSpell.books">{{book.book}} <span class="badge">{{book.page}}</span></li>
-                        </ul>
+                            <li class="list-group-item" ng-repeat="book in spellCtrl.modalSpell.books" ng-switch on="book.book">
+                                <!-- Display when link to basic rules -->
+                                <span ng-switch-when="Basic Rules"><a href="/assets/docs/PlayerDnDBasicRules_v0.2.pdf" target="_blank">{{book.book}}</a></span> 
+                                <span class="badge" ng-switch-when="Basic Rules"><a class="book-page-link" href="/assets/docs/PlayerDnDBasicRules_v0.2.pdf#page={{book.page}}" target="_blank">{{book.page}}</a></span>
 
+                                <!-- Display when link to EE player's companion -->
+                                <span ng-switch-when="Elemental Evil Player's Companion"><a href="/assets/docs/EE_PlayersCompanion.pdf">{{book.book}}</a></span>
+                                <span class="badge" ng-switch-when="Elemental Evil Player's Companion"><a class="book-page-link" href="/assets/docs/EE_PlayersCompanion.pdf#page={{book.page}}" target="_blank">{{book.page}}</a></span>
+
+                                <!-- Display when no link to pdf -->
+                                <span ng-switch-default>{{book.book}}</span> 
+                                <span class="badge" ng-switch-default>{{book.page}}</span>
+                            </li>
+                        </ul>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

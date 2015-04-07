@@ -49,12 +49,12 @@
 				<li><a href="/spellbook"><i class="fa fa-book"></i> Spellbook</a></li>
 			</ul>
             <!-- Show this navbar if not logged in -->
-			<ul class="nav navbar-nav navbar-right" ng-if="!main.loggedIn">
+			<ul class="nav navbar-nav navbar-right" ng-if="false">
 				<li><a href="/login">Login</a></li>
                 <li><a href="/join">Create Account</a></li>
 			</ul>
             <!-- Show this navbar if logged in -->
-            <ul class="nav navbar-nav navbar-right" ng-if="main.loggedIn">
+            <ul class="nav navbar-nav navbar-right" ng-if="false">
                 <li><a href="/account">My Account</a></li>
                 <li><a href="#" ng-click="main.doLogout()">Logout</a></li>
             </ul>
