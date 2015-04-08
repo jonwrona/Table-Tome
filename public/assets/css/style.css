@@ -1,6 +1,13 @@
 /* HEADER 
 ===================== */
-
+body {
+    margin-top: 45px;
+}
+#home-header h1 {
+    color: white;
+    text-shadow: 0px 0px 5px black;
+    font-size: 400%;
+}
 header .navbar {
     border-radius: 0;
 }
@@ -71,7 +78,7 @@ body {
 }
 
 .image-bg-fluid-height {
-    background: url('../img/home-img.jpg') no-repeat center center scroll;
+    background: url('../img/home-header.jpg') no-repeat center center scroll;
     padding: 100px 0;
 }
 
