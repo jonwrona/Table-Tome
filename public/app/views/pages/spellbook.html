@@ -163,24 +163,30 @@
                                 <th>Level</th>
                                 <th>School</th>
                                 <th>Classes</th>
-                                <th>Casting Time</th>
+                                <!-- <th>Casting Time</th>
                                 <th>Range</th>
-                                <th>Duration</th>
+                                <th>Duration</th> -->
                             </tr>
                         </thead>
                         <tbody data-link="row" class="rowlink">
                             <tr ng-repeat="spell in spellCtrl.items | filter:search | filter:spellCtrl.levelFilter | filter:spellCtrl.classFilter | filter:spellCtrl.schoolFilter">
                                 <td><a href ng-click="spellCtrl.setSpell(spell)" data-toggle="modal" data-target="#spellModal">{{spell.name}}</a></td>
-                                <td>{{spell.level}}</td>
-                                <td>{{spell.school}}</td>
+                                <td ng-switch on="spell.level">
+                                    <p ng-switch-when=0>Cantrip</p>
+                                    <p ng-switch-when=1>{{spell.level}}<small>st</small> Level</p>
+                                    <p ng-switch-when=2>{{spell.level}}<small>nd</small> Level</p>
+                                    <p ng-switch-when=3>{{spell.level}}<small>rd</small> Level</p>
+                                    <p ng-switch-default>{{spell.level}}<small>th</small> Level</p>
+                                </td>
+                                <td>School of {{spell.school}}</td>
                                 <td>
                                     <ul class="list-unstyled">
                                         <li ng-repeat="class in spell.classes">{{class}}</li>
                                     </ul>
                                 </td>
-                                <td>{{spell.castingTime}}</td>
+                                <!-- <td>{{spell.castingTime}}</td>
                                 <td>{{spell.range}}</td>
-                                <td>{{spell.duration}}</td>
+                                <td>{{spell.duration}}</td> -->
                             </tr>
                         </tbody>
                     </table>
@@ -193,7 +199,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times; </span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="myModalLabel">{{spellCtrl.modalSpell.name | uppercase}} <small>... level {{spellCtrl.modalSpell.level}}, {{spellCtrl.modalSpell.school}}</small><small ng-if="spellCtrl.modalSpell.ritual">, Ritual</small></h4>
+                        <h4 class="modal-title" id="myModalLabel">{{spellCtrl.modalSpell.name | uppercase}}&emsp;<small><i class="fa fa-bar-chart"></i> Level {{spellCtrl.modalSpell.level}}&emsp;<i class="fa fa-university"></i> School of {{spellCtrl.modalSpell.school}}</small><small ng-if="spellCtrl.modalSpell.ritual">, Ritual</small></h4>
                     </div>
                     <div class="modal-body">
                         <div class="table-responsive">
