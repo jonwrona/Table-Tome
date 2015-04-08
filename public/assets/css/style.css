@@ -85,6 +85,7 @@ body {
 .image-bg-fixed-height {
     background: url('../img/home-img.jpg') no-repeat center center scroll;
     height: 300px;
+    margin: 50px 0;
 }
 
 .img-center {
