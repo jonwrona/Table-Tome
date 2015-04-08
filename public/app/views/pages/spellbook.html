@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <nav class="navbar navbar" role="navigation">
+            <nav class="navbar" role="navigation">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#spell-filter-collapse"><span class="sr-only">Toggle Navigation</span><i class="fa fa-bars fa-lg"></i></button>
@@ -198,7 +198,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times; </span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="myModalLabel">{{spellCtrl.modalSpell.name | uppercase}}&emsp;<small><i class="fa fa-bar-chart"></i> Level {{spellCtrl.modalSpell.level}}&emsp;<i class="fa fa-university"></i> School of {{spellCtrl.modalSpell.school}}</small><small ng-if="spellCtrl.modalSpell.ritual">, Ritual</small></h4>
+                        <h4 class="modal-title" id="myModalLabel">{{spellCtrl.modalSpell.name | uppercase}}&emsp;
+                        <small ng-if="spellCtrl.modalSpell.level == 0"><i class="fa fa-bar-chart"></i> Cantrip</small>
+                        <small ng-if="spellCtrl.modalSpell.level == 1"><i class="fa fa-bar-chart"></i> {{spellCtrl.modalSpell.level}}st Level</small>
+                        <small ng-if="spellCtrl.modalSpell.level == 2"><i class="fa fa-bar-chart"></i> {{spellCtrl.modalSpell.level}}nd Level</small>
+                        <small ng-if="spellCtrl.modalSpell.level == 3"><i class="fa fa-bar-chart"></i> {{spellCtrl.modalSpell.level}}rd Level</small>
+                        <small ng-if="spellCtrl.modalSpell.level > 3"><i class="fa fa-bar-chart"></i> {{spellCtrl.modalSpell.level}}th Level</small>
+                        <small>&emsp;<i class="fa fa-university"></i> School of {{spellCtrl.modalSpell.school}}</small><small ng-if="spellCtrl.modalSpell.ritual">, Ritual</small></h4>
                     </div>
                     <div class="modal-body">
                         <div class="table-responsive">
