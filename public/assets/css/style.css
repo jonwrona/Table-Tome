@@ -1,15 +1,19 @@
 /* HEADER 
 ===================== */
+
 body {
     margin-top: 45px;
 }
+
 .image-header-text {
     color: white;
     text-shadow: 0px 0px 5px black;
 }
+
 .home-header {
-    font-size:400%;
+    font-size: 400%;
 }
+
 header .navbar {
     border-radius: 0;
 }

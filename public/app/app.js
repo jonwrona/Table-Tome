@@ -1,3 +1,2 @@
-angular.module('tabletome', ['ngAnimate', 'app.routes', 'spellService', 'spellCtrl'])
-.config(function($httpProvider) {
-});
+angular.module('tabletome', ['vcRecaptcha', 'ngAnimate', 'app.routes', 'homeCtrl', 'subscriberService', 'spellService', 'spellCtrl'])
+.config(function($httpProvider) {});

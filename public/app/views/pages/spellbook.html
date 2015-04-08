@@ -149,119 +149,120 @@
                             </div>
                         </form>
                     </div>
+                </div>
             </nav>
-            </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Spell</th>
-                                <th>Level</th>
-                                <th>School</th>
-                                <th>Classes</th>
-                                <!-- <th>Casting Time</th>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Spell</th>
+                            <th>Level</th>
+                            <th>School</th>
+                            <th>Classes</th>
+                            <!-- <th>Casting Time</th>
                                 <th>Range</th>
                                 <th>Duration</th> -->
-                            </tr>
-                        </thead>
-                        <tbody data-link="row" class="rowlink">
-                            <tr ng-repeat="spell in spellCtrl.items | filter:search | filter:spellCtrl.levelFilter | filter:spellCtrl.classFilter | filter:spellCtrl.schoolFilter">
-                                <td><a href ng-click="spellCtrl.setSpell(spell)" data-toggle="modal" data-target="#spellModal">{{spell.name}}</a></td>
-                                <td ng-switch on="spell.level">
-                                    <p ng-switch-when=0>Cantrip</p>
-                                    <p ng-switch-when=1>{{spell.level}}<small>st</small> Level</p>
-                                    <p ng-switch-when=2>{{spell.level}}<small>nd</small> Level</p>
-                                    <p ng-switch-when=3>{{spell.level}}<small>rd</small> Level</p>
-                                    <p ng-switch-default>{{spell.level}}<small>th</small> Level</p>
-                                </td>
-                                <td>School of {{spell.school}}</td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        <li ng-repeat="class in spell.classes">{{class}}</li>
-                                    </ul>
-                                </td>
-                                <!-- <td>{{spell.castingTime}}</td>
+                        </tr>
+                    </thead>
+                    <tbody data-link="row" class="rowlink">
+                        <tr ng-repeat="spell in spellCtrl.items | filter:search | filter:spellCtrl.levelFilter | filter:spellCtrl.classFilter | filter:spellCtrl.schoolFilter">
+                            <td><a href ng-click="spellCtrl.setSpell(spell)" data-toggle="modal" data-target="#spellModal">{{spell.name}}</a></td>
+                            <td ng-switch on="spell.level">
+                                <p ng-switch-when=0>Cantrip</p>
+                                <p ng-switch-when=1>{{spell.level}}<small>st</small> Level</p>
+                                <p ng-switch-when=2>{{spell.level}}<small>nd</small> Level</p>
+                                <p ng-switch-when=3>{{spell.level}}<small>rd</small> Level</p>
+                                <p ng-switch-default>{{spell.level}}<small>th</small> Level</p>
+                            </td>
+                            <td>School of {{spell.school}}</td>
+                            <td>
+                                <ul class="list-unstyled">
+                                    <li ng-repeat="class in spell.classes">{{class}}</li>
+                                </ul>
+                            </td>
+                            <!-- <td>{{spell.castingTime}}</td>
                                 <td>{{spell.range}}</td>
                                 <td>{{spell.duration}}</td> -->
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <!-- modal -->
-        <div class="modal fade" id="spellModal">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times; </span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="myModalLabel">{{spellCtrl.modalSpell.name | uppercase}}&emsp;
+    </div>
+    <!-- modal -->
+    <div class="modal fade" id="spellModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times; </span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{spellCtrl.modalSpell.name | uppercase}}&emsp;
                         <small ng-if="spellCtrl.modalSpell.level == 0"><i class="fa fa-bar-chart"></i> Cantrip</small>
                         <small ng-if="spellCtrl.modalSpell.level == 1"><i class="fa fa-bar-chart"></i> {{spellCtrl.modalSpell.level}}st Level</small>
                         <small ng-if="spellCtrl.modalSpell.level == 2"><i class="fa fa-bar-chart"></i> {{spellCtrl.modalSpell.level}}nd Level</small>
                         <small ng-if="spellCtrl.modalSpell.level == 3"><i class="fa fa-bar-chart"></i> {{spellCtrl.modalSpell.level}}rd Level</small>
                         <small ng-if="spellCtrl.modalSpell.level > 3"><i class="fa fa-bar-chart"></i> {{spellCtrl.modalSpell.level}}th Level</small>
                         <small>&emsp;<i class="fa fa-university"></i> School of {{spellCtrl.modalSpell.school}}</small><small ng-if="spellCtrl.modalSpell.ritual">, Ritual</small></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Classes</th>
+                                    <th>Casting Time</th>
+                                    <th>Range</th>
+                                    <th>Components</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <ul class="list-unstyled">
+                                            <li ng-repeat="class in spellCtrl.modalSpell.classes">{{class}}</li>
+                                        </ul>
+                                    </td>
+                                    <td>{{spellCtrl.modalSpell.castingTime}}</td>
+                                    <td>{{spellCtrl.modalSpell.range}}</td>
+                                    <td>
+                                        <ul class="list-unstyled">
+                                            <li ng-if="spellCtrl.modalSpell.verbal">Verbal</li>
+                                            <li ng-if="spellCtrl.modalSpell.somatic">Somatic</li>
+                                            <li ng-if="spellCtrl.modalSpell.material.has">Material: <em>{{spellCtrl.modalSpell.material.items}}</em></li>
+                                        </ul>
+                                    </td>
+                                    <td>{{spellCtrl.modalSpell.duration}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="modal-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Classes</th>
-                                        <th>Casting Time</th>
-                                        <th>Range</th>
-                                        <th>Components</th>
-                                        <th>Duration</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <ul class="list-unstyled">
-                                                <li ng-repeat="class in spellCtrl.modalSpell.classes">{{class}}</li>
-                                            </ul>
-                                        </td>
-                                        <td>{{spellCtrl.modalSpell.castingTime}}</td>
-                                        <td>{{spellCtrl.modalSpell.range}}</td>
-                                        <td>
-                                            <ul class="list-unstyled">
-                                                <li ng-if="spellCtrl.modalSpell.verbal">Verbal</li>
-                                                <li ng-if="spellCtrl.modalSpell.somatic">Somatic</li>
-                                                <li ng-if="spellCtrl.modalSpell.material.has">Material: <em>{{spellCtrl.modalSpell.material.items}}</em></li>
-                                            </ul>
-                                        </td>
-                                        <td>{{spellCtrl.modalSpell.duration}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="well">
-                            <p ng-repeat="paragraph in spellCtrl.modalSpell.description">
-                                <strong>{{paragraph.title}}</strong> {{paragraph.text}}
-                            </p>
-                        </div>
-                        <ul class="list-group">
-                            <li class="list-group-item" ng-repeat="book in spellCtrl.modalSpell.books" ng-switch on="book.book">
-                                <!-- Display when link to basic rules -->
-                                <span ng-switch-when="Basic Rules"><a href="/assets/docs/PlayerDnDBasicRules_v0.2.pdf" target="_blank">{{book.book}}</a></span>
-                                <span class="badge" ng-switch-when="Basic Rules"><a class="book-page-link" href="/assets/docs/PlayerDnDBasicRules_v0.2.pdf#page={{book.page}}" target="_blank">{{book.page}}</a></span>
-                                <!-- Display when link to EE player's companion -->
-                                <span ng-switch-when="Elemental Evil Player's Companion"><a href="/assets/docs/EE_PlayersCompanion.pdf" target="_blank">{{book.book}}</a></span>
-                                <span class="badge" ng-switch-when="Elemental Evil Player's Companion"><a class="book-page-link" href="/assets/docs/EE_PlayersCompanion.pdf#page={{book.page}}" target="_blank">{{book.page}}</a></span>
-                                <!-- Display when no link to pdf -->
-                                <span ng-switch-default>{{book.book}}</span>
-                                <span class="badge" ng-switch-default>{{book.page}}</span>
-                            </li>
-                        </ul>
+                    <div class="well">
+                        <p ng-repeat="paragraph in spellCtrl.modalSpell.description">
+                            <strong>{{paragraph.title}}</strong> {{paragraph.text}}
+                        </p>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="book in spellCtrl.modalSpell.books" ng-switch on="book.book">
+                            <!-- Display when link to basic rules -->
+                            <span ng-switch-when="Basic Rules"><a href="/assets/docs/PlayerDnDBasicRules_v0.2.pdf" target="_blank">{{book.book}}</a></span>
+                            <span class="badge" ng-switch-when="Basic Rules"><a class="book-page-link" href="/assets/docs/PlayerDnDBasicRules_v0.2.pdf#page={{book.page}}" target="_blank">{{book.page}}</a></span>
+                            <!-- Display when link to EE player's companion -->
+                            <span ng-switch-when="Elemental Evil Player's Companion"><a href="/assets/docs/EE_PlayersCompanion.pdf" target="_blank">{{book.book}}</a></span>
+                            <span class="badge" ng-switch-when="Elemental Evil Player's Companion"><a class="book-page-link" href="/assets/docs/EE_PlayersCompanion.pdf#page={{book.page}}" target="_blank">{{book.page}}</a></span>
+                            <!-- Display when no link to pdf -->
+                            <span ng-switch-default>{{book.book}}</span>
+                            <span class="badge" ng-switch-default>{{book.page}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+</div>

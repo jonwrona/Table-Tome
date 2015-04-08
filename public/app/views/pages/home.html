@@ -18,7 +18,9 @@
         </div>
     </div>
 </section>
-<div class="container"><hr></div>
+<div class="container">
+    <hr>
+</div>
 <section>
     <div class="container">
         <div class="section-header">
@@ -47,14 +49,50 @@
             <div class="col-sm-8">
                 <p class="text-justify">We have many ideas for the expansion of Table Tome, and are looking forward to implementing these in the future. If you are interested in receiving updates, sign up for our newsletter here.</p>
             </div>
-            <div class="col-sm-4">
-                <div class="input-group">
-                    <input type="email" class="form-control" placeholder="example@email.com">
-                    <span class="input-group-btn">
-        			<button class="btn btn-default" type="button"><i class="fa fa-envelope"></i></button>
-     			</span>
-                </div>
+            <div class="col-sm-3 col-sm-offset-1">
+                <button class="btn btn-success btn-block" type="button" data-toggle="modal" data-target="#subModal"><i class="fa fa-envelope"></i> Subscribe</button>
             </div>
         </div>
     </div>
 </section>
+<!-- email subscription modal -->
+<div class="modal fade" id="subModal" ng-controller="subCreateController" ng-controller-as="subCtrl">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button ng-click="homeCtrl.clearEmail()" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times; </span><span class="sr-only">Close</span></button>
+                <h2 class="modal-title">Subscribe</h2>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img src="assets/img/subscribe-img.jpg" alt="fantasy book" class="img-thumbnail">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="well">
+                            <form ng-submit="console.log('submit clicked');">
+                                <div class="form-group">
+                                    <label for="subscriber-name" class="control-label"><strong>Name:</strong></label>
+                                    <input type="text" class="form-control" ng-model="subCtrl.subData.name" placeholder="John Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subscriber-email" class="control-label"><strong>Email:</strong></label>
+                                    <input type="email" class="form-control" id="subCtrl.subData.email" placeholder="johndoe@example.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" id="submit" class="btn btn-success btn-lg btn-block" value="Subscribe">
+                                </div>
+                                <div cv-recaptcha key="6Ld4_QQTAAAAAN2tqCIJl_PU_sm6r0VSjtwxYAR5"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
