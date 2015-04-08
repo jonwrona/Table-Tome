@@ -3,10 +3,12 @@
 body {
     margin-top: 45px;
 }
-#home-header h1 {
+.image-header-text {
     color: white;
     text-shadow: 0px 0px 5px black;
-    font-size: 400%;
+}
+.home-header {
+    font-size:400%;
 }
 header .navbar {
     border-radius: 0;
@@ -68,8 +70,9 @@ body {
 /* FULL WIDTH IMAGES
 ====================== */
 
-.image-bg-fluid-height,
-.image-bg-fixed-height {
+.image-bg-home-header,
+.image-bg-home-break,
+.image-bg-spellbook-header {
     text-align: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -77,15 +80,21 @@ body {
     -o-background-size: cover;
 }
 
-.image-bg-fluid-height {
+.image-bg-home-header {
     background: url('../img/home-header.jpg') no-repeat center center scroll;
     padding: 100px 0;
 }
 
-.image-bg-fixed-height {
+.image-bg-home-break {
     background: url('../img/home-img.jpg') no-repeat center center scroll;
     height: 300px;
     margin: 50px 0;
+}
+
+.image-bg-spellbook-header {
+    background: url('../img/home-header.jpg') no-repeat center center scroll;
+    padding: 20px 0;
+    margin-bottom: 30px;
 }
 
 .img-center {
