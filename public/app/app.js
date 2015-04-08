@@ -1,4 +1,4 @@
-angular.module('tabletome', ['ngAnimate', 'app.routes', 'authService', 'spellService', 'mainCtrl', 'spellCtrl'])
+angular.module('tabletome', ['ngAnimate', 'app.routes', 'spellService', 'spellCtrl'])
 .config(function($httpProvider) {
 	$httpProvider.interceptors.push('AuthInterceptor');
 });
