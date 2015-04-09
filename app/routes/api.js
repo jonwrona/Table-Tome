@@ -5,6 +5,7 @@ var config = require('../../config');
 var request = require('request');
 
 var superSecret = config.secret;
+var captchaSecret = config.recaptchaSecret;
 
 module.exports = function(app, express) {
 
@@ -18,11 +19,17 @@ module.exports = function(app, express) {
         res.json({
             message: 'hooray! welcome to our api!'
         });
-    })
+    });
 
     var verifyRecaptcha = function(key, callback) {
-        request("https://www.google.com/recaptcha/api/siteverify" + config.recaptchaSecret + "&response=" + key)
-            .on('response', function(res) {
+        request.post({
+                url: 'https://www.google.com/recaptcha/api/siteverify',
+                form: {
+                    secret: captchaSecret,
+                    response: key
+                }
+            },
+            function(err, res, body) {
                 var data = "";
                 res.on('data', function(chunk) {
                     data += chunk.toString();
@@ -38,6 +45,22 @@ module.exports = function(app, express) {
                 });
             });
     };
+
+    // RESPONSE CODE 
+    // --------------------------------------------
+    // var data = "";
+    // res.on('data', function(chunk) {
+    //     data += chunk.toString();
+    // });
+    // res.on('end', function() {
+    //     try {
+    //         var parsedData = JSON.parse(data);
+    //         console.log(parsedData);
+    //         callback(parsedData.success);
+    //     } catch (e) {
+    //         callback(false);
+    //     }
+    // });
 
     apiRouter.route('/mail')
         .post(function(req, res) {
