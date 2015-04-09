@@ -1,8 +1,6 @@
 var Spell = require('../models/spell');
 var Sub = require('../models/subscriber');
-var jwt = require('jsonwebtoken');
 var config = require('../../config');
-var request = require('request');
 
 var superSecret = config.secret;
 var captchaSecret = config.recaptchaSecret;
@@ -21,59 +19,25 @@ module.exports = function(app, express) {
         });
     });
 
-    var verifyRecaptcha = function(key, callback) {
-        request.post({
-                url: 'https://www.google.com/recaptcha/api/siteverify',
-                form: {
-                    secret: captchaSecret,
-                    response: key
-                }
-            },
-            function(err, res, body) {
-                var data = "";
-                res.on('data', function(chunk) {
-                    data += chunk.toString();
-                });
-                res.on('end', function() {
-                    try {
-                        var parsedData = JSON.parse(data);
-                        console.log(parsedData);
-                        callback(parsedData.success);
-                    } catch (e) {
-                        callback(false);
-                    }
-                });
-            });
-    };
-
     apiRouter.route('/mail')
         .post(function(req, res) {
-        	console.log()
-            verifyRecaptcha(req.body['g-recaptcha-response'], function(success) {
-                if (success) {
-                    var sub = new Subcriber();
-                    sub.name = req.body.name;
-                    sub.email = req.body.email;
-                    sub.save(function(err) {
-                        if (err) {
-                            if (err.code == 11000)
-                                return res.json({
-                                    success: false,
-                                    message: 'Someone has already subscribed with that email.'
-                                });
-                            else
-                                return res.send(err);
-                        }
+            var sub = new Sub();
+            sub.name = req.body.name;
+            sub.email = req.body.email;
+            sub.save(function(err) {
+                if (err) {
+                    if (err.code == 11000)
                         return res.json({
-                            message: 'Welcome!'
+                            success: false,
+                            message: 'Someone has already subscribed with that email.'
                         });
-                    });
-                } else {
-                    return res.json({
-                        success: false,
-                        message: "Captcha failed! Try again?"
-                    });
+                    else
+                        return res.send(err);
                 }
+                return res.json({
+                    success: true,
+                    message: 'Welcome to the mailing list!'
+                });
             });
         });
 

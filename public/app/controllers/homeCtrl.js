@@ -7,17 +7,16 @@ angular.module('homeCtrl', ['subscriberService'])
             var params = {
                 name: $scope.name,
                 email: $scope.email,
-                recaptcha: document.getElementById("g-recaptcha-response").value
             };
             Subscriber.create(params)
                 .success(function(data) {
                     if (data.success) {
-                        // do stuff
+                        $('#subModal').modal('hide');
+                        document.getElementById("subForm").reset();
                     } else {
                         $scope.message = data.message;
                     }
                 });
-            // grecaptcha.reset();
         };
 
     });

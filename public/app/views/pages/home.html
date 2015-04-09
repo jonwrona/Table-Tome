@@ -67,7 +67,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="well">
-                            <form ng-submit="submit()">
+                            <form ng-submit="submit()" id="subForm">
                                 <div class="form-group">
                                     <label for="subName" class="control-label"><strong>Name:</strong></label>
                                     <input type="text" class="form-control" id="subName" ng-model="name" placeholder="John Doe" required>
@@ -79,9 +79,6 @@
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success btn-lg btn-block"><i class='fa fa-envelope'></i> Subscribe</button>
                                 </div>
-                                <center>
-                                    <div class="g-recaptcha" data-sitekey="6Ld4_QQTAAAAAN2tqCIJl_PU_sm6r0VSjtwxYAR5"></div>
-                                </center>
                             </form>
                         </div>
                     </div>
