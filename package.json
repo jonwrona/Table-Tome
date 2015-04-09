@@ -19,6 +19,7 @@
     "express": "^4.11.2",
     "jsonwebtoken": "^3.2.2",
     "mongoose": "^3.8.23",
-    "morgan": "^1.5.1"
+    "morgan": "^1.5.1",
+    "request": "^2.55.0"
   }
 }

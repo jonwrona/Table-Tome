@@ -2,7 +2,7 @@ var Spell = require('../models/spell');
 var Sub = require('../models/subscriber');
 var jwt = require('jsonwebtoken');
 var config = require('../../config');
-var http = require('http');
+var request = require('request');
 
 var superSecret = config.secret;
 
@@ -15,26 +15,29 @@ module.exports = function(app, express) {
     });
 
     apiRouter.get('/', function(req, res) {
-		res.json({ message: 'hooray! welcome to our api!' });	
-	})
+        res.json({
+            message: 'hooray! welcome to our api!'
+        });
+    })
 
     var verifyRecaptcha = function(key, callback) {
-        http.get("//www.google.com/recaptcha/api/siteverify?secret=" + config.recaptchaSecret + "&response=" + key, function(res) {
-            var data = "";
-            res.on('data', function(chunk) {
-                data += chunk.toString();
+        request("https://www.google.com/recaptcha/api/siteverify" + config.recaptchaSecret + "&response=" + key)
+            .on('response', function(res) {
+                var data = "";
+                res.on('data', function(chunk) {
+                    data += chunk.toString();
+                });
+                res.on('end', function() {
+                    try {
+                        var parsedData = JSON.parse(data);
+                        console.log(parsedData);
+                        callback(parsedData.success);
+                    } catch (e) {
+                        callback(false);
+                    }
+                });
             });
-            res.on('end', function() {
-                try {
-                    var parsedData = JSON.parse(data);
-                    console.log(parsedData);
-                    callback(parsedData.success);
-                } catch (e) {
-                    callback(false);
-                }
-            });
-        });
-    }
+    };
 
     apiRouter.route('/mail')
         .post(function(req, res) {
