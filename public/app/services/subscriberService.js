@@ -3,7 +3,6 @@ angular.module('subscriberService', [])
 	var subFactory = {};
 
 	subFactory.create = function(subData) {
-		console.log(subData);
 		return $http.post('/api/mail', subData);
 	};
 

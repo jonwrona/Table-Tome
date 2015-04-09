@@ -48,11 +48,12 @@ module.exports = function(app, express) {
 
     apiRouter.route('/mail')
         .post(function(req, res) {
+        	console.log()
             verifyRecaptcha(req.body['g-recaptcha-response'], function(success) {
                 if (success) {
                     var sub = new Subcriber();
                     sub.name = req.body.name;
-                    sub.email = req.body.password;
+                    sub.email = req.body.email;
                     sub.save(function(err) {
                         if (err) {
                             if (err.code == 11000)
