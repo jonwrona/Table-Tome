@@ -10,7 +10,9 @@ var morgan = require('morgan');
 var mongoose = require('mongoose');
 var config = require('./config');
 var path = require('path');
+var http = require('http');
 var https = require('https');
+var fs = require('fs');
 
 
 // APP CONFIGURATION
@@ -54,5 +56,17 @@ app.get('*', function(req, res) {
 
 // START THE SERVER
 // ==================
-app.listen(config.port);
-console.log('Application running on post ' + config.port);
+var options = {
+	key: fs.readFileSync('server-key.pem'),
+	cert: fs.readFileSync('server-crt.pem')
+}
+https.createServer(options, app, function(req, res) {
+	res.end('secure');
+	console.log('secure server running on port 443');
+}).listen(443);
+http.createServer(function(req, res) {
+	res.writeHead(301, {"Location": "https://"+req.headers['host']+req.url});
+	res.end();
+	console.log('server running on port 80');
+}).listen(80);
+
