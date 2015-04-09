@@ -1,9 +1,9 @@
 angular.module('homeCtrl', ['subscriberService'])
     .controller('SubscriberController', function($scope, Subscriber) {
-    	$scope.message = "";
+        $scope.message = "";
 
         $scope.submit = function() {
-        	$scope.message = "";
+            $scope.message = "";
             var params = {
                 name: $scope.name,
                 email: $scope.email,
@@ -11,11 +11,11 @@ angular.module('homeCtrl', ['subscriberService'])
             };
             Subscriber.create(params)
                 .success(function(data) {
-                	if (data.success) {
-
-                	} else {
-                		$scope.message = data.message;
-                	}
+                    if (data.success) {
+                        // do stuff
+                    } else {
+                        $scope.message = data.message;
+                    }
                 });
         };
 

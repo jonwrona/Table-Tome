@@ -1,5 +1,5 @@
 angular.module('subscriberService', [])
-.factory('Subscriber', function($http) {
+.factory('Subscriber', ['$http', function($http) {
 	var subFactory = {};
 
 	subFactory.create = function(subData) {
@@ -11,4 +11,4 @@ angular.module('subscriberService', [])
 	};
 
 	return subFactory;
-});
+}]);

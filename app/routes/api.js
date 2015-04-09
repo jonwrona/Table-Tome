@@ -34,29 +34,34 @@ module.exports = function(app, express) {
     }
 
     apiRouter.route('/mail')
-    .post(function(req, res) {
-        verifyRecaptcha(req.body['g-recaptcha-response'], function(success) {
-            if (success) {
-                var sub = new Subcriber();
-                sub.name = req.body.name;
-                sub.email = req.body.password;
-                sub.save(function(err) {
-                	if (err) {
-                		if (err.code == 11000)
-                			return res.json({success:false, message: 'Someone has already subscribed with that email.'});
-                		else
-                			return res.send(err);
-                	}
-                	return res.json({message: 'Welcome!'});
-                });
-            } else {
-                return res.json({
-                    success: false,
-                    message: "Captcha failed! Try again?"
-                });
-            }
+        .post(function(req, res) {
+            verifyRecaptcha(req.body['g-recaptcha-response'], function(success) {
+                if (success) {
+                    var sub = new Subcriber();
+                    sub.name = req.body.name;
+                    sub.email = req.body.password;
+                    sub.save(function(err) {
+                        if (err) {
+                            if (err.code == 11000)
+                                return res.json({
+                                    success: false,
+                                    message: 'Someone has already subscribed with that email.'
+                                });
+                            else
+                                return res.send(err);
+                        }
+                        return res.json({
+                            message: 'Welcome!'
+                        });
+                    });
+                } else {
+                    return res.json({
+                        success: false,
+                        message: "Captcha failed! Try again?"
+                    });
+                }
+            });
         });
-    });
 
     apiRouter.route('/mail/:sub_id')
         .delete(function(req, res) {
