@@ -46,22 +46,6 @@ module.exports = function(app, express) {
             });
     };
 
-    // RESPONSE CODE 
-    // --------------------------------------------
-    // var data = "";
-    // res.on('data', function(chunk) {
-    //     data += chunk.toString();
-    // });
-    // res.on('end', function() {
-    //     try {
-    //         var parsedData = JSON.parse(data);
-    //         console.log(parsedData);
-    //         callback(parsedData.success);
-    //     } catch (e) {
-    //         callback(false);
-    //     }
-    // });
-
     apiRouter.route('/mail')
         .post(function(req, res) {
             verifyRecaptcha(req.body['g-recaptcha-response'], function(success) {

@@ -17,7 +17,7 @@ angular.module('homeCtrl', ['subscriberService'])
                         $scope.message = data.message;
                     }
                 });
-            grecaptcha.reset();
+            // grecaptcha.reset();
         };
 
     });
