@@ -56,43 +56,43 @@
     </div>
 </section>
 <!-- email subscription modal -->
-<div class="modal fade" id="subModal" ng-controller="subCreateController" ng-controller-as="subCtrl">
+<div class="modal fade" id="subModal" ng-controller="SubscriberController">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <button ng-click="homeCtrl.clearEmail()" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times; </span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times; </span><span class="sr-only">Close</span></button>
                 <h2 class="modal-title">Subscribe</h2>
             </div>
             <div class="modal-body">
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-12">
                         <img src="assets/img/subscribe-img.jpg" alt="fantasy book" class="img-thumbnail">
                     </div>
-                </div>
+                </div> -->
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="well">
-                            <form ng-submit="console.log('submit clicked');">
+                            <form ng-submit="submit()">
                                 <div class="form-group">
-                                    <label for="subscriber-name" class="control-label"><strong>Name:</strong></label>
-                                    <input type="text" class="form-control" ng-model="subCtrl.subData.name" placeholder="John Doe" required>
+                                    <label for="subName" class="control-label"><strong>Name:</strong></label>
+                                    <input type="text" class="form-control" id="subName" ng-model="subData.name" placeholder="John Doe" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="subscriber-email" class="control-label"><strong>Email:</strong></label>
-                                    <input type="email" class="form-control" id="subCtrl.subData.email" placeholder="johndoe@example.com" required>
+                                    <label for="subEmail" class="control-label"><strong>Email:</strong></label>
+                                    <input type="email" class="form-control" id="subEmail" ng-model="subData.email" placeholder="johndoe@example.com" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" id="submit" class="btn btn-success btn-lg btn-block" value="Subscribe">
+                                    <button type="submit" class="btn btn-success btn-lg btn-block"><i class='fa fa-envelope'></i> Subscribe</button>
                                 </div>
-                                <div vc-recaptcha key="'6Ld4_QQTAAAAAN2tqCIJl_PU_sm6r0VSjtwxYAR5'"></div>
+                                <div re-captcha ng-model="subData.captcha"></div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
