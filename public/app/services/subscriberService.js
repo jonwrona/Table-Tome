@@ -3,11 +3,11 @@ angular.module('subscriberService', [])
 	var subFactory = {};
 
 	subFactory.create = function(subData) {
-		return $http.post('/mail', subData);
+		return $http.post('/api/mail', subData);
 	};
 
 	subFactory.delete = function(id) {
-		return $http.delete('/mail/' + id);
+		return $http.delete('/api/mail/' + id);
 	};
 
 	return subFactory;

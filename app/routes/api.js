@@ -2,7 +2,7 @@ var Spell = require('../models/spell');
 var Sub = require('../models/subscriber');
 var jwt = require('jsonwebtoken');
 var config = require('../../config');
-var https = require('http');
+var http = require('http');
 
 var superSecret = config.secret;
 
@@ -10,13 +10,16 @@ module.exports = function(app, express) {
 
     var apiRouter = express.Router();
 
-
     apiRouter.use(function(req, res, next) {
         next();
     });
 
+    apiRouter.get('/', function(req, res) {
+		res.json({ message: 'hooray! welcome to our api!' });	
+	})
+
     var verifyRecaptcha = function(key, callback) {
-        https.get("https://www.google.com/recaptcha/api/siteverify?secret=" + config.recaptchaSecret + "&response=" + key, function(res) {
+        http.get("//www.google.com/recaptcha/api/siteverify?secret=" + config.recaptchaSecret + "&response=" + key, function(res) {
             var data = "";
             res.on('data', function(chunk) {
                 data += chunk.toString();
