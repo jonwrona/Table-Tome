@@ -64,35 +64,34 @@
                 <h2 class="modal-title">Subscribe</h2>
             </div>
             <div class="modal-body">
-                <!-- <div class="row">
-                    <div class="col-sm-12">
-                        <img src="assets/img/subscribe-img.jpg" alt="fantasy book" class="img-thumbnail">
-                    </div>
-                </div> -->
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="well">
                             <form ng-submit="submit()">
                                 <div class="form-group">
                                     <label for="subName" class="control-label"><strong>Name:</strong></label>
-                                    <input type="text" class="form-control" id="subName" ng-model="subData.name" placeholder="John Doe" required>
+                                    <input type="text" class="form-control" id="subName" ng-model="name" placeholder="John Doe" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="subEmail" class="control-label"><strong>Email:</strong></label>
-                                    <input type="email" class="form-control" id="subEmail" ng-model="subData.email" placeholder="johndoe@example.com" required>
+                                    <input type="email" class="form-control" id="subEmail" ng-model="email" placeholder="johndoe@example.com" required>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success btn-lg btn-block"><i class='fa fa-envelope'></i> Subscribe</button>
                                 </div>
-                                <div re-captcha ng-model="subData.captcha"></div>
+                                <div class="g-recaptcha" data-sitekey="6Ld4_QQTAAAAAN2tqCIJl_PU_sm6r0VSjtwxYAR5"></div>
                             </form>
                         </div>
                     </div>
                 </div>
+                <div class="row show-hide-message" ng-show="message">
+                    <div class="col-sm-12">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>{{ message }}</strong>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div> -->
         </div>
     </div>
 </div>

@@ -1,9 +1,22 @@
 angular.module('homeCtrl', ['subscriberService'])
-.controller('SubscriberController', function($scope, Subscriber){
+    .controller('SubscriberController', function($scope, Subscriber) {
+    	$scope.message = "";
 
-	$scope.submit = function() {
-		Subscriber.create($scope.subData);
-		// console.log($scope.name + ' ' + $scope.email);
-	};
-	
-});
+        $scope.submit = function() {
+        	$scope.message = "";
+            var params = {
+                name: $scope.name,
+                email: $scope.email,
+                recaptcha: document.getElementById("g-recaptcha-response").value
+            };
+            Subscriber.create(params)
+                .success(function(data) {
+                	if (data.success) {
+
+                	} else {
+                		$scope.message = data.message;
+                	}
+                });
+        };
+
+    });
