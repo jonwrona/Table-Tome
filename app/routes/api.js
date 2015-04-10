@@ -34,7 +34,12 @@ module.exports = function(app, express) {
                     });
                 } else {
                     kb.verify(sub.email, function(err, res0) {
-                        if (res0.body.result == 'deliverable') {
+                        if (res0 === undefined) {
+                            return res.json({
+                                success: false,
+                                message: 'I\'m sorry, but we cannot accept any more subscribers today. Please try again tomorrow.'
+                            });
+                        } else if (res0.body.result == 'deliverable') {
                             sub.save(function(err) {
                                 if (err) {
                                     return res.send(err);
