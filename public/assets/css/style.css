@@ -85,18 +85,18 @@ body {
 }
 
 .image-bg-home-header {
-    background: url('../img/home-header.jpg') no-repeat center center scroll;
+    background: url('../img/ToDKeyArt2-resized-cropped.jpg') no-repeat center center scroll;
     padding: 100px 0;
 }
 
 .image-bg-home-break {
-    background: url('../img/home-img.jpg') no-repeat center center scroll;
+    background: url('../img/ToDKeyArt3-cropped.jpg') no-repeat center center scroll;
     height: 300px;
     margin: 50px 0;
 }
 
 .image-bg-spellbook-header {
-    background: url('../img/home-header.jpg') no-repeat center center scroll;
+    background: url('../img/DnD_DMG_Art-cropped-resized.jpg') no-repeat center center scroll;
     padding: 20px 0;
     margin-bottom: 30px;
 }
