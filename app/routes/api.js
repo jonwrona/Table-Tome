@@ -44,7 +44,6 @@ module.exports = function(app, express) {
                                     message: 'Welcome to the mailing list!'
                                 });
                             });
-
                         } else {
                             return res.json({
                                 success: false,
@@ -67,24 +66,6 @@ module.exports = function(app, express) {
                 });
             });
         });
-
-    // sub.save(function(err) {
-    //         if (err) {
-    //             if (err.code == 11000)
-    //                 return res.json({
-    //                     success: false,
-    //                     message: 'Someone has already subscribed with that email.'
-    //                 });
-    //             else
-    //                 return res.send(err);
-    //         }
-    //         return res.json({
-    //             success: true,
-    //             message: 'Welcome to the mailing list!'
-    //         });
-    //     }
-
-
 
     apiRouter.route('/spells/basic')
         .get(function(req, res) {

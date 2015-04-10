@@ -76,17 +76,16 @@
                                     <label for="subEmail" class="control-label"><strong>Email:</strong></label>
                                     <input type="email" class="form-control" id="subEmail" ng-model="email" placeholder="johndoe@example.com" required>
                                 </div>
+                                <div class="show-hide-message" ng-show="message">
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>{{ message }}</strong>
+                                    </div>
+                                </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success btn-lg btn-block"><i class='fa fa-envelope'></i> Subscribe</button>
+                                    <button ng-if="!processing" type="submit" class="btn btn-success btn-lg btn-block" ><i class='fa fa-envelope'></i> Subscribe</button>
+                                    <button ng-if="processing" class="btn btn-info btm-lg btn-block"><i class="fa fa-cog fa-spin fa-3x" disabled></i>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="row show-hide-message" ng-show="message">
-                    <div class="col-sm-12">
-                        <div class="alert alert-danger" role="alert">
-                            <strong>{{ message }}</strong>
                         </div>
                     </div>
                 </div>
@@ -94,8 +93,3 @@
         </div>
     </div>
 </div>
-<script>
-$('#subModal').on('hidden.bs.modal', function() {
-    document.getElementById("subForm").reset();
-});
-</script>
