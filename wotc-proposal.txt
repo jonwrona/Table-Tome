@@ -1,0 +1,24 @@
+Requestor’s Name/Company Name:
+	Jonathan Wrona
+
+Requestor’s Full Mailing Address: 
+	101 Thompson 1999 Burdett Avenue
+	Troy, New York 12180-3599
+	United States
+
+Requestor’s Email:
+	jonwrona@gmail.com
+
+What is the exact property/work the Requestor is asking permission to use?  (Please be specific.)
+	I am asking for permission to use 5th edition spells from any free publicly distributed content, as well as those from the Official Player's Handbook. In the future I may wish to use more official 5th edition content/rules as well.
+
+Detailed description of project:  (Please be specific in how you intend to use the property, including scope of project, and duration of use.)
+	"Table Tome" is currently a Dungeons & Dragons 5th Edition spellbook which features the ability to filter a table of spells. The spells included so far are those from any freely distributed content, for example the Basic Rules and the Elemental Evil Player's Companion. The goal in contacting you is to gain the ability to add the entire list of spells from the Player's Handbook.
+	The goal of "Table Tome" is to evolve into a community of users who share their custom content, but for now acts solely as a tool that strives to reduce the time taken flipping through pages to find rules for a spell, or to pick new spells for a users spellcasting character.
+	My hope is that "Table Tome" is frequently used for as long as people play 5th Edition Dungeons & Dragons.
+
+Where would the project be displayed and/or distributed?  (Please specify format/platform as well as geographical market/territory.)
+	The project will be displayed at tabletome.com as a website. It is currently live if you would like to examine its functionality.
+
+Additional information that is relevant to the request and potential use:
+	I understand that in order for players to gain access to the list of spells in the Player's Handbook, they have to own one. The goal of "Table Tome" is not to eliminate that need. I hope to add user accounts that specify a permission level, so that only those users who have been granted access to the content which is not freely distributed (as of now specifically those spells included in the Player's Handbook), will have access to said content. In doing this I want to work with you to provide a method of validating that a user owns the content.

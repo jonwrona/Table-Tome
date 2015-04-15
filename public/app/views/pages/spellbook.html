@@ -178,7 +178,7 @@
                                 <p ng-switch-when=3>{{spell.level}}<small>rd</small> Level</p>
                                 <p ng-switch-default>{{spell.level}}<small>th</small> Level</p>
                             </td>
-                            <td>School of {{spell.school}}</td>
+                            <td>{{spell.school}}</td>
                             <td>
                                 <ul class="list-unstyled">
                                     <li ng-repeat="class in spell.classes">{{class}}</li>

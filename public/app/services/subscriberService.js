@@ -1,14 +1,12 @@
 angular.module('subscriberService', [])
-.factory('Subscriber', ['$http', function($http) {
-	var subFactory = {};
+    .factory('Subscriber', ['$http', function($http) {
+        var subFactory = {};
 
-	subFactory.create = function(subData) {
-		return $http.post('/api/mail', subData);
-	};
+        subFactory.create = function(email) {
+            $http.post('/api/mail', {
+                    email: email
+                });
+        };
 
-	subFactory.delete = function(id) {
-		return $http.delete('/api/mail/' + id);
-	};
-
-	return subFactory;
-}]);
+        return subFactory;
+    }]);

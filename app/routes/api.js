@@ -1,9 +1,7 @@
 var Spell = require('../models/spell');
 var Sub = require('../models/subscriber');
 var config = require('../../config');
-var kb = require('kickbox').client(config.kickboxKey).kickbox();
-
-var superSecret = config.secret;
+var Mailgun = require('mailgun-js');
 
 module.exports = function(app, express) {
 
@@ -21,56 +19,51 @@ module.exports = function(app, express) {
 
     apiRouter.route('/mail')
         .post(function(req, res) {
-            var sub = new Sub();
-            sub.name = req.body.name;
-            sub.email = req.body.email;
-            Sub.findOne({
-                email: sub.email
-            }, function(err, user) {
-                if (user) {
-                    return res.json({
-                        success: false,
-                        message: 'Someone has already subscribed with that email.'
+            var mailgun = new Mailgun({
+                apiKey: config.mailgunKey,
+                domain: config.mailgunDomain
+            });
+            var data = {
+                from: config.mailgunSendAddress,
+                to: req.body.email,
+                subject: 'You want to subscribe?',
+                html: '<a href="http://localhost:8080/api/mail/validate?' + req.body.email + '">Click here to add your email address to a mailing list</a>'
+            }
+            mailgun.messages.send(data, function(err, body) {
+                if (err) {
+                    res.render('error', {
+                        error: err
                     });
+                    console.log('a mailing error occured: '.err);
                 } else {
-                    kb.verify(sub.email, function(err, res0) {
-                        if (res0 === undefined) {
-                            return res.json({
-                                success: false,
-                                message: 'I\'m sorry, but we cannot accept any more subscribers today. Please try again tomorrow.'
-                            });
-                        } else if (res0.body.result == 'deliverable') {
-                            sub.save(function(err) {
-                                if (err) {
-                                    return res.send(err);
-                                }
-                                return res.json({
-                                    success: true,
-                                    message: 'Welcome to the mailing list!'
-                                });
-                            });
-                        } else {
-                            return res.json({
-                                success: false,
-                                message: 'Email address is invalid.'
-                            });
-                        }
+                    res.render('submitted', {
+                        email: req.body.email
                     });
+                    console.log(body);
                 }
             });
         });
 
-    apiRouter.route('/mail/:sub_id')
-        .delete(function(req, res) {
-            Sub.remove({
-                _id: req.params.sub_id
-            }, function(err, user) {
-                if (err) return res.send(err);
-                return res.json({
-                    message: 'Successfully deleted'
-                });
-            });
+    apiRouter.get('/mail/validate/:mail', function(req, res) {
+        var mailgun = new Mailgun({
+            apiKey: config.mailgunKey,
+            domain: mailgunDomain
         });
+        var members = [{
+            address: req.params.mail
+        }];
+        mailgun.lists('updates@mail.tabletome.com').members().add({
+            members: members,
+            subscribed: true
+        }, function(err, body) {
+            console.log(body);
+            if (err) {
+                res.send("Error - check console");
+            } else {
+                res.send("Added to mailing list");
+            }
+        });
+    });
 
     apiRouter.route('/spells/basic')
         .get(function(req, res) {
@@ -79,6 +72,34 @@ module.exports = function(app, express) {
             }, function(err, spells) {
                 if (err) return res.send(err);
                 res.json(spells);
+            });
+        });
+
+    apiRouter.route('/spells')
+        .post(function(req, res) {
+            var spell = new Spell();
+            spell.permissionLvl = req.body.permissionLvl
+            spell.custom = req.body.custom;
+            if (spell.custom) spell.author = req.body.author;
+            if (!spell.custom) spell.books = req.body.books;
+            spell.name = req.body.name;
+            spell.level = req.body.level;
+            spell.school = req.body.school;
+            spell.ritual = req.body.ritual;
+            spell.classes = req.body.classes;
+            spell.castingTime = req.body.castingTime;
+            spell.duration = req.body.duration;
+            spell.range = req.body.range;
+            spell.verbal = req.body.verbal;
+            spell.somatic = req.body.somatic;
+            spell.material = req.body.material;
+            spell.description = req.body.description;
+
+            spell.save(function(err) {
+                if (err) return res.send(err);
+                res.json({
+                    message: 'Spell created!'
+                });
             });
         });
 
