@@ -1,7 +1,7 @@
 var Spell = require('../models/spell');
 var Sub = require('../models/subscriber');
 var config = require('../../config');
-var Mailgun = require('mailgun-js');
+var mailgun = require('mailgun-js')({apiKey: config.mailgunKey, domain: config.mailgunDomain});
 
 module.exports = function(app, express) {
 
@@ -19,36 +19,24 @@ module.exports = function(app, express) {
 
     apiRouter.route('/mail')
         .post(function(req, res) {
-            var mailgun = new Mailgun({
-                apiKey: config.mailgunKey,
-                domain: config.mailgunDomain
-            });
             var data = {
                 from: config.mailgunSendAddress,
                 to: req.body.email,
                 subject: 'You want to subscribe?',
-                html: '<a href="http://localhost:8080/api/mail/validate?' + req.body.email + '">Click here to add your email address to a mailing list</a>'
+                html: '<a href="http://localhost:8080/api/mail/validate/' + req.body.email + '">Click here to add your email address to a mailing list</a>'
             }
-            mailgun.messages.send(data, function(err, body) {
-                if (err) {
-                    res.render('error', {
-                        error: err
-                    });
-                    console.log('a mailing error occured: '.err);
-                } else {
-                    res.render('submitted', {
-                        email: req.body.email
-                    });
-                    console.log(body);
-                }
+            mailgun.messages().send(data, function(err, body) {
+                console.log(body);
+                console.log(err);
+                // if (err) {                    
+                //     console.log('a mailing error occured: '.err);
+                // } else {
+                //     console.log(body+"We good");
+                // }
             });
         });
 
     apiRouter.get('/mail/validate/:mail', function(req, res) {
-        var mailgun = new Mailgun({
-            apiKey: config.mailgunKey,
-            domain: mailgunDomain
-        });
         var members = [{
             address: req.params.mail
         }];
