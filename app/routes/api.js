@@ -23,7 +23,7 @@ module.exports = function(app, express) {
                 from: config.mailgunSendAddress,
                 to: req.body.email,
                 subject: 'You want to subscribe?',
-                html: '<a href="http://localhost:8080/api/mail/validate/' + req.body.email + '">Click here to add your email address to a mailing list</a>'
+                html: '/app/views/pages/confirm_email.html'
             }
             mailgun.messages().send(data, function(err, body) {
                 console.log(body);
