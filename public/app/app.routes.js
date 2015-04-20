@@ -10,7 +10,7 @@ angular.module('app.routes', ['ngRoute'])
 		templateUrl: 'app/views/pages/spellbook.html',
 		controller: 'spellController',
 		controllerAs: 'spellCtrl'
-	});
-
+	}).
+	otherwise({redirectTo: 'app/views/pages/404.html'})
 	$locationProvider.html5Mode(true);
 });
