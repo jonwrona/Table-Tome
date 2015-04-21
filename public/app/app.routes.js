@@ -11,8 +11,11 @@ angular.module('app.routes', ['ngRoute'])
                 controller: 'spellController',
                 controllerAs: 'spellCtrl'
             })
+            // .when('/confirm', {
+            // 	templateURL: 'app/views/pages/confirm_email.html'
+            // })
             .otherwise({
-                templateUrl: 'app/views/pages/404.html'
+                templateUrl: 'app/views/pages/confirm_email.html'
             });
         $locationProvider.html5Mode(true);
     });

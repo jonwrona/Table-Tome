@@ -2,7 +2,8 @@ var Spell = require('../models/spell');
 var Sub = require('../models/subscriber');
 var config = require('../../config');
 var mailgun = require('mailgun-js')({apiKey: config.mailgunKey, domain: config.mailgunDomain});
-
+var path = require('path');
+var fs = require('fs');
 module.exports = function(app, express) {
 
     var apiRouter = express.Router();
@@ -19,11 +20,23 @@ module.exports = function(app, express) {
 
     apiRouter.route('/mail')
         .post(function(req, res) {
+            var temp = path.join(__dirname, '../');
+            var temp = path.join(temp, '../');
+            var jquery_path = path.join(temp, '/public/app/services/jquery-1.11.2.min.js');
+            var filepath = path.join(temp,'/public/app/views/pages/confirm_email.html'); //__dirname is apparently Table-Tome/app/routes instead of Table-Tome, so I cannot access the html location
+            var file = fs.readFileSync(filepath);
+
             var data = {
                 from: config.mailgunSendAddress,
                 to: req.body.email,
-                subject: 'You want to subscribe?',
-                html: '/app/views/pages/confirm_email.html'
+                subject: 'Confirm your subscription to our mailing list',
+                html: '<script src="jquery.js"></script> 
+                            <script> 
+                            $(function(){
+                              $("#includedContent").load(filepath); 
+                            });
+                            </script> 
+                             <div id="includedContent"></div>'
             }
             mailgun.messages().send(data, function(err, body) {
                 console.log(body);
