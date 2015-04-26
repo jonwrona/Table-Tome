@@ -159,17 +159,15 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Spell</th>
-                            <th>Level</th>
-                            <th>School</th>
+                            <th><a href="" ng-click="spellCtrl.predicate='name'; spellCtrl.reverse=!spellCtrl.reverse">Spell&emsp;<i class="fa fa-sort-alpha-asc" ng-if="spellCtrl.predicate=='name' && spellCtrl.reverse==false"></i><i class="fa fa-sort-alpha-desc" ng-if="spellCtrl.predicate=='name' && spellCtrl.reverse==true"></i></a></th>
+                            <th><a href="" ng-click="spellCtrl.predicate='level'; spellCtrl.reverse=!spellCtrl.reverse">Level&emsp;<i class="fa fa-sort-numeric-asc" ng-if="spellCtrl.predicate=='level' && spellCtrl.reverse==false"></i>
+                            <i class="fa fa-sort-numeric-desc" ng-if="spellCtrl.predicate=='level' && spellCtrl.reverse==true"></i></a></th>
+                            <th><a href="" ng-click="spellCtrl.predicate='school'; spellCtrl.reverse=!spellCtrl.reverse">School&emsp;<i class="fa fa-sort-alpha-asc" ng-if="spellCtrl.predicate=='school' && spellCtrl.reverse==false"></i><i class="fa fa-sort-alpha-desc" ng-if="spellCtrl.predicate=='school' && spellCtrl.reverse==true"></i></a></th>
                             <th>Classes</th>
-                            <!-- <th>Casting Time</th>
-                                <th>Range</th>
-                                <th>Duration</th> -->
                         </tr>
                     </thead>
                     <tbody data-link="row" class="rowlink">
-                        <tr ng-repeat="spell in spellCtrl.items | filter:search | filter:spellCtrl.levelFilter | filter:spellCtrl.classFilter | filter:spellCtrl.schoolFilter">
+                        <tr ng-repeat="spell in spellCtrl.items | filter:search | filter:spellCtrl.levelFilter | filter:spellCtrl.classFilter | filter:spellCtrl.schoolFilter | orderBy:spellCtrl.predicate:spellCtrl.reverse">
                             <td><a href ng-click="spellCtrl.setSpell(spell)" data-toggle="modal" data-target="#spellModal">{{spell.name}}</a></td>
                             <td ng-switch on="spell.level">
                                 <p ng-switch-when=0>Cantrip</p>

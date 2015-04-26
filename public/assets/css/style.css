@@ -44,6 +44,27 @@ header .navbar {
     color: white;
     text-decoration: none;
 }
+/* TABLE HEADER LINKS
+====================== */
+/* for sortable tables */
+th a:link {
+    color: #000;
+    text-decoration: none;
+}
+th a:hover {
+    color: #000;
+    text-decoration: none;
+}
+th a:visited {
+    color: #000;
+    text-decoration: none;
+}
+th a:active {
+    color: #000;
+    text-decoration: none
+}
+
+
 /* STICKY FOOTER
 ====================== */
 

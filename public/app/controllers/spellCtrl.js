@@ -4,6 +4,9 @@ angular.module('spellCtrl', [])
 
         vm.items = Spells.spells;
 
+        vm.predicate = 'name';
+        vm.reverse = false;
+
         vm.levelIncludes = [];
         vm.includeLevel = function(level) {
             var i = $.inArray(level, vm.levelIncludes);
