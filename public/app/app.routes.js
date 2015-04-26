@@ -19,7 +19,7 @@ angular.module('app.routes', ['ngRoute'])
             })
             // otherwise page doesn't exist
             .otherwise({
-                templateUrl: 'app/views/pages/confirm_email.html'
+                templateUrl: 'app/views/pages/404.html'
             });
         $locationProvider.html5Mode(true);
     });
