@@ -11,8 +11,15 @@ angular.module('app.routes', ['ngRoute'])
                 controller: 'spellController',
                 controllerAs: 'spellCtrl'
             })
+            .when('/mail/success', {
+                templateUrl: 'app/views/pages/mail/success.html'
+            })
+            .when('/mail/failure', {
+                templateUrl: 'app/views/pages/mail/failure.html'
+            })
+            // otherwise page doesn't exist
             .otherwise({
-                templateUrl: 'app/views/pages/404.html'
+                templateUrl: 'app/views/pages/confirm_email.html'
             });
         $locationProvider.html5Mode(true);
     });
