@@ -6,6 +6,7 @@ angular.module('subscriberService', [])
             $http.post('/api/mail', {
                     email: email_
                 });
+            return true;
         };
 
         return subFactory;

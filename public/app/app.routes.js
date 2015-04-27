@@ -1,7 +1,7 @@
 angular.module('app.routes', ['ngRoute'])
     .config(function($routeProvider, $locationProvider) {
         $routeProvider
-        // home page
+            // home page
             .when('/', {
                 templateUrl: 'app/views/pages/home.html'
             })
@@ -11,6 +11,7 @@ angular.module('app.routes', ['ngRoute'])
                 controller: 'spellController',
                 controllerAs: 'spellCtrl'
             })
+            // mailing list success and failure pages
             .when('/mail/success', {
                 templateUrl: 'app/views/pages/mail/success.html'
             })

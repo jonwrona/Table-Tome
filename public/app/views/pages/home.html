@@ -49,13 +49,20 @@
             <div class="col-md-8">
                 <p class="text-justify">We have many ideas for the expansion of Table Tome, and are looking forward to implementing these in the future. If you are interested in receiving updates, sign up for our newsletter. Another option is to watch our github repository <a href="https://github.com/jonwrona/Table-Tome">here</a>.</p>
             </div>
-            <div class="col-md-4">
-                <form ng-controller="SubscriberController" ng-submit="submit()">
+            <div class="col-md-4" ng-controller="SubscriberController">
+                <form name="subForm" ng-submit="submit()" ng-if="!submitted">
                     <div class="input-group">
                         <input type="email" class="form-control" ng-model="mail" placeholder="nruffdarcy@example.com" required>
                         <span class="input-group-btn"><button type="submit" class="btn btn-default"><i class="fa fa-envelope-o"></i></button></span>
                     </div>
                 </form>
+                <div class="alert alert-success" role="alert" ng-if="submitted && !err"><strong>Hooray!</strong> Check your email to confirm your subscription.</div>
+                <div class="alert alert-info" role="alert" ng-if="submitted && err">
+                    <p><strong>Oh no!</strong> Someone else has already subscribed using that address!</p>
+                    <p>
+                        <button type="button" class="btn btn-default btn-xs" ng-click="reset()">Try Again?</button>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
