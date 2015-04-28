@@ -2,7 +2,11 @@ angular.module('spellCtrl', [])
     .controller('spellController', function($rootScope, Spells) {
         var vm = this;
 
-        vm.items = Spells.spells;
+        vm.items = [];
+        vm.loadItems = function() {
+            vm.items = Spells.spells.slice(0,14);
+            return vm.items;
+        };
 
         vm.levelIncludes = [];
         vm.includeLevel = function(level) {
