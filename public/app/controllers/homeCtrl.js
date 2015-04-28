@@ -1,23 +1,16 @@
 angular.module('homeCtrl', ['subscriberService'])
     .controller('SubscriberController', function($scope, Subscriber) {
-        $scope.message = "";
-
+    	$scope.submitted = false;
+    	$scope.err = false;
         $scope.submit = function() {
-            $scope.message = "";
-            var params = {
-                name: $scope.name,
-                email: $scope.email,
-                recaptcha: document.getElementById("g-recaptcha-response").value
-            };
-            Subscriber.create(params)
-                .success(function(data) {
-                    if (data.success) {
-                        // do stuff
-                    } else {
-                        $scope.message = data.message;
-                    }
-                });
-            // grecaptcha.reset();
+            var thing = !Subscriber.create($scope.mail);
+            console.log(thing);
+            $scope.submitted = true;
+            $scope.err = thing;
         };
-
+        $scope.reset = function() {
+         	$scope.submitted = false;
+        	$scope.err = false;
+            document.getElementById('subForm').reset();
+        };
     });

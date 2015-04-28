@@ -142,6 +142,27 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li>
+                                <p class="navbar-text"><em>Source:</em>
+                                </p>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Sources<s></s><span class="caret"></span></a>
+                                <ul class="dropdown-menu noclose">
+                                    <li>
+                                        <input type="checkbox" id="pbr" ng-click="spellCtrl.includeSource('Basic Rules')">
+                                        <label for="pbr">Basic Rules</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="phb" ng-click="spellCtrl.includeSource('Player\'s Handbook')">
+                                        <label for="phb">Player's Handbook</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="eepc" ng-click="spellCtrl.includeSource('Elemental Evil Player\'s Companion')">
+                                        <label for="eepc">Elemental Evil</label>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                         <form class="navbar-form navbar-right" role="search">
                             <div class="form-group">
@@ -159,37 +180,33 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Spell</th>
-                            <th>Level</th>
-                            <th>School</th>
+                            <th><a href="" ng-click="spellCtrl.predicate='name'; spellCtrl.reverse=!spellCtrl.reverse">Spell&emsp;<i class="fa fa-sort-alpha-asc" ng-if="spellCtrl.predicate=='name' && spellCtrl.reverse==false"></i><i class="fa fa-sort-alpha-desc" ng-if="spellCtrl.predicate=='name' && spellCtrl.reverse==true"></i></a></th>
+                            <th><a href="" ng-click="spellCtrl.predicate='level'; spellCtrl.reverse=!spellCtrl.reverse">Level&emsp;<i class="fa fa-sort-numeric-asc" ng-if="spellCtrl.predicate=='level' && spellCtrl.reverse==false"></i>
+                            <i class="fa fa-sort-numeric-desc" ng-if="spellCtrl.predicate=='level' && spellCtrl.reverse==true"></i></a></th>
+                            <th><a href="" ng-click="spellCtrl.predicate='school'; spellCtrl.reverse=!spellCtrl.reverse">School&emsp;<i class="fa fa-sort-alpha-asc" ng-if="spellCtrl.predicate=='school' && spellCtrl.reverse==false"></i><i class="fa fa-sort-alpha-desc" ng-if="spellCtrl.predicate=='school' && spellCtrl.reverse==true"></i></a></th>
                             <th>Classes</th>
-                            <!-- <th>Casting Time</th>
-                                <th>Range</th>
-                                <th>Duration</th> -->
                         </tr>
                     </thead>
                     <tbody data-link="row" class="rowlink">
-                        <div ng-controller='scrollController' infinite-scroll='moreSpells()' infinite-scroll-distance='2'>
-                            <tr ng-repeat="spell in spellCtrl.loadItems() | filter:search | filter:spellCtrl.levelFilter | filter:spellCtrl.classFilter | filter:spellCtrl.schoolFilter">
-                                <td><a href ng-click="spellCtrl.setSpell(spell)" data-toggle="modal" data-target="#spellModal">{{spell.name}}</a></td>
-                                <td ng-switch on="spell.level">
-                                    <p ng-switch-when=0>Cantrip</p>
-                                    <p ng-switch-when=1>{{spell.level}}<small>st</small> Level</p>
-                                    <p ng-switch-when=2>{{spell.level}}<small>nd</small> Level</p>
-                                    <p ng-switch-when=3>{{spell.level}}<small>rd</small> Level</p>
-                                    <p ng-switch-default>{{spell.level}}<small>th</small> Level</p>
-                                </td>
-                                <td>School of {{spell.school}}</td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        <li ng-repeat="class in spell.classes">{{class}}</li>
-                                    </ul>
-                                </td>
-                                <!-- <td>{{spell.castingTime}}</td>
-                                    <td>{{spell.range}}</td>
-                                    <td>{{spell.duration}}</td> -->
-                            </tr>
-                        </div>
+                        <tr ng-repeat="spell in spellCtrl.items | filter:search | filter:spellCtrl.levelFilter | filter:spellCtrl.classFilter | filter:spellCtrl.schoolFilter | filter:spellCtrl.sourceFilter | orderBy:spellCtrl.predicate:spellCtrl.reverse">
+                            <td><a href ng-click="spellCtrl.setSpell(spell)" data-toggle="modal" data-target="#spellModal">{{spell.name}}</a></td>
+                            <td ng-switch on="spell.level">
+                                <p ng-switch-when=0>Cantrip</p>
+                                <p ng-switch-when=1>{{spell.level}}<small>st</small> Level</p>
+                                <p ng-switch-when=2>{{spell.level}}<small>nd</small> Level</p>
+                                <p ng-switch-when=3>{{spell.level}}<small>rd</small> Level</p>
+                                <p ng-switch-default>{{spell.level}}<small>th</small> Level</p>
+                            </td>
+                            <td>{{spell.school}}</td>
+                            <td>
+                                <ul class="list-unstyled">
+                                    <li ng-repeat="class in spell.classes | orderBy:class">{{class}}</li>
+                                </ul>
+                            </td>
+                            <!-- <td>{{spell.castingTime}}</td>
+                                <td>{{spell.range}}</td>
+                                <td>{{spell.duration}}</td> -->
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -225,7 +242,7 @@
                                 <tr>
                                     <td>
                                         <ul class="list-unstyled">
-                                            <li ng-repeat="class in spellCtrl.modalSpell.classes">{{class}}</li>
+                                            <li ng-repeat="class in spellCtrl.modalSpell.classes | orderBy:class">{{class}}</li>
                                         </ul>
                                     </td>
                                     <td>{{spellCtrl.modalSpell.castingTime}}</td>

@@ -1,12 +1,12 @@
 var Spell = require('../models/spell');
 var Sub = require('../models/subscriber');
-var jwt = require('jsonwebtoken');
 var config = require('../../config');
-var request = require('request');
-
-var superSecret = config.secret;
-var captchaSecret = config.recaptchaSecret;
-
+var mailgun = require('mailgun-js')({
+    apiKey: config.mailgunKey,
+    domain: config.mailgunDomain
+});
+var path = require('path');
+var fs = require('fs');
 module.exports = function(app, express) {
 
     var apiRouter = express.Router();
@@ -21,74 +21,74 @@ module.exports = function(app, express) {
         });
     });
 
-    var verifyRecaptcha = function(key, callback) {
-        request.post({
-                url: 'https://www.google.com/recaptcha/api/siteverify',
-                form: {
-                    secret: captchaSecret,
-                    response: key
-                }
-            },
-            function(err, res, body) {
-                var data = "";
-                res.on('data', function(chunk) {
-                    data += chunk.toString();
-                });
-                res.on('end', function() {
-                    try {
-                        var parsedData = JSON.parse(data);
-                        console.log(parsedData);
-                        callback(parsedData.success);
-                    } catch (e) {
-                        callback(false);
-                    }
-                });
-            });
-    };
-
     apiRouter.route('/mail')
         .post(function(req, res) {
-        	console.log()
-            verifyRecaptcha(req.body['g-recaptcha-response'], function(success) {
-                if (success) {
-                    var sub = new Subcriber();
-                    sub.name = req.body.name;
-                    sub.email = req.body.email;
-                    sub.save(function(err) {
-                        if (err) {
-                            if (err.code == 11000)
-                                return res.json({
-                                    success: false,
-                                    message: 'Someone has already subscribed with that email.'
-                                });
-                            else
-                                return res.send(err);
-                        }
+            mailgun.lists('updates@mail.tabletome.com')
+                .members(req.body.email).info(function(err, body) {
+                    if (body.member && body.member.subscribed) {
+                        console.log('should be here homie');
                         return res.json({
-                            message: 'Welcome!'
+                            success: false
                         });
-                    });
-                } else {
-                    return res.json({
-                        success: false,
-                        message: "Captcha failed! Try again?"
-                    });
-                }
-            });
-        });
-
-    apiRouter.route('/mail/:sub_id')
-        .delete(function(req, res) {
-            Sub.remove({
-                _id: req.params.sub_id
-            }, function(err, user) {
-                if (err) return res.send(err);
-                res.json({
-                    message: 'Successfully deleted'
+                    } else {
+                        var data = {
+                            from: config.mailgunSendAddress,
+                            to: req.body.email,
+                            subject: 'Confirm your subscription to our mailing list',
+                            html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><head> <meta name="viewport" content="width=device-width"/> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> <title>Actionable emails e.g. reset password</title> <style type="text/css"> img{max-width: 100%;}body{-webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6;}body{background-color: #f6f6f6;}@media only screen and (max-width: 640px){body{padding: 0 !important;}h1{font-weight: 800 !important; margin: 20px 0 5px !important;}h2{font-weight: 800 !important; margin: 20px 0 5px !important;}h3{font-weight: 800 !important; margin: 20px 0 5px !important;}h4{font-weight: 800 !important; margin: 20px 0 5px !important;}h1{font-size: 22px !important;}h2{font-size: 18px !important;}h3{font-size: 16px !important;}.container{padding: 0 !important; width: 100% !important;}.content{padding: 0 !important;}.content-wrap{padding: 10px !important;}.invoice{width: 100% !important;}}</style></head><body itemscope itemtype="http://schema.org/EmailMessage" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6; background: #f6f6f6; margin: 0;"> <table class="body-wrap" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background: #f6f6f6; margin: 0;"> <tr style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> <td style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td><td class="container" width="600" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;" valign="top"> <div class="content" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;"> <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; background: #fff; margin: 0; border: 1px solid #e9e9e9;"> <tr style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> <td class="content-wrap" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;" valign="top"> <meta itemprop="name" content="Confirm Email" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"/> <table width="100%" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> <tr style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> <td class="content-block" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top"> Please confirm your subscription by clicking the link below. </td></tr><tr style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> <td class="content-block" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top"> We will send you updates regarding Table Tome only when an important feature is being added to the service. It is important that we have an accurate email address. </td></tr><tr style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> <td class="content-block" itemprop="handler" itemscope itemtype="http://schema.org/HttpActionHandler" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top"> <a href="http://localhost:8080/api/mail/validate/' + req.body.email + '" class="btn-primary" itemprop="url" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background: #348eda; margin: 0; border-color: #348eda; border-style: solid; border-width: 10px 20px;">Confirm subscription!</a> </td></tr><tr style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> <td class="content-block" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top"> &mdash; Table Tome </td></tr></table> </td></tr></table> <div class="footer" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;"> <table width="100%" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> <tr style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> <td class="aligncenter content-block" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top"> Watch <a href="https://github.com/jonwrona/Table-Tome" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 12px; color: #999; text-decoration: underline; margin: 0;">Table Tome</a> on Github. <br>Check out <a href="http://rcos.rpi.edu/" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 12px; color: #999; text-decoration: underline; margin: 0;">RCOS</a>. </td></tr></table> </div></div></td><td style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td></tr></table></body></html>'
+                        }
+                        mailgun.messages().send(data, function(err, body) {
+                            if (err) {
+                                return res.json({
+                                    success: false
+                                });
+                            } else {
+                                return res.json({
+                                    success: true
+                                });
+                            }
+                        });
+                    }
                 });
-            });
         });
 
+    apiRouter.get('/mail/validate/:mail', function(req, res) {
+        mailgun.lists('updates@mail.tabletome.com')
+            .members(req.params.mail).info(function(err, body) {
+                if (body.member && body.member.subscribed) {
+                    res.redirect("/mail/failure");
+                } else if (body.member) {
+                    mailgun.lists('updates@mail.tabletome.com')
+                        .members(req.params.mail).update({
+                            "subscribed": "true"
+                        }, function(err, body) {
+                            if (err) {
+                                res.redirect("/mail/failure");
+                                console.log(err);
+                            } else {
+                                res.redirect("/mail/success")
+                            };
+                        });
+                } else {
+                    var members = [{
+                        address: req.params.mail
+                    }];
+                    mailgun.lists('updates@mail.tabletome.com')
+                        .members().add({
+                            members: members,
+                            subscribed: true
+                        }, function(err, body) {
+                            console.log(body);
+                            if (err) {
+                                res.redirect("/mail/failure");
+                            } else {
+                                res.redirect("/mail/success");
+                            }
+                        });
+                }
+
+            });
+    });
 
     apiRouter.route('/spells/basic')
         .get(function(req, res) {

@@ -8,6 +8,9 @@ angular.module('spellCtrl', [])
             return vm.items;
         };
 
+        vm.predicate = 'name';
+        vm.reverse = false;
+
         vm.levelIncludes = [];
         vm.includeLevel = function(level) {
             var i = $.inArray(level, vm.levelIncludes);
@@ -64,6 +67,29 @@ angular.module('spellCtrl', [])
             }
             return spell;
         };
+
+        vm.sourceIncludes = [];
+        vm.includeSource = function(source) {
+            var i = $.inArray(source, vm.sourceIncludes);
+            if (i > -1) {
+                vm.sourceIncludes.splice(i, 1);
+            } else {
+                vm.sourceIncludes.push(source);
+            }
+        };
+        vm.sourceFilter = function(spell) {
+            if (vm.sourceIncludes.length > 0) {
+                if (spell.books.length === 0)
+                    return spell;
+                for (i = 0; i < spell.books.length; i++) {
+                    if ($.inArray(spell.books[i].book, vm.sourceIncludes) >= 0) {
+                        return spell;
+                    }
+                }
+                return;
+            }
+            return spell;
+        }
 
         vm.setSpell = function(spell) {
             vm.modalSpell = spell;

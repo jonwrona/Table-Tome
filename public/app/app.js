@@ -4,5 +4,6 @@ angular.module('tabletome', [
     'homeCtrl',
     'spellCtrl',
     'subscriberService',
-    'spellService'
+    'spellService',
+    'infinite-scroll'
 ]);

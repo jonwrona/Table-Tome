@@ -44,6 +44,27 @@ header .navbar {
     color: white;
     text-decoration: none;
 }
+/* TABLE HEADER LINKS
+====================== */
+/* for sortable tables */
+th a:link {
+    color: #000;
+    text-decoration: none;
+}
+th a:hover {
+    color: #000;
+    text-decoration: none;
+}
+th a:visited {
+    color: #000;
+    text-decoration: none;
+}
+th a:active {
+    color: #000;
+    text-decoration: none
+}
+
+
 /* STICKY FOOTER
 ====================== */
 
@@ -55,7 +76,7 @@ html {
 body {
     /* Margin bottom by footer height */
     
-    margin-bottom: 100px;
+    margin-bottom: 120px;
 }
 
 .footer {
@@ -64,8 +85,8 @@ body {
     width: 100%;
     /* Set the fixed height of the footer here */
     
-    height: 60px;
-    background-color: #f5f5f5;
+    height: 80px;
+    background-color: #f9f9f9;
 }
 
 .footer p {
@@ -85,18 +106,18 @@ body {
 }
 
 .image-bg-home-header {
-    background: url('../img/home-header.jpg') no-repeat center center scroll;
+    background: url('../img/ToDKeyArt2-resized-cropped.jpg') no-repeat center center scroll;
     padding: 100px 0;
 }
 
 .image-bg-home-break {
-    background: url('../img/home-img.jpg') no-repeat center center scroll;
+    background: url('../img/ToDKeyArt3-cropped.jpg') no-repeat center center scroll;
     height: 300px;
     margin: 50px 0;
 }
 
 .image-bg-spellbook-header {
-    background: url('../img/home-header.jpg') no-repeat center center scroll;
+    background: url('../img/DnD_DMG_Art-cropped-resized.jpg') no-repeat center center scroll;
     padding: 20px 0;
     margin-bottom: 30px;
 }
