@@ -4,9 +4,10 @@ angular.module('subscriberService', [])
 
         subFactory.create = function(email_) {
             $http.post('/api/mail', {
-                    email: email_
-                });
-            return true;
+                email: email_
+            }).success(function(data) {
+                return data.success;
+            });
         };
 
         return subFactory;

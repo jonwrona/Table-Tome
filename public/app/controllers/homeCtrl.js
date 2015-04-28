@@ -3,13 +3,13 @@ angular.module('homeCtrl', ['subscriberService'])
     	$scope.submitted = false;
     	$scope.err = false;
         $scope.submit = function() {
-        	console.log($scope.mail);
-            var success = Subscriber.create($scope.mail);
+            $scope.err = !Subscriber.create($scope.mail);
             $scope.submitted = true;
-            $scope.err = !success;
+            console.log($scope.err);
         };
         $scope.reset = function() {
          	$scope.submitted = false;
         	$scope.err = false;
+            document.getElementById('subForm').reset();
         };
     });
