@@ -3,9 +3,10 @@ angular.module('homeCtrl', ['subscriberService'])
     	$scope.submitted = false;
     	$scope.err = false;
         $scope.submit = function() {
-            $scope.err = !Subscriber.create($scope.mail);
+            var thing = !Subscriber.create($scope.mail);
+            console.log(thing);
             $scope.submitted = true;
-            console.log($scope.err);
+            $scope.err = thing;
         };
         $scope.reset = function() {
          	$scope.submitted = false;

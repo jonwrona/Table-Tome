@@ -55,9 +55,6 @@ module.exports = function(app, express) {
     apiRouter.get('/mail/validate/:mail', function(req, res) {
         mailgun.lists('updates@mail.tabletome.com')
             .members(req.params.mail).info(function(err, body) {
-                if (body.member) {
-                    console.log(body.member);
-                }
                 if (body.member && body.member.subscribed) {
                     res.redirect("/mail/failure");
                 } else if (body.member) {
