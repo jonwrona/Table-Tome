@@ -97,7 +97,9 @@ body {
 
 .image-bg-home-header,
 .image-bg-home-break,
-.image-bg-spellbook-header {
+.image-bg-spellbook-header,
+.image-bg-success-header,
+.image-bg-failure-header {
     text-align: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -121,7 +123,17 @@ body {
     padding: 20px 0;
     margin-bottom: 30px;
 }
-
+.image-bg-success-header {
+    background: url('../img/DnD_DMG_Art-cropped-resized.jpg') no-repeat center center scroll;
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
+.image-bg-failure-header {
+    background: url('../img/DnD_DMG_Art-cropped-resized.jpg') no-repeat center center scroll;
+    padding: 20px 0;
+    height: 200px;
+    margin-bottom: 30px;
+}
 .img-center {
     margin: 0 auto;
 }
