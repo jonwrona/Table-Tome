@@ -6,9 +6,9 @@ angular.module('subscriberService', [])
             $http.post('/api/mail', {
                 email: email_
             }).success(function(data) {
+                console.log("success: "+data.success);
                 return data.success;
             });
-        };
 
         return subFactory;
     }]);
