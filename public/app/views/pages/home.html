@@ -56,10 +56,10 @@
                         <span class="input-group-btn"><button type="submit" class="btn btn-default"><i class="fa fa-envelope-o"></i></button></span>
                     </div>
                 </form>
-                <div class="alert alert-success" role="alert" ng-show="submitted && !err">
+                <div class="alert alert-success" role="alert" ng-show="submitted && !err1">
                     <h4 class="text-center"><strong>Hooray!</strong> Check your email to confirm your subscription.</h4>
                 </div>
-                <div class="alert alert-warning" role="alert" ng-show="submitted && err">
+                <div class="alert alert-warning" role="alert" ng-show="submitted && err1">
                     <h4 class="text-center"><strong>Oh no!</strong> That address is already subscribed. <a href="" ng-click="reset()"><em>Try Again?</em></a></h4>
                 </div>
             </div>
