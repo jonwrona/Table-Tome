@@ -16,9 +16,6 @@ a basic search bar.
 ### In Progress
 * Improved spellbook search filtering.
 * User accounts with custom access levels.
-  * Basic user - can only access spells and items from the basic rules.
-  * Registered user - owns a 5th edition players handbook, and
-  therefore can access the full database of spells and items.
 * An item table (inventory).
 
 ### The Future
