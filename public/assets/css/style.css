@@ -10,6 +10,10 @@ body {
     text-shadow: 0px 0px 5px black;
 }
 
+.image-header-text-lg {
+    font-size: 500%;
+}
+
 .home-header {
     font-size: 400%;
 }
@@ -99,7 +103,8 @@ body {
 .image-bg-home-break,
 .image-bg-spellbook-header,
 .image-bg-success-header,
-.image-bg-failure-header {
+.image-bg-failure-header,
+.image-bg-404-header {
     text-align: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -124,14 +129,18 @@ body {
     margin-bottom: 30px;
 }
 .image-bg-success-header {
-    background: url('../img/DnD_DMG_Art-cropped-resized.jpg') no-repeat center center scroll;
-    padding: 20px 0;
+    background: url('../img/ToDKeyArt1-cropped.jpg') no-repeat center center scroll;
+    padding: 100px 0;
     margin-bottom: 30px;
 }
 .image-bg-failure-header {
-    background: url('../img/DnD_DMG_Art-cropped-resized.jpg') no-repeat center center scroll;
-    padding: 20px 0;
-    height: 200px;
+    background: url('../img/ToDKeyArt1-cropped.jpg') no-repeat center center scroll;
+    padding: 100px 0;
+    margin-bottom: 30px;
+}
+.image-bg-404-header {
+    background: url('../img/DnD_MM_Art-cropped-resized.jpg') no-repeat center center scroll;
+    padding: 100px 0;
     margin-bottom: 30px;
 }
 .img-center {
