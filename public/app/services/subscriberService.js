@@ -4,7 +4,7 @@ angular.module('subscriberService', [])
             return $http.post('/api/mail', {
                 email: email_
             }).then(function(result) {
-                return result.data.success;
+                return result.data;
             });
         };
         return { subscribe: subscribe };
