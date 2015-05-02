@@ -130,17 +130,17 @@ body {
 }
 .image-bg-success-header {
     background: url('../img/ToDKeyArt1-cropped.jpg') no-repeat center center scroll;
-    padding: 100px 0;
+    padding: 75px 0;
     margin-bottom: 30px;
 }
 .image-bg-failure-header {
     background: url('../img/ToDKeyArt1-cropped.jpg') no-repeat center center scroll;
-    padding: 100px 0;
+    padding: 75px 0;
     margin-bottom: 30px;
 }
 .image-bg-404-header {
     background: url('../img/DnD_MM_Art-cropped-resized.jpg') no-repeat center center scroll;
-    padding: 100px 0;
+    padding: 75px 0;
     margin-bottom: 30px;
 }
 .img-center {
