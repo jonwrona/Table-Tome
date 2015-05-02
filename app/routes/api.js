@@ -26,11 +26,10 @@ module.exports = function(app, express) {
             mailgun.lists('updates@mail.tabletome.com')
                 .members(req.body.email).info(function(err, body) {
                     if (body.member && body.member.subscribed) {
-                        console.log('should be here homie');
-                        return res.json({
-                            success: false
-                        });
+                        console.log('that person is already subbed');
+                        return res.json({ success: false });
                     } else {
+                        console.log('email not subbed');
                         var data = {
                             from: config.mailgunSendAddress,
                             to: req.body.email,
@@ -39,13 +38,11 @@ module.exports = function(app, express) {
                         }
                         mailgun.messages().send(data, function(err, body) {
                             if (err) {
-                                return res.json({
-                                    success: false
-                                });
+                                console.log("Error, email not sent");
+                                return res.json({ success: false });
                             } else {
-                                return res.json({
-                                    success: true
-                                });
+                                console.log("Sent email.");
+                                return res.json({ success: true });
                             }
                         });
                     }
