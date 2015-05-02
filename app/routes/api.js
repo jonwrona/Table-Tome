@@ -39,7 +39,8 @@ module.exports = function(app, express) {
                                     message: 'That address is already subscribed.'
                                 });
                             } else {
-                                var link = req.get('host') + '/api/mail/validate/' + req.body.email;
+                                var link = req.protocol + '://' + req.get('host') + '/api/mail/validate/' + req.body.email;
+                                console.log(link);
                                 var data = {
                                     from: config.mailgunSendAddress,
                                     to: req.body.email,
@@ -66,41 +67,47 @@ module.exports = function(app, express) {
         });
 
     apiRouter.get('/mail/validate/:mail', function(req, res) {
-        mailgun.lists('updates@mail.tabletome.com')
-            .members(req.params.mail).info(function(err, body) {
-                if (body.member && body.member.subscribed) {
-                    res.redirect("/mail/failure");
-                } else if (body.member) {
-                    mailgun.lists('updates@mail.tabletome.com')
-                        .members(req.params.mail).update({
-                            "subscribed": "true"
-                        }, function(err, body) {
-                            if (err) {
-                                res.redirect("/mail/failure");
-                                console.log(err);
-                            } else {
-                                res.redirect("/mail/success")
-                            };
-                        });
-                } else {
-                    var members = [{
-                        address: req.params.mail
-                    }];
-                    mailgun.lists('updates@mail.tabletome.com')
-                        .members().add({
-                            members: members,
-                            subscribed: true
-                        }, function(err, body) {
-                            console.log(body);
-                            if (err) {
-                                res.redirect("/mail/failure");
-                            } else {
-                                res.redirect("/mail/success");
-                            }
-                        });
-                }
+        validator.check(req.params.mail, function(err, valid) {
+            if (err || !valid) {
+                res.redirect("/mail/failure");
+            } else {
+                mailgun.lists('updates@mail.tabletome.com')
+                    .members(req.params.mail).info(function(err, body) {
+                        if (body.member && body.member.subscribed) {
+                            res.redirect("/mail/failure");
+                        } else if (body.member) {
+                            mailgun.lists('updates@mail.tabletome.com')
+                                .members(req.params.mail).update({
+                                    "subscribed": "true"
+                                }, function(err, body) {
+                                    if (err) {
+                                        res.redirect("/mail/failure");
+                                        console.log(err);
+                                    } else {
+                                        res.redirect("/mail/success")
+                                    };
+                                });
+                        } else {
+                            var members = [{
+                                address: req.params.mail
+                            }];
+                            mailgun.lists('updates@mail.tabletome.com')
+                                .members().add({
+                                    members: members,
+                                    subscribed: true
+                                }, function(err, body) {
+                                    console.log(body);
+                                    if (err) {
+                                        res.redirect("/mail/failure");
+                                    } else {
+                                        res.redirect("/mail/success");
+                                    }
+                                });
+                        }
 
-            });
+                    });
+            }
+        })
     });
 
     apiRouter.route('/spells/basic')
