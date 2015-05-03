@@ -267,11 +267,11 @@
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="book in spellCtrl.modalSpell.books" ng-switch on="book.book">
                             <!-- Display when link to basic rules -->
-                            <span ng-switch-when="Basic Rules"><a href="/assets/docs/PlayerDnDBasicRules_v0.2.pdf" target="_blank">{{book.book}}</a></span>
-                            <span class="badge" ng-switch-when="Basic Rules"><a class="book-page-link" href="/assets/docs/PlayerDnDBasicRules_v0.2.pdf#page={{book.page}}" target="_blank">{{book.page}}</a></span>
+                            <span ng-switch-when="Basic Rules"><a href="http://media.wizards.com/2014/downloads/dnd/PlayerDnDBasicRules_v0.2.pdf" target="_blank">{{book.book}}</a></span>
+                            <span class="badge" ng-switch-when="Basic Rules"><a class="book-page-link" href="http://media.wizards.com/2014/downloads/dnd/PlayerDnDBasicRules_v0.2.pdf#page={{book.page}}" target="_blank">{{book.page}}</a></span>
                             <!-- Display when link to EE player's companion -->
-                            <span ng-switch-when="Elemental Evil Player's Companion"><a href="/assets/docs/EE_PlayersCompanion.pdf" target="_blank">{{book.book}}</a></span>
-                            <span class="badge" ng-switch-when="Elemental Evil Player's Companion"><a class="book-page-link" href="/assets/docs/EE_PlayersCompanion.pdf#page={{book.page}}" target="_blank">{{book.page}}</a></span>
+                            <span ng-switch-when="Elemental Evil Player's Companion"><a href="http://media.wizards.com/2015/downloads/dnd/EE_PlayersCompanion.pdf" target="_blank">{{book.book}}</a></span>
+                            <span class="badge" ng-switch-when="Elemental Evil Player's Companion"><a class="book-page-link" href="http://media.wizards.com/2015/downloads/dnd/EE_PlayersCompanion.pdf#page={{book.page}}" target="_blank">{{book.page}}</a></span>
                             <!-- Display when no link to pdf -->
                             <span ng-switch-default>{{book.book}}</span>
                             <span class="badge" ng-switch-default>{{book.page}}</span>
