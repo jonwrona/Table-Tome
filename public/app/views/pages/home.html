@@ -60,7 +60,7 @@
                     <h4 class="text-center"><strong>Hooray!</strong> Check your email to confirm your subscription.</h4>
                 </div>
                 <div class="alert alert-warning" role="alert" ng-show="submitted && err">
-                    <h4 class="text-center"><strong>Oh no!</strong> That address is already subscribed. <a href="" ng-click="reset()"><em>Try Again?</em></a></h4>
+                    <h4 class="text-center"><strong>Oh no!</strong> {{message}} <a href="" ng-click="reset()"><em>Try Again?</em></a></h4>
                 </div>
             </div>
         </div>

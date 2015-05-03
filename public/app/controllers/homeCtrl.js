@@ -1,16 +1,20 @@
 angular.module('homeCtrl', ['subscriberService'])
     .controller('SubscriberController', function($scope, Subscriber) {
-    	$scope.submitted = false;
-    	$scope.err = false;
+        $scope.submitted = false;
+        $scope.err = false;
+        $scope.message = "";
         $scope.submit = function() {
-            var thing = !Subscriber.create($scope.mail);
-            console.log(thing);
-            $scope.submitted = true;
-            $scope.err = thing;
+            var submitPromise = Subscriber.subscribe($scope.mail);
+            submitPromise.then(function(result) {
+                $scope.submitted = true;
+                $scope.err = !result.success;
+                if ($scope.err) $scope.message = result.message;
+            });
         };
         $scope.reset = function() {
-         	$scope.submitted = false;
-        	$scope.err = false;
+            $scope.submitted = false;
+            $scope.err = false;
+            $scope.message = "";
             document.getElementById('subForm').reset();
         };
     });
