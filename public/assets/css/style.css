@@ -80,7 +80,7 @@ html {
 body {
     /* Margin bottom by footer height */
     
-    margin-bottom: 120px;
+    margin-bottom: 360px;
 }
 
 .footer {
@@ -89,7 +89,7 @@ body {
     width: 100%;
     /* Set the fixed height of the footer here */
     
-    height: 80px;
+    height: 310px;
     background-color: #f9f9f9;
 }
 
