@@ -11,6 +11,8 @@ var mongoose = require('mongoose');
 var config = require('./config');
 var path = require('path');
 var favicon = require('serve-favicon');
+var https = require('https');
+var fs = require('fs');
 
 // APP CONFIGURATION
 // ===================
@@ -57,5 +59,8 @@ app.get('*', function(req, res) {
 
 // START THE SERVER
 // ==================
-app.listen(config.port);
+https.createServer({
+    pfx: fs.readFileSync(config.certFile),
+    passphrase: config.certPass
+}, app).listen(config.port);
 console.log('server running on port ' + config.port);
