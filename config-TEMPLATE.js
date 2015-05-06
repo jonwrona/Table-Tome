@@ -1,8 +1,10 @@
-SSmodule.exports = {
+module.exports = {
     'port': _,
     'database': _,
     'secret': _,
     'mailgunDomain': _,
     'mailgunKey': _,
-    'mailgunSendAddress': _
+    'mailgunSendAddress': _,
+    'certFile': _,
+    'certPass': _
 }
