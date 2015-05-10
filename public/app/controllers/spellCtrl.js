@@ -1,13 +1,27 @@
-angular.module('spellCtrl', [])
-    .controller('spellController', function($rootScope, Spells) {
+angular.module('spellCtrl', ['infinite-scroll'])
+    .controller('spellController', function($rootScope, $timeout, Spells) {
         var vm = this;
 
         vm.items = Spells.spells;
+        vm.loadItems = function() {
+            vm.items = Spells.spells.slice(0,14);
+            return vm.items;
+        };
 
         vm.predicate = 'name';
         vm.reverse = false;
 
         vm.levelIncludes = [];
+        vm.clearLevels = function() {
+            for (i = 0; i < vm.levelIncludes.length; i++) {
+                var id = "";
+                if (vm.levelIncludes[i] == 0) id = "#cantrip";
+                else id = "#lvl" + vm.levelIncludes[i];
+                angular.element(document.querySelector(id)).attr('checked', false);
+            }
+            vm.levelIncludes = [];
+            console.log(angular.element(document.querySelector('.dropdown-menu')));
+        }
         vm.includeLevel = function(level) {
             var i = $.inArray(level, vm.levelIncludes);
             if (i > -1)
@@ -27,7 +41,7 @@ angular.module('spellCtrl', [])
         vm.includeClass = function(class_) {
             var i = $.inArray(class_, vm.classIncludes);
             if (i > -1)
-                vm.classIncludes.splice(i, 1)
+                vm.classIncludes.splice(i, 1);
             else
                 vm.classIncludes.push(class_);
         };
@@ -89,5 +103,12 @@ angular.module('spellCtrl', [])
 
         vm.setSpell = function(spell) {
             vm.modalSpell = spell;
+        };
+    })
+    .controller('scrollController', function($scope, Spells) {
+        $scope.moreSpells = function() {
+            //$scope.items = spellCtrl.loadItems();
+            var moreSpells = Spells.spells.slice($scope.items.length, $scope.items.length+10);
+            $scope.items.push(moreSpells);
         };
     });
