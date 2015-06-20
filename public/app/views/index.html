@@ -29,6 +29,8 @@
     <!-- main Angular app files -->
     <script src="app/app.routes.js"></script>
     <script src="app/app.js"></script>
+    <!-- index js -->
+    <script src="assets/js/index.js"></script>
 </head>
 
 <body ng-app="tabletome">
@@ -48,20 +50,21 @@
         </div>
     </header>
     <div ng-view></div>
-    <footer class="footer">
+    <footer id="footer" class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-xs-4">
+                <div class="col-sm-3">
                     <p class="text-left text-muted">
-                        <i class="fa fa-copyright"></i> Table Tome 2015
-                        <br> An <a href="http://rcos.rpi.edu/">RCOS</a> Project
+                        <i class="fa fa-copyright fa-fw"></i>&emsp;Table Tome 2015
                         <br>
-                        <i class="fa fa-github"></i>&emsp;<a href="https://github.com/jonwrona/Table-Tome">Github</a>
+                        <i class="fa fa-code fa-fw"></i>&emsp;An <a href="http://rcos.rpi.edu/">RCOS</a> Project
                         <br>
-                        <i class="fa fa-envelope-o"></i>&emsp;<a href="mailto:jonwrona@gmail.com">Contact Us</a>
+                        <i class="fa fa-github fa-fw"></i>&emsp;<a href="https://github.com/jonwrona/Table-Tome">Github</a> | <a href="https://github.com/jonwrona/Table-Tome/issues">Issues</a>
+                        <br>
+                        <i class="fa fa-envelope-o fa-fw"></i>&emsp;<a href="mailto:jonwrona@gmail.com">Contact Us</a>
                     </p>
                 </div>
-                <div class="col-xs-8">
+                <div class="col-sm-9">
                     <p class="text-justify text-muted">This Table Tome is not affiliated with, endorsed, sponsored, or specifically approved by Wizards of the Coast LLC. This Table Tome may use the trademarks and other intellectual property of Wizards of the Coast LLC, which is permitted under Wizards' Fan Site Policy <a href="http://dnd.wizards.com/articles/features/fan-site-kit">[link]</a>. For example, Dungeons & Dragons® is a trademark[s] of Wizards of the Coast. For more information about Wizards of the Coast or any of Wizards' trademarks or other intellectual property, please visit their website at (<a href="http://company.wizards.com/">www.wizards.com</a>).</p>
                 </div>
             </div>
