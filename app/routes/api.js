@@ -22,18 +22,13 @@ module.exports = function(app, express) {
         });
     });
 
-    apiRouter.route('/spells/basic')
+    apiRouter.route('/spells')
         .get(function(req, res) {
-            Spell.find({
-                'permissionLvl': 'basic'
-            }, function(err, spells) {
+            Spell.find({}, function(err, spells) {
                 if (err) return res.send(err);
                 res.json(spells);
             });
-        });
-
-    apiRouter.route('/spells')
-        .post(function(req, res) {
+        }).post(function(req, res) {
             var spell = new Spell();
             spell.permissionLvl = req.body.permissionLvl
             spell.custom = req.body.custom;
@@ -59,6 +54,7 @@ module.exports = function(app, express) {
                 });
             });
         });
+        
 
     return apiRouter;
 

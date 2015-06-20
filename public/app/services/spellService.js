@@ -3,7 +3,7 @@ angular.module('spellService', [])
         var o = {
             spells: []
         };
-        $http.get('/api/spells/basic').success(function(data) {
+        $http.get('/api/spells').success(function(data) {
             angular.copy(data, o.spells);
         });
         return o;

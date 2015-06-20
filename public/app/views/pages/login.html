@@ -1,39 +1,51 @@
 <div class="container">
-	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h2>Login</h1>
-				</div>
-
-				<div class="panel-body">
-					<form ng-submit="login.doLogin()">
-
-						<!-- Username -->
-						<div class="form-group">
-							<label>Username *</label>
-							<input type="text" class="form-control" ng-model="login.loginData.username" required>
-						</div>
-
-						<!-- Password -->
-						<div class="form-group">
-							<label>Password *</label>
-							<input type="password" class="form-control" ng-model="login.loginData.password" required>
-						</div>
-
-						<div class="alert alert-danger" ng-if="login.error">
-							{{ login.error }}
-						</div>
-
-						<!-- Login Button -->
-						<button type="submit" class="btn btn-block btn-primary">
-							<span ng-if="!login.processing">Login</span>
-							<span ng-if="login.processing"><i class="fa fa-spinner fa-pulse"></i></span>
-						</button>
-
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+    <section>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Attune to the Tome</h2>
+                <p class="text-justify">
+                    Whether you already have an account or you need to make one, this is where you will begin your adventures with the Tome.
+                </p>
+                <p class="text-justify">
+                    <em>All fields are required.</em>
+                </p>
+                <img class="img-thumbnail" src="../../assets/img/DnD_Starter_Art-cropped.jpg">
+            </div>
+            <div class="col-md-4">
+                <h2>Login</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="loginUsername" class="control-label">Username</label>
+                        <input type="text" class="form-control" id="loginUsername" placeholder="EnruffTheGreat" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword" class="control-label">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-default">Login</button>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h2>Register</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="registerEmail" class="control-label">Email Address</label>
+                        <input type="email" class="form-control" id="registerUsername" placeholder="EnruffDarcy@tabletome.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerUsername" class="control-label">Username</label>
+                        <input type="text" class="form-control" id="registerUsername" placeholder="EnruffTheGreat" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword" class="control-label">Password</label>
+                        <input type="password" class="form-control" id="registerPassword" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="registerPasswordVer" placeholder="Password Verification" required>
+                    </div>
+                    <button type="submit" class="btn btn-default">Create Account</button>
+                </form>
+            </div>
+            </SSdiv>
+    </section>
+    </div>

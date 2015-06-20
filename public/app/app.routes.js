@@ -4,6 +4,9 @@ angular.module('app.routes', ['ngRoute'])
             // home page
             .when('/', {
                 templateUrl: 'app/views/pages/home.html'
+            // login page
+            }).when('/login', {
+                templateUrl: 'app/views/pages/login.html'
             })
             // spellbook page
             .when('/spellbook', {
