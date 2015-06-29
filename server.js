@@ -16,6 +16,7 @@ var fs = require('fs');
 
 // APP CONFIGURATION
 // ===================
+
 // use body parser to grab info from POST requests
 app.use(bodyParser.urlencoded({
     extended: true
@@ -46,9 +47,19 @@ app.use(favicon(__dirname + '/public/assets/img/favicon.ico'));
 // ========
 
 // API ROUTE
+// -----------
+var basicRoutes = require('./app/routes/basic')(app, express);
+app.use('/basic', basicRoutes);
+
+// ADMIT ROUTE
+// --------------
+var adminRoutes = require('./app/routes/admin')(app, express);
+app.use('/admin', adminRoutes);
+
+// USER ROUTE
 // -------------
-var apiRoutes = require('./app/routes/api')(app, express);
-app.use('/api', apiRoutes);
+var userRoutes = require('./app/routes/user')(app, express);
+app.use('/user', userRoutes);
 
 // MAIN CATCHALL ROUTE
 // ---------------------
@@ -59,6 +70,7 @@ app.get('*', function(req, res) {
 
 // START THE SERVER
 // ==================
+
 https.createServer({
     pfx: fs.readFileSync(config.certFile),
     passphrase: config.certPass
