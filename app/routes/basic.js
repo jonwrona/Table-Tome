@@ -6,6 +6,7 @@ var mailgun = require('mailgun-js')({
     apiKey: config.mailgunKey,
     domain: config.mailgunDomain
 });
+var jwt = require('jsonwebtoken');
 var path = require('path');
 var fs = require('fs');
 
@@ -21,6 +22,7 @@ module.exports = function(app, express) {
 
     basicRouter.route('/register')
         .post(function(req, res) {
+            console.log(req.body.username);
             var user = new User();
 
             user.username = req.body.username;
@@ -32,7 +34,7 @@ module.exports = function(app, express) {
                     if (err.code == 11000) {
                         return res.json({
                             success: false,
-                            message: 'A user with that username already exists.'
+                            message: 'A user with that username or email already exists.'
                         });
                     } else {
                         return res.send(err);
@@ -47,7 +49,8 @@ module.exports = function(app, express) {
             console.log('processing a login request');
             User.findOne({
                 username: req.body.username
-            }).select('username password').exec(function(err, user) {
+            }).select('username password verified admin').exec(function(err, user) {
+                console.log(user);
                 if (err) throw err;
                 if (!user) {
                     res.json({
@@ -63,8 +66,10 @@ module.exports = function(app, express) {
                         });
                     } else {
                         var token = jwt.sign({
-                            username: user.username
-                        }, config.supersecret, {
+                            username: user.username,
+                            verified: user.verified,
+                            admin: user.admin
+                        }, config.secret, {
                             expiresInMinutes: 1440 // 24 hours
                         });
 

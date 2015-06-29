@@ -1,21 +1,31 @@
+var jwt = require('jsonwebtoken');
+var config = require('../../config');
+
+
 module.exports = function(app, express) {
 
     var adminRouter = express.Router();
 
     adminRouter.use(function(req, res, next) {
-    	var token = req.body.token || req.param('token') || req.headers['x-access=token'];
+    	var token = req.body.token || req.param('token') || req.headers['x-access-token'];
     	if (token) {
-    		jwt.verify(token, superSecret, function(err, decoded) {
+    		jwt.verify(token, config.secret, function(err, decoded) {
     			if (err) {
     				return res.status(403).send({
     					success: false,
     					message: 'Failed to authenticate token.'
     				});
     			} else {
-    				if (!decoded.admin) {
+    				console.log(">>> ADMIN??? " + decoded.admin);
+    				if (!decoded.verified) {
     					return res.status(403).send({
     						success: false,
-    						message: 'Token does not give admin rights.'
+    						message: 'User has not yet verified their email.'
+    					});
+    				} else if (!decoded.admin) {
+    					return res.status(403).send({
+    						success: false,
+    						message: 'User does not have admin rights.'
     					});
     				}
     				req.decoded = decoded;
