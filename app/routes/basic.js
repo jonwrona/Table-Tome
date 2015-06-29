@@ -13,15 +13,34 @@ module.exports = function(app, express) {
 
     var basicRouter = express.Router();
 
-    basicRouter.use(function(req, res, next) {
-        next();
-    });
-
     basicRouter.get('/', function(req, res) {
         res.json({
             message: 'welcome to the basic tabletome routes!'
         });
     });
+
+    basicRouter.route('/register')
+        .post(function(req, res) {
+            var user = new User();
+
+            user.username = req.body.username;
+            user.email = req.body.email;
+            user.password = req.body.password;
+
+            user.save(function(err) {
+                if (err) {
+                    if (err.code == 11000) {
+                        return res.json({
+                            success: false,
+                            message: 'A user with that username already exists.'
+                        });
+                    } else {
+                        return res.send(err);
+                    }
+                }
+                res.json({ message: 'User created!' });
+            });
+        });
 
     basicRouter.route('/authenticate')
         .post(function(req, res) {
