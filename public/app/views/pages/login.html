@@ -9,11 +9,11 @@
                 <p class="text-justify">
                     <em>All fields are required.</em>
                 </p>
-                <img class="img-thumbnail" src="../../assets/img/DnD_Starter_Art-cropped.jpg">
+                <img class="img-thumbnail" src="assets/img/DnD_Starter_Art-cropped.jpg">
             </div>
             <div class="col-md-4">
                 <h2>Login</h2>
-                <form>
+                <form id="loginForm">
                     <div class="form-group">
                         <label for="loginUsername" class="control-label">Username</label>
                         <input type="text" class="form-control" id="loginUsername" placeholder="EnruffTheGreat" required>
@@ -22,12 +22,17 @@
                         <label for="loginPassword" class="control-label">Password</label>
                         <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
                     </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Remember Me
+                        </label>
+                    </div>
                     <button type="submit" class="btn btn-default">Login</button>
                 </form>
             </div>
             <div class="col-md-4">
                 <h2>Register</h2>
-                <form>
+                <form id="registerForm">
                     <div class="form-group">
                         <label for="registerEmail" class="control-label">Email Address</label>
                         <input type="email" class="form-control" id="registerUsername" placeholder="EnruffDarcy@tabletome.com" required>
@@ -38,14 +43,11 @@
                     </div>
                     <div class="form-group">
                         <label for="registerPassword" class="control-label">Password</label>
-                        <input type="password" class="form-control" id="registerPassword" placeholder="Password" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="registerPasswordVer" placeholder="Password Verification" required>
+                        <input type="password" class="form-control" id="registerPassword" name="registerPassword" placeholder="Password" pattern=".{6,}" title="Must contain at least six characters." required>
                     </div>
                     <button type="submit" class="btn btn-default">Create Account</button>
                 </form>
             </div>
-            </SSdiv>
+        </div>
     </section>
-    </div>
+</div>

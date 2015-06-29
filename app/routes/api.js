@@ -1,5 +1,4 @@
 var Spell = require('../models/spell');
-var Sub = require('../models/subscriber');
 var config = require('../../config');
 var validator = require('mailgun-email-validation');
 var mailgun = require('mailgun-js')({
