@@ -48,8 +48,8 @@ app.use(favicon(__dirname + '/public/assets/img/favicon.ico'));
 
 // API ROUTE
 // -----------
-var basicRoutes = require('./app/routes/basic')(app, express);
-app.use('/basic', basicRoutes);
+var spellRoutes = require('./app/routes/spell')(app, express);
+app.use('/spell', spellRoutes);
 
 // ADMIT ROUTE
 // --------------

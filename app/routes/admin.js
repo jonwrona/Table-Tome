@@ -16,7 +16,6 @@ module.exports = function(app, express) {
     					message: 'Failed to authenticate token.'
     				});
     			} else {
-    				console.log(">>> ADMIN??? " + decoded.admin);
     				if (!decoded.verified) {
     					return res.status(403).send({
     						success: false,
