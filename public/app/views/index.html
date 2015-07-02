@@ -23,7 +23,6 @@
     <script src="assets/js/dropdowns-enhancement.js"></script>
     <!-- controllers -->
     <script src="app/controllers/mainCtrl.js"></script>
-    <script src="app/controllers/homeCtrl.js"></script>
     <script src="app/controllers/spellCtrl.js"></script>
     <!-- services -->
     <script src="app/services/authService.js"></script>
@@ -35,7 +34,7 @@
     <script src="assets/js/index.js"></script>
 </head>
 
-<body ng-app="tabletome">
+<body ng-app="tabletome" ng-controller="mainController as main">
     <header>
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -48,7 +47,7 @@
                         <li><a href="/spellbook"><i class="fa fa-magic"></i> Spellbook</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/login">Login / Register</a></li>
+                        <li ng-if="main.loggedIn"><a href="/login">Login / Register</a></li>
                     </ul>
                 </div>
             </div>

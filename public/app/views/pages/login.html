@@ -13,7 +13,7 @@
             </div>
             <div class="col-md-4">
                 <h2>Login</h2>
-                <form id="loginForm" ng-controller="loginController as login" ng-submit="login.doLogin()">
+                <form id="loginForm" ng-controller="mainController as login" ng-submit="login.doLogin()">
                     <div class="form-group">
                         <label for="loginUsername" class="control-label">Username</label>
                         <input type="text" class="form-control" ng-model="login.loginData.username" placeholder="EnruffTheGreat" required>
@@ -22,6 +22,7 @@
                         <label for="loginPassword" class="control-label">Password</label>
                         <input type="password" class="form-control" ng-model="login.loginData.password" placeholder="Password" required>
                     </div>
+                    <div class="alert alert-danger" role="alert" ng-if="login.error">{{login.error}}</div>
                     <button type="submit" class="btn btn-default">
                         <span ng-if="!login.processing">Login</span>
                         <span ng-if="login.processing"><i class="fa fa-spinner fa-pulse"></i></span>

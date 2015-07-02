@@ -1,5 +1,5 @@
-angular.module('mainCtrl', [])
-    .controller('loginController', function($rootScope, $location, Auth) {
+angular.module('mainCtrl', ['authService'])
+    .controller('mainController', function($rootScope, $location, Auth) {
     	var vm = this;
 
     	vm.loggedIn = Auth.isLoggedIn();
@@ -18,8 +18,12 @@ angular.module('mainCtrl', [])
     		Auth.login(vm.loginData.username, vm.loginData.password)
     		.success(function(data) {
     			vm.processing = false;
-    			if (data.success) $location.path('/');
-    			else vm.error = data.message;
+    			if (data.success) {
+                    $location.path('/');
+    			} else {
+                    console.log(data.message);
+                    vm.error = data.message;
+                }
     		});
     	};
 

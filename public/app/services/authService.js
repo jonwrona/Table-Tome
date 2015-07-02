@@ -1,5 +1,5 @@
 angular.module('authService', [])
-	// factory to login and get information
+    // factory to login and get information
     .factory('Auth', function($http, $q, AuthToken) {
         var authFactory = {};
 
@@ -54,22 +54,22 @@ angular.module('authService', [])
     })
     // integrate token into all requests
     .factory('AuthInterceptor', function($q, $location, AuthToken) {
-    	var interceptorFactory = {};
+        var interceptorFactory = {};
 
-    	interceptorFactory.request = function(config) {
-    		var token = AuthToken.getToken();
-    		if (token) config.headers['x-access-token'] = token;
-    		return config;
-    	};
+        interceptorFactory.request = function(config) {
+            var token = AuthToken.getToken();
+            if (token) config.headers['Authorization'] = token;
+            return config;
+        };
 
-    	interceptorFactory.responseError = function(response) {
-    		if (response.status == 403) {
-    			AuthToken.setToken();
-    			$location.path('/login');
-    		}
+        interceptorFactory.responseError = function(response) {
+            if (response.status == 403) {
+                AuthToken.setToken();
+                $location.path('/login');
+            }
 
-    		return $q.reject(response);
-    	};
+            return $q.reject(response);
+        };
 
-    	return interceptorFactory;
+        return interceptorFactory;
     });
