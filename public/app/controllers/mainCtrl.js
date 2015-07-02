@@ -21,7 +21,6 @@ angular.module('mainCtrl', ['authService'])
     			if (data.success) {
                     $location.path('/');
     			} else {
-                    console.log(data.message);
                     vm.error = data.message;
                 }
     		});

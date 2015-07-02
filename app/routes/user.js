@@ -69,8 +69,7 @@ module.exports = function(app, express) {
         });
 
     userRouter.use(function(req, res, next) {
-        var token = req.body.token || req.param('token') || req.headers['Authorization'];
-        console.log(token);
+        var token = req.body.token || req.param('token') || req.headers['x-access-token'];
         if (token) {
             jwt.verify(token, config.secret, function(err, decoded) {
                 if (err) {
@@ -79,6 +78,7 @@ module.exports = function(app, express) {
                         message: 'Failed to authenticate token.'
                     });
                 } else {
+                    console.log(decoded);
                     req.decoded = decoded;
                     next();
                 }
