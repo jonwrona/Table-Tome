@@ -11,40 +11,52 @@
                 </p>
                 <img class="img-thumbnail" src="assets/img/DnD_Starter_Art-cropped.jpg">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6">
                 <h2>Login</h2>
                 <form id="loginForm" ng-controller="mainController as login" ng-submit="login.doLogin()">
                     <div class="form-group">
                         <label for="loginUsername" class="control-label">Username</label>
                         <input type="text" class="form-control" ng-model="login.loginData.username" placeholder="EnruffTheGreat" required>
+                        <p class="help-block">Forgot your username? Click <a href="">here</a> and we'll send you an email reminder.</p>
                     </div>
                     <div class="form-group">
                         <label for="loginPassword" class="control-label">Password</label>
                         <input type="password" class="form-control" ng-model="login.loginData.password" placeholder="Password" required>
+                        <p class="help-block">If you forgot your password, click <a href="">here</a> and we'll send you and email with a link to reset it.</p>
                     </div>
-                    <div class="alert alert-danger" role="alert" ng-if="login.error">{{login.error}}</div>
-                    <button type="submit" class="btn btn-default">
-                        <span ng-if="!login.processing">Login</span>
-                        <span ng-if="login.processing"><i class="fa fa-spinner fa-pulse"></i></span>
+                    <div class="alert alert-danger" role="alert" ng-if="login.loginError"><strong>{{login.loginError}}</strong></div>
+                    <button style="width:100%" type="submit" class="btn btn-primary">
+                        <span ng-if="!login.loginProcessing">Login</span>
+                        <span ng-if="login.loginProcessing"><i class="fa fa-spinner fa-pulse"></i></span>
                     </button>
                 </form>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6">
                 <h2>Register</h2>
-                <form id="registerForm">
+                <form id="registerForm" ng-controller="mainController as register" ng-submit="register.doRegister()">
                     <div class="form-group">
                         <label for="registerEmail" class="control-label">Email Address</label>
-                        <input type="email" class="form-control" id="registerUsername" placeholder="EnruffDarcy@tabletome.com" required>
+                        <input type="email" class="form-control" ng-model="register.regData.email" placeholder="EnruffDarcy@tabletome.com" required>
                     </div>
                     <div class="form-group">
                         <label for="registerUsername" class="control-label">Username</label>
-                        <input type="text" class="form-control" id="registerUsername" placeholder="EnruffTheGreat" required>
+                        <input type="text" class="form-control" ng-model="register.regData.username" placeholder="EnruffTheGreat" pattern="[a-zA-Z0-9-_]{4,}" maxlength="20" required>
+                        <p class="help-block">Your username must be between four and 20 characters long, and can only contain letters, numbers, '-' and '_'.</p>
                     </div>
                     <div class="form-group">
                         <label for="registerPassword" class="control-label">Password</label>
-                        <input type="password" class="form-control" id="registerPassword" name="registerPassword" placeholder="Password" pattern=".{6,}" title="Must contain at least six characters." required>
+                        <input type="password" class="form-control" ng-model="register.regData.password" name="registerPassword" placeholder="Password" pattern=".{8,}" maxlength="30" required>
+                        <p class="help-block">Your password must be between eight and 30 characters long.</p>
                     </div>
-                    <button type="submit" class="btn btn-default">Create Account</button>
+                    <div class="form-group">
+                        <label for="registerPassCheck" class="control-label">Verify Password</label>
+                        <input type="password" class="form-control" ng-model="register.regData.passCheck" name="registerPassCheck" placeholder="Password" maxlength="30" required>
+                    </div>
+                    <div class="alert alert-danger" role="alert" ng-if="register.registerError"><strong>{{register.registerError}}</strong></div>
+                    <button style="width:100%" type="submit" class="btn btn-primary">
+                        <span ng-if="!register.registerProcessing">Create Account</span>
+                        <span ng-if="register.registerProcessing"><i class="fa fa-spinner fa-pulse"></i></span>
+                    </button>
                 </form>
             </div>
         </div>

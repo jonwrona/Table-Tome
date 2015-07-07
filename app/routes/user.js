@@ -8,7 +8,6 @@ module.exports = function(app, express) {
 
     userRouter.route('/register')
         .post(function(req, res) {
-            console.log(req.body.username);
             var user = new User();
 
             user.username = req.body.username;
@@ -18,21 +17,27 @@ module.exports = function(app, express) {
             user.save(function(err) {
                 if (err) {
                     if (err.code == 11000) {
+                        var field = err.err.split('.$')[1];
+                        field = field.split(' dup key')[0];
+                        field = field.substring(0, field.lastIndexOf('_'));
+                        console.log(field);
                         return res.json({
                             success: false,
-                            message: 'A user with that username or email already exists.'
+                            message: 'A user with that ' + field + ' already exists.'
                         });
                     } else {
                         return res.send(err);
                     }
                 }
-                res.json({ message: 'User created!' });
+                res.json({
+                    success: true,
+                    message: 'User created!'
+                });
             });
         });
 
     userRouter.route('/authenticate')
         .post(function(req, res) {
-            console.log('processing a login request');
             User.findOne({
                 username: req.body.username
             }).select('username password verified admin').exec(function(err, user) {
@@ -40,14 +45,14 @@ module.exports = function(app, express) {
                 if (!user) {
                     res.json({
                         success: false,
-                        message: 'Authentication failed. User not found.'
+                        message: 'Login failed. User not found.'
                     });
                 } else if (user) {
                     var validPassword = user.comparePassword(req.body.password);
                     if (!validPassword) {
                         res.json({
                             success: false,
-                            message: 'Authentication failed. Wrong password.'
+                            message: 'Login failed. Incorrect password.'
                         });
                     } else {
                         var token = jwt.sign({
@@ -60,7 +65,7 @@ module.exports = function(app, express) {
 
                         res.json({
                             success: true,
-                            message: 'Authentication successful.',
+                            message: 'Login successful.',
                             token: token
                         });
                     }
@@ -70,7 +75,6 @@ module.exports = function(app, express) {
 
     userRouter.use(function(req, res, next) {
         var token = req.body.token || req.param('token') || req.headers['x-access-token'];
-        console.log(token);
         if (token) {
             jwt.verify(token, config.secret, function(err, decoded) {
                 if (err) {
@@ -98,8 +102,8 @@ module.exports = function(app, express) {
     });
 
     userRouter.get('/me', function(req, res) {
-		res.send(req.decoded);
-	});
+        res.send(req.decoded);
+    });
 
     return userRouter;
 
