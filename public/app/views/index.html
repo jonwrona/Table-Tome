@@ -47,7 +47,9 @@
                         <li><a href="/spellbook"><i class="fa fa-magic"></i> Spellbook</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li ng-if="main.loggedIn"><a href="/login">Login / Register</a></li>
+                        <li ng-if="!main.loggedIn"><a href="/login">Login / Register</a></li>
+                        <li ng-if="main.loggedIn"><a href="#"><i class="fa fa-user"></i> {{main.user.username}}</a></li>
+                        <li ng-if="main.loggedIn"><a href="/login" ng-click="main.doLogout()">Logout</a></li>
                     </ul>
                 </div>
             </div>
