@@ -2,6 +2,7 @@ angular.module('tabletome', [
         'ngAnimate',
         'app.routes',
         'mainCtrl',
+        'accountCtrl',
         'spellCtrl',
         'authService',
         'registerService',

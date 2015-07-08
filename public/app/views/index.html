@@ -23,6 +23,7 @@
     <script src="assets/js/dropdowns-enhancement.js"></script>
     <!-- controllers -->
     <script src="app/controllers/mainCtrl.js"></script>
+    <script src="app/controllers/accountCtrl.js"></script>
     <script src="app/controllers/spellCtrl.js"></script>
     <!-- services -->
     <script src="app/services/registerService.js"></script>
@@ -49,7 +50,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li ng-if="!main.loggedIn"><a href="/login">Login / Register</a></li>
-                        <li ng-if="main.loggedIn"><a href="#"><i class="fa fa-user"></i> {{main.user.username}}</a></li>
+                        <li ng-if="main.loggedIn"><a href="/account"><i class="fa fa-user"></i> {{main.user.username}}</a></li>
                         <li ng-if="main.loggedIn"><a href="/login" ng-click="main.doLogout()">Logout</a></li>
                     </ul>
                 </div>

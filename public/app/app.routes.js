@@ -1,25 +1,25 @@
 angular.module('app.routes', ['ngRoute'])
     .config(function($routeProvider, $locationProvider) {
         $routeProvider
-            // home page
+        // home page
             .when('/', {
                 templateUrl: 'app/views/pages/home.html'
+            })
             // login page
-            }).when('/login', {
+            .when('/login', {
                 templateUrl: 'app/views/pages/login.html'
+            })
+            // account page
+            .when('/account', {
+                templateUrl: 'app/views/pages/account.html',
+                controller: 'accountController',
+                controllerAs: 'accCtrl'
             })
             // spellbook page
             .when('/spellbook', {
                 templateUrl: 'app/views/pages/spellbook.html',
                 controller: 'spellController',
                 controllerAs: 'spellCtrl'
-            })
-            // mailing list success and failure pages
-            .when('/mail/success', {
-                templateUrl: 'app/views/pages/mail/success.html'
-            })
-            .when('/mail/failure', {
-                templateUrl: 'app/views/pages/mail/failure.html'
             })
             // otherwise page doesn't exist
             .otherwise({

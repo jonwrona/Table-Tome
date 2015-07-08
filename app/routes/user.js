@@ -20,7 +20,6 @@ module.exports = function(app, express) {
                         var field = err.err.split('.$')[1];
                         field = field.split(' dup key')[0];
                         field = field.substring(0, field.lastIndexOf('_'));
-                        console.log(field);
                         return res.json({
                             success: false,
                             message: 'A user with that ' + field + ' already exists.'
@@ -40,7 +39,7 @@ module.exports = function(app, express) {
         .post(function(req, res) {
             User.findOne({
                 username: req.body.username
-            }).select('username password verified admin').exec(function(err, user) {
+            }).select('username email password verified admin').exec(function(err, user) {
                 if (err) throw err;
                 if (!user) {
                     res.json({
@@ -55,12 +54,14 @@ module.exports = function(app, express) {
                             message: 'Login failed. Incorrect password.'
                         });
                     } else {
+                        console.log(user);
                         var token = jwt.sign({
                             username: user.username,
+                            email: user.email,
                             verified: user.verified,
                             admin: user.admin
                         }, config.secret, {
-                            expiresInMinutes: 1440 // 24 hours
+                            expiresInMinutes: 1 // for testing // 24 hours = 1440
                         });
 
                         res.json({
