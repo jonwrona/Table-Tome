@@ -1,13 +1,11 @@
-angular.module('accountCtrl', ['authService'])
+angular.module('accountCtrl', ['authService', 'userService'])
     .controller('accountController', function(Auth) {
         var vm = this;
 
         vm.active = 'account';
 
-        console.log(Auth.isLoggedIn());
         Auth.getUser().then(function(data) {
             vm.user = data.data;
-            console.log(vm.user);
         });
 
         vm.isActive = function(tab) {
@@ -22,4 +20,52 @@ angular.module('accountCtrl', ['authService'])
             vm.active = tab;
         };
 
+    })
+    .controller('accountSettingsController', function($window, User) {
+        var vm = this;
+
+        vm.processing = false;
+        vm.err = '';
+        vm.accData = {};
+
+        vm.submit = function() {
+            vm.processing = true;
+            vm.err = '';
+
+            console.log(vm.accData);
+            if (vm.accData.password) {
+                if (vm.accData.password != vm.passcheck) {
+                    vm.err = 'New password verification does not match new password.'
+                    vm.passcheck = '';
+                    vm.password = '';
+                    vm.processing = false;
+                    return;
+                }
+            }
+
+            User.reauth(vm.password)
+                .success(function(data) {
+                    if (!data.success) {
+                        vm.processing = false;
+                        vm.err = data.message;
+                        vm.passcheck = '';
+                        vm.password = '';
+                        return;
+                    }
+                    User.update(vm.accData).success(function(data) {
+                        vm.processing = false;
+                        if (!data.success) {
+                            vm.err = data.message;
+                            vm.passcheck = '';
+                            vm.password = '';
+                        } else {
+                            vm.accData = {};
+                            vm.passcheck = '';
+                            vm.password = '';
+                            vm.err = '';
+                            $window.location.reload();
+                        }
+                    });
+                });
+        };
     });

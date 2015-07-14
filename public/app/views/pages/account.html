@@ -15,16 +15,16 @@
         <section class="col-md-9">
             <div ng-show="accCtrl.active == 'account'">
                 <div class="row">
-                    <form class="col-md-12 form-horizontal">
+                    <form class="col-md-12 form-horizontal" ng-controller="accountSettingsController as accSett" ng-submit="accSett.submit()">
                         <div class="form-group">
-                            <label for="username" class="col-sm-2 control-label"><strong>Username</strong></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="email" placeholder="{{accCtrl.user.username}}">
+                            <label for="username" class="col-sm-3 control-label"><strong>Username</strong></label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="username" value="{{accCtrl.user.username}}" title="You can't change your username. Yet." disabled>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email" class="col-sm-2 control-label"><strong>Email Address</strong></label>
-                            <div class="col-sm-10">
+                            <label for="email" class="col-sm-3 control-label"><strong>Email Address</strong></label>
+                            <div class="col-sm-9">
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="email" value="{{accCtrl.user.email}}" title="Sorry, we can't allow users to change their email address." disabled>
                                     <span class="input-group-btn" ng-if="accCtrl.user.verified"><button class="btn btn-success" type="button" disabled>Email Verified!</button></span>
@@ -33,40 +33,48 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-10 col-sm-offset-2">
-                                <div class="alert alert-danger" role="alert" ng-if="!accCtrl.user.verified">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <div class="alert alert-warning" role="alert" ng-if="!accCtrl.user.verified">
                                     <strong>Your email is not verified!</strong> You will not have access to most of Table Tome's features until you have verified your email.
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="password" class="col-sm-2 control-label"><strong>Change Password</strong></label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="password" placeholder="New Password">
+                            <label for="password" class="col-sm-3 control-label"><strong>Change Password</strong></label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="password" placeholder="New Password" ng-model="accSett.accData.password" pattern=".{8,}" maxlength="30" title="Your password must be between eight and 30 characters long.">
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-2">
-                                <input type="password" class="form-control" id="password2" placeholder="New Password">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <input type="password" class="form-control" id="password2" ng-model="accSett.passcheck" placeholder="New Password">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="currPassword" class="col-sm-2 control-label"><strong>Current Password</strong></label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="currPassword" placeholder="Current Password" required>
+                            <label for="currPassword" class="col-sm-3 control-label"><strong>Current Password</strong></label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="currPassword" ng-model="accSett.password" placeholder="Current Password" required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-10 col-sm-offset-2">
+                            <div class="col-sm-9 col-sm-offset-3">
                                 <div class="well">
                                     In order to change any of your account information you must provide your current password.
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-10 col-sm-offset-2">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <div class="alert alert-danger" role="alert" ng-if="accSett.err">
+                                    <strong>{{accSett.err}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-9 col-sm-offset-3">
                                 <button style="width:100%" type="submit" class="btn btn-lg btn-success">
-                                    <span><strong>Update Account Information</strong></span>
+                                    <span ng-if="!accSett.processing"><strong>Update Account Information</strong></span>
+                                    <span ng-if="accSett.processing"><i class="fa fa-spinner fa-pulse"></i></span>
                                 </button>
                             </div>
                         </div>

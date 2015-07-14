@@ -1,5 +1,5 @@
 angular.module('mainCtrl', ['authService', 'registerService'])
-    .controller('mainController', function($rootScope, $location, Auth, Register) {
+    .controller('mainController', function($rootScope, $location, $window, Auth, Register) {
     	var vm = this;
 
     	vm.loggedIn = Auth.isLoggedIn();
@@ -22,6 +22,7 @@ angular.module('mainCtrl', ['authService', 'registerService'])
             .success(function(data) {
                 vm.loginProcessing = false;
                 if (data.success) {
+                    $window.location.reload();
                     $location.path('/account');
                 } else {
                     vm.loginError = data.message;

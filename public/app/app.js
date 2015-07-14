@@ -6,6 +6,7 @@ angular.module('tabletome', [
         'spellCtrl',
         'authService',
         'registerService',
+        'userService',
         'spellService'
     ])
     // application configuration to integrate token into requests
