@@ -23,6 +23,7 @@
     "md5": "^1.0.0",
     "mongoose": "^3.8.23",
     "morgan": "^1.5.1",
+    "password-generator": "^1.0.0",
     "request": "^2.55.0",
     "serve-favicon": "^2.2.0"
   }

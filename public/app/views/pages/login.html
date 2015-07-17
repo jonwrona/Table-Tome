@@ -17,12 +17,13 @@
                     <div class="form-group">
                         <label for="loginUsername" class="control-label">Username</label>
                         <input type="text" class="form-control" ng-model="login.loginData.username" placeholder="EnruffTheGreat" required>
-                        <p class="help-block">Forgot your username? Click <a href="">here</a> and we'll send you an email reminder.</p>
                     </div>
                     <div class="form-group">
                         <label for="loginPassword" class="control-label">Password</label>
                         <input type="password" class="form-control" ng-model="login.loginData.password" placeholder="Password" required>
-                        <p class="help-block">If you forgot your password, click <a href="">here</a> and we'll send you and email with a link to reset it.</p>
+                    </div>
+                    <div class="form-group">
+                        <p class="help-block">If you forgot your username or password, go <a href="/remindme">here</a> and we'll help you regain access to your account.</p>
                     </div>
                     <div class="alert alert-danger" role="alert" ng-if="login.loginError"><strong>{{login.loginError}}</strong></div>
                     <button style="width:100%" type="submit" class="btn btn-primary">

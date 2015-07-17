@@ -9,6 +9,12 @@ angular.module('app.routes', ['ngRoute'])
             .when('/login', {
                 templateUrl: 'app/views/pages/login.html'
             })
+            // forgot page
+            .when('/remindme', {
+                templateUrl: 'app/views/pages/remindme.html',
+                controller: 'remindController',
+                controllerAs: 'remindCtrl'
+            })
             // account page
             .when('/account', {
                 templateUrl: 'app/views/pages/account.html',

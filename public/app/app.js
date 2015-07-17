@@ -4,6 +4,7 @@ angular.module('tabletome', [
         'mainCtrl',
         'accountCtrl',
         'spellCtrl',
+        'remindCtrl',
         'authService',
         'registerService',
         'userService',
