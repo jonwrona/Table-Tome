@@ -52,6 +52,10 @@
                         <label for="registerPassCheck" class="control-label">Verify Password</label>
                         <input type="password" class="form-control" ng-model="register.regData.passCheck" name="registerPassCheck" placeholder="Password" maxlength="30" required>
                     </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Agree to the <a href="#tc" data-toggle="modal" role="button">terms and conditions.</a></label>
+                    </div>
                     <div class="alert alert-danger" role="alert" ng-if="register.registerError"><strong>{{register.registerError}}</strong></div>
                     <button style="width:100%" type="submit" class="btn btn-primary">
                         <span ng-if="!register.registerProcessing">Create Account</span>
@@ -61,4 +65,21 @@
             </div>
         </div>
     </section>
+    <!-- Modal -->
+    <div class="modal fade" id="tc">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times; </span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Terms & Conditions</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Terms and conditions will go here when I write them... ew.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

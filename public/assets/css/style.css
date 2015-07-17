@@ -53,19 +53,19 @@ header .navbar {
 /* for sortable tables */
 th a:link {
     color: #000;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 th a:hover {
     color: #000;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 th a:visited {
     color: #000;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 th a:active {
     color: #000;
-    text-decoration: none
+    text-decoration: none !important;
 }
 
 

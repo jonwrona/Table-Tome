@@ -1,72 +1,114 @@
 <header class="image-bg-spellbook-header">
     <h1 class="text-center image-header-text"><i class="fa fa-magic"></i> Spellbook</h1>
 </header>
-<div class="container">
+<div class="container" ng-controller="mainController as main">
     <div class="row">
         <div class="col-lg-12">
-            <nav class="navbar" role="navigation">
+            <nav class="navbar" role="spell_list" ng-if="main.loggedIn">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#spell-filter-collapse"><span class="sr-only">Toggle Navigation</span><i class="fa fa-bars fa-lg"></i></button>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#list-filter-collapse"><span class="sr-only">Toggle Spell Lists</span><i class="fa fa-bars fa-lg"></i></button>
+                        <b1 class="navbar-brand">Spell Lists</b1>
+                    </div>
+                    <div class="collapse navbar-collapse" id="list-filter-collapse">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <p class="navbar-text"><em><small>Spell List:</small></em></p>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Spells <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <input type="radio" id="allspells" ng-click="">
+                                        <label for="allspells">All Spells</label>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="navbar-form navbar-right" role="create">
+                            <div class="form-group input-group">
+                                <input type="text" class="form-control" placeholder="Spell List Name">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-success" title="Create spell list"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <nav class="navbar" role="filter">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#spell-filter-collapse"><span class="sr-only">Toggle Filtering</span><i class="fa fa-bars fa-lg"></i></button>
                         <b1 class="navbar-brand">Filtering</b1>
                     </div>
                     <div class="collapse navbar-collapse" id="spell-filter-collapse">
                         <ul class="nav navbar-nav">
                             <li>
-                                <p class="navbar-text"><em>Levels:</em></p>
+                                <p class="navbar-text"><em><small>Levels:</small></em></p>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Levels <span class="caret"></span></a>
                                 <ul class="dropdown-menu noclose">
                                     <li>
-                                        <input type="checkbox" id="cantrip" ng-click="spellCtrl.includeLevel(0)">
+                                        <input type="checkbox" id="clearlevels" ng-click="console.log('clicking')" checked>
+                                        <label for="clear">All Levels</label>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <input class="level-filter" type="checkbox" id="cantrip" ng-click="spellCtrl.includeLevel(0)">
                                         <label for="cantrip">Cantrip</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl1" ng-click="spellCtrl.includeLevel(1)">
+                                        <input class="level-filter" type="checkbox" id="lvl1" ng-click="spellCtrl.includeLevel(1)">
                                         <label for="lvl1">Level 1</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl2" ng-click="spellCtrl.includeLevel(2)">
+                                        <input class="level-filter" type="checkbox" id="lvl2" ng-click="spellCtrl.includeLevel(2)">
                                         <label for="lvl2">Level 2</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl3" ng-click="spellCtrl.includeLevel(3)">
+                                        <input class="level-filter" type="checkbox" id="lvl3" ng-click="spellCtrl.includeLevel(3)">
                                         <label for="lvl3">Level 3</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl4" ng-click="spellCtrl.includeLevel(4)">
+                                        <input class="level-filter" type="checkbox" id="lvl4" ng-click="spellCtrl.includeLevel(4)">
                                         <label for="lvl4">Level 4</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl5" ng-click="spellCtrl.includeLevel(5)">
+                                        <input class="level-filter" type="checkbox" id="lvl5" ng-click="spellCtrl.includeLevel(5)">
                                         <label for="lvl5">Level 5</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl6" ng-click="spellCtrl.includeLevel(6)">
+                                        <input class="level-filter" type="checkbox" id="lvl6" ng-click="spellCtrl.includeLevel(6)">
                                         <label for="lvl6">Level 6</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl7" ng-click="spellCtrl.includeLevel(7)">
+                                        <input class="level-filter" type="checkbox" id="lvl7" ng-click="spellCtrl.includeLevel(7)">
                                         <label for="lvl7">Level 7</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl8" ng-click="spellCtrl.includeLevel(8)">
+                                        <input class="level-filter" type="checkbox" id="lvl8" ng-click="spellCtrl.includeLevel(8)">
                                         <label for="lvl8">Level 8</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="lvl9" ng-click="spellCtrl.includeLevel(9)">
+                                        <input class="level-filter" type="checkbox" id="lvl9" ng-click="spellCtrl.includeLevel(9)">
                                         <label for="lvl9">Level 9</label>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <p class="navbar-text"><em>Classes:</em>
+                                <p class="navbar-text"><em><small>Classes:</small></em>
                                 </p>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Classes <span class="caret"></span></a>
                                 <ul class="dropdown-menu noclose">
+                                    <li>
+                                        <input type="checkbox" id="clearclasses" ng-click="spellCtrl.clearClassFilter()" checked>
+                                        <label for="clear">All Classes</label>
+                                    </li>
+                                    <li class="divider"></li>
                                     <li>
                                         <input type="checkbox" id="bard" ng-click="spellCtrl.includeClass('Bard')">
                                         <label for="bard">Bard</label>
@@ -102,12 +144,17 @@
                                 </ul>
                             </li>
                             <li>
-                                <p class="navbar-text"><em>Schools:</em>
+                                <p class="navbar-text"><em><small>Schools:</small></em>
                                 </p>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Schools<s></s><span class="caret"></span></a>
                                 <ul class="dropdown-menu noclose">
+                                    <li>
+                                        <input type="checkbox" id="clearschools" ng-click="spellCtrl.clearSchoolFilter()" checked>
+                                        <label for="clear">All Schools</label>
+                                    </li>
+                                    <li class="divider"></li>
                                     <li>
                                         <input type="checkbox" id="abjuration" ng-click="spellCtrl.includeSchool('Abjuration')">
                                         <label for="abjuration">Abjuration</label>
@@ -143,12 +190,18 @@
                                 </ul>
                             </li>
                             <li>
-                                <p class="navbar-text"><em>Source:</em>
+                                <p class="navbar-text"><em><small>Sources:</small></em>
                                 </p>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Sources<s></s><span class="caret"></span></a>
                                 <ul class="dropdown-menu noclose">
+                                    <li>
+                                        <input type="checkbox" id="clearsources" ng-click="spellCtrl.clearSourceFilter()" checked>
+                                        <label for="clear">All Sources</label>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Official Documents</li>
                                     <li>
                                         <input type="checkbox" id="pbr" ng-click="spellCtrl.includeSource('Basic Rules')">
                                         <label for="pbr">Basic Rules</label>
@@ -162,11 +215,15 @@
                                         <label for="eepc">Elemental Evil</label>
                                     </li>
                                     <li class="divider"></li>
+                                    <li class="dropdown-header">Tome Certified Documents</li>
                                 </ul>
                             </li>
                         </ul>
+                        <form class="navbar-form navbar-right" role="reset">
+                            <button class="btn btn-warning" title="Reset filters"><i class="fa fa-refresh"></i></button>
+                        </form>
                         <form class="navbar-form navbar-right" role="search">
-                            <div class="form-group">
+                            <div class="form-group input-group">
                                 <input type="text" class="form-control" placeholder="Search" ng-model="search">
                             </div>
                         </form>
@@ -280,7 +337,19 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="btn-group" ng-if="main.loggedIn">
+                        <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Save to List
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown">
+                                <li><a href="#">Dropdown link</a></li>
+                                <li><a href="#">Dropdown link</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

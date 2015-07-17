@@ -10,10 +10,19 @@ angular.module('spellCtrl', [])
         vm.levelIncludes = [];
         vm.includeLevel = function(level) {
             var i = $.inArray(level, vm.levelIncludes);
-            if (i > -1)
+            if (i > -1) {
                 vm.levelIncludes.splice(i, 1);
-            else
+                if (vm.levelIncludes.length == 0)
+                    $('#clearlevels').attr('checked', 'checked');
+            } else {
                 vm.levelIncludes.push(level);
+                $('#clearlevels').removeAttr('checked');
+            }
+        };
+        vm.clearLevelFilter = function() {
+            vm.levelIncludes = [];
+            $('#clearlevels').attr('checked', 'checked');
+            $('.level-filter').removeAttr('checked');
         };
         vm.levelFilter = function(spell) {
             if (vm.levelIncludes.length > 0) {
@@ -26,10 +35,16 @@ angular.module('spellCtrl', [])
         vm.classIncludes = [];
         vm.includeClass = function(class_) {
             var i = $.inArray(class_, vm.classIncludes);
-            if (i > -1)
-                vm.classIncludes.splice(i, 1)
-            else
+            if (i > -1) {
+                vm.classIncludes.splice(i, 1);
+            }
+            else {
                 vm.classIncludes.push(class_);
+            }
+        };
+        vm.clearClassFilter = function() {
+            vm.classIncludes = [];
+            $('#clearclasses').prop('checked', true);
         };
         vm.classFilter = function(spell) {
             if (vm.classIncludes.length > 0) {
@@ -54,6 +69,10 @@ angular.module('spellCtrl', [])
                 vm.schoolIncludes.push(school);
             }
         };
+        vm.clearSchoolFilter = function() {
+            vm.schoolIncludes = [];
+            $('#clearschools').prop('checked', true);
+        };
         vm.schoolFilter = function(spell) {
             if (vm.schoolIncludes.length > 0) {
                 if ($.inArray(spell.school, vm.schoolIncludes) >= 0) {
@@ -72,6 +91,10 @@ angular.module('spellCtrl', [])
             } else {
                 vm.sourceIncludes.push(source);
             }
+        };
+        vm.clearSourceFilter = function() {
+            vm.sourceIncludes = [];
+            $('#clearsources').prop('checked', true);
         };
         vm.sourceFilter = function(spell) {
             if (vm.sourceIncludes.length > 0) {
