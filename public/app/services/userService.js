@@ -17,6 +17,14 @@ angular.module('userService', [])
                 });
         };
 
+        userFactory.verify = function(email) {
+            return $http.post('/user/sendverify', {
+                email: email
+            }).success(function(data) {
+                return data;
+            });
+        }
+
         return userFactory;
     })
     .factory('Remind', function($http) {

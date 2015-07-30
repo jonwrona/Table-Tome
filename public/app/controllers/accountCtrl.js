@@ -28,11 +28,27 @@ angular.module('accountCtrl', ['authService', 'userService'])
         vm.err = '';
         vm.accData = {};
 
+        vm.verifyErr = '';
+        vm.verifySuccess = '';
+        vm.verify = function(email) {
+            console.log(email);
+            User.verify(email)
+                .success(function(data) {
+                    console.log(data);
+                    if (data.success) {
+                        vm.verifySuccess = data.message;
+                        vm.verifyErr = '';
+                    } else {
+                        vm.verifySuccess = '';
+                        vm.verifyErr = data.message;
+                    }
+                });
+        };
+
         vm.submit = function() {
             vm.processing = true;
             vm.err = '';
 
-            console.log(vm.accData);
             if (vm.accData.password) {
                 if (vm.accData.password != vm.passcheck) {
                     vm.err = 'New password verification does not match new password.'

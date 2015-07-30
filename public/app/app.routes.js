@@ -27,6 +27,10 @@ angular.module('app.routes', ['ngRoute'])
                 controller: 'spellController',
                 controllerAs: 'spellCtrl'
             })
+            // verified email page
+            .when('/verified/:id', {
+                templateUrl: 'app/views/pages/verified.html',
+            })
             // otherwise page doesn't exist
             .otherwise({
                 templateUrl: 'app/views/pages/404.html'

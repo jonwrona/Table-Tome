@@ -11,6 +11,29 @@ module.exports = function(app, express) {
 
     var userRouter = express.Router();
 
+    userRouter.get('/verify/:_id', function(req, res) {
+        User.findOne({
+            _id: req.params._id
+        }, function(err, user) {
+            if (err) return res.send(err);
+            if (!user) {
+                return res.json({
+                    success: false,
+                    message: 'No user with id ' + req.params._id + ' found.'
+                });
+            }
+
+            user.verified = true;
+            user.save(function(err) {
+                if (err) {
+                    return res.send(err);
+                } else {
+                    return res.redirect('/verified/' + req.params._id);
+                }
+            });
+        });
+    });
+
     userRouter.route('/getusername')
         .post(function(req, res) {
             User.findOne({
@@ -188,6 +211,43 @@ module.exports = function(app, express) {
         });
     });
 
+    // move below middleware
+    userRouter.post('/sendverify', function(req, res) {
+        var email = req.body.email;
+        User.findOne({
+            email: email
+        }, function(err, user) {
+            if (err) return res.send(err);
+            if (!user) {
+                return res.json({
+                    success: false,
+                    message: 'No user with email ' + email + ' found.'
+                });
+            }
+
+            var data = {
+                from: config.mailgunSendAddress,
+                to: req.body.email,
+                subject: 'Verify Your Table Tome Email',
+                html: 'Click <a href="https://' + req.get('host') + '/user/verify/' + user._id + '">here</a> to verify your email.'
+            }
+
+            mailgun.messages().send(data, function(err, body) {
+                if (err) {
+                    return res.json({
+                        success: false,
+                        message: 'The verification email could not be sent.'
+                    });
+                } else {
+                    return res.json({
+                        success: true,
+                        message: 'An email has been sent to ' + email + '. Click the link to verify it.'
+                    });
+                }
+            });
+        });
+    });
+
     userRouter.post('/reauth', function(req, res) {
         var username = req.decoded.username;
         User.findOne({
@@ -228,7 +288,7 @@ module.exports = function(app, express) {
             if (!user) {
                 return res.json({
                     success: false,
-                    message: 'No user with username ' + username + 'found.'
+                    message: 'No user with username ' + username + ' found.'
                 });
             }
 
@@ -262,6 +322,8 @@ module.exports = function(app, express) {
             });
         });
     });
+
+
 
     userRouter.get('/me', function(req, res) {
         res.send(req.decoded);

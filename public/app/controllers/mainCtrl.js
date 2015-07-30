@@ -56,4 +56,10 @@ angular.module('mainCtrl', ['authService', 'registerService'])
     		vm.user = '';
     		$location.path('/');
     	};
+    })
+    // verified email controller
+    .controller('verifiedController', function($routeParams) {
+        var vm = this;
+
+
     });

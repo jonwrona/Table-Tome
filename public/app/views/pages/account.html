@@ -28,7 +28,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="email" value="{{accCtrl.user.email}}" title="Sorry, we can't allow users to change their email address." disabled>
                                     <span class="input-group-btn" ng-if="accCtrl.user.verified"><button class="btn btn-success" type="button" disabled>Email Verified!</button></span>
-                                    <span class="input-group-btn" ng-if="!accCtrl.user.verified"><button class="btn btn-warning" type="button">Verify Email</button></span>
+                                    <span class="input-group-btn" ng-if="!accCtrl.user.verified"><button class="btn btn-warning" type="button" ng-click="accSett.verify(accCtrl.user.email)" ng-disabled="accSett.verifySuccess">Verify Email</button></span>
                                 </div>
                             </div>
                         </div>
@@ -36,6 +36,16 @@
                             <div class="col-sm-9 col-sm-offset-3">
                                 <div class="alert alert-warning" role="alert" ng-if="!accCtrl.user.verified">
                                     <strong>Your email is not verified!</strong> You will not have access to most of Table Tome's features until you have verified your email.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <div class="alert alert-danger" role="alert" ng-if="accSett.verifyErr">
+                                    {{accSett.verifyErr}}
+                                </div>
+                                <div class="alert alert-success" role="alert" ng-if="accSett.verifySuccess">
+                                    {{accSett.verifySuccess}}
                                 </div>
                             </div>
                         </div>
