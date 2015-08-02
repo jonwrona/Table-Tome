@@ -22,7 +22,6 @@ angular.module('mainCtrl', ['authService', 'registerService'])
             .success(function(data) {
                 vm.loginProcessing = false;
                 if (data.success) {
-                    $window.location.reload();
                     $location.path('/account');
                 } else {
                     vm.loginError = data.message;
@@ -53,13 +52,12 @@ angular.module('mainCtrl', ['authService', 'registerService'])
 
     	vm.doLogout = function() {
     		Auth.logout();
-    		vm.user = '';
+    		vm.user = null;
     		$location.path('/');
     	};
     })
     // verified email controller
-    .controller('verifiedController', function($routeParams) {
+    .controller('verifiedController', function($routeParams, Auth) {
         var vm = this;
-
-
+        Auth.logout();
     });

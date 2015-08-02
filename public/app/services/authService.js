@@ -1,6 +1,6 @@
 angular.module('authService', [])
     // factory to login and get information
-    .factory('Auth', function($http, $q, $location, AuthToken) {
+    .factory('Auth', function($http, $q, $location, $window, AuthToken) {
         var authFactory = {};
 
         authFactory.login = function(username, password) {
@@ -9,13 +9,14 @@ angular.module('authService', [])
                 password: password
             }).success(function(data) {
                 AuthToken.setToken(data.token);
+                $window.location.reload();
                 return data;
             });
         };
 
         authFactory.logout = function() {
             AuthToken.setToken();
-            $location.path('/login');
+            $window.location.reload();
         };
 
         authFactory.isLoggedIn = function() {

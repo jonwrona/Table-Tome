@@ -28,7 +28,7 @@ module.exports = function(app, express) {
                 if (err) {
                     return res.send(err);
                 } else {
-                    return res.redirect('/verified/' + req.params._id);
+                    return res.redirect('/verified');
                 }
             });
         });
