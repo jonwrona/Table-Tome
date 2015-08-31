@@ -96,9 +96,15 @@ angular.module('spellCtrl', [])
         vm.spellLists = [
 
             {
-                _id: 'asdfadsfasdf',
+                _id: 'asdfadsfasdf1',
                 userid: 'jonwrona',
                 name: 'list1',
+                spells: [ '55145b1ddd87101a304cd012' ]
+            },
+            {
+                _id: 'asdfasdfasdf2',
+                userid: 'jonwrona',
+                name: 'list2',
                 spells: [ '55145b1ddd87101a304cd012' ]
             }
 
