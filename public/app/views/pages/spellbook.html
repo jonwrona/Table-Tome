@@ -15,12 +15,15 @@
                             <li>
                                 <p class="navbar-text"><em><small>Spell List:</small></em></p>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Spells <span class="caret"></span></a>
+                            <li ng-if="spellCtrl.spellLists.length <= 0">
+                                <p class="navbar-text">No spell lists.</p>
+                            </li>
+                            <li class="dropdown" ng-if="spellCtrl.spellLists.length > 0">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">None <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <input type="radio" id="allspells" ng-click="">
-                                        <label for="allspells">All Spells</label>
+                                    <li ng-repeat="list in spellCtrl.spellLists">
+                                        <input class="spellList" type="checkbox" ng-click="spellCtrl.includeList(list)" id="list_{{list._id}}">
+                                        <label for="list_{{list._id}}">{{list.name}}</label>
                                     </li>
                                 </ul>
                             </li>
@@ -50,11 +53,6 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Levels <span class="caret"></span></a>
                                 <ul class="dropdown-menu noclose">
-                                    <li>
-                                        <input type="checkbox" id="clearlevels" ng-click="console.log('clicking')" checked>
-                                        <label for="clear">All Levels</label>
-                                    </li>
-                                    <li class="divider"></li>
                                     <li>
                                         <input class="level-filter" type="checkbox" id="cantrip" ng-click="spellCtrl.includeLevel(0)">
                                         <label for="cantrip">Cantrip</label>
@@ -105,11 +103,6 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Classes <span class="caret"></span></a>
                                 <ul class="dropdown-menu noclose">
                                     <li>
-                                        <input type="checkbox" id="clearclasses" ng-click="spellCtrl.clearClassFilter()" checked>
-                                        <label for="clear">All Classes</label>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
                                         <input type="checkbox" id="bard" ng-click="spellCtrl.includeClass('Bard')">
                                         <label for="bard">Bard</label>
                                     </li>
@@ -151,11 +144,6 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Schools<s></s><span class="caret"></span></a>
                                 <ul class="dropdown-menu noclose">
                                     <li>
-                                        <input type="checkbox" id="clearschools" ng-click="spellCtrl.clearSchoolFilter()" checked>
-                                        <label for="clear">All Schools</label>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
                                         <input type="checkbox" id="abjuration" ng-click="spellCtrl.includeSchool('Abjuration')">
                                         <label for="abjuration">Abjuration</label>
                                     </li>
@@ -196,11 +184,6 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Sources<s></s><span class="caret"></span></a>
                                 <ul class="dropdown-menu noclose">
-                                    <li>
-                                        <input type="checkbox" id="clearsources" ng-click="spellCtrl.clearSourceFilter()" checked>
-                                        <label for="clear">All Sources</label>
-                                    </li>
-                                    <li class="divider"></li>
                                     <li class="dropdown-header">Official Documents</li>
                                     <li>
                                         <input type="checkbox" id="pbr" ng-click="spellCtrl.includeSource('Basic Rules')">
@@ -216,13 +199,14 @@
                                     </li>
                                     <li class="divider"></li>
                                     <li class="dropdown-header">Tome Certified Documents</li>
+                                    <li>
+                                        <label>Coming Soon...</label>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
-                        <form class="navbar-form navbar-right" role="reset">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search" ng-model="search">
-                            </div>
+                        <form class="navbar-form navbar-right" role="search">
+                            <input type="text" class="form-control" placeholder="Search" ng-model="search">
                         </form>
                     </div>
                 </div>
@@ -243,7 +227,7 @@
                         </tr>
                     </thead>
                     <tbody data-link="row" class="rowlink">
-                        <tr ng-repeat="spell in spellCtrl.items | filter:search | filter:spellCtrl.levelFilter | filter:spellCtrl.classFilter | filter:spellCtrl.schoolFilter | filter:spellCtrl.sourceFilter | orderBy:spellCtrl.predicate:spellCtrl.reverse">
+                        <tr ng-repeat="spell in spellCtrl.items | filter:search | filter:spellCtrl.levelFilter | filter:spellCtrl.classFilter | filter:spellCtrl.schoolFilter | filter:spellCtrl.sourceFilter | filter:spellCtrl.listFilter | orderBy:spellCtrl.predicate:spellCtrl.reverse">
                             <td><a href ng-click="spellCtrl.setSpell(spell)" data-toggle="modal" data-target="#spellModal">{{spell.name}}</a></td>
                             <td ng-switch on="spell.level">
                                 <p ng-switch-when=0>Cantrip</p>

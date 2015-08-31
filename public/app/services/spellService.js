@@ -7,4 +7,13 @@ angular.module('spellService', [])
             angular.copy(data, o.spells);
         });
         return o;
+    }])
+    .factory('SpellLists', ['$http', function($http) {
+    	var listFactory = {};
+
+    	listFactory.refresh = function() {
+    		return $http.get('/user/lists').lists;
+    	};
+
+    	return listFactory;
     }]);

@@ -19,11 +19,6 @@ angular.module('spellCtrl', [])
                 $('#clearlevels').removeAttr('checked');
             }
         };
-        vm.clearLevelFilter = function() {
-            vm.levelIncludes = [];
-            $('#clearlevels').attr('checked', 'checked');
-            $('.level-filter').removeAttr('checked');
-        };
         vm.levelFilter = function(spell) {
             if (vm.levelIncludes.length > 0) {
                 if ($.inArray(spell.level, vm.levelIncludes) < 0)
@@ -37,14 +32,9 @@ angular.module('spellCtrl', [])
             var i = $.inArray(class_, vm.classIncludes);
             if (i > -1) {
                 vm.classIncludes.splice(i, 1);
-            }
-            else {
+            } else {
                 vm.classIncludes.push(class_);
             }
-        };
-        vm.clearClassFilter = function() {
-            vm.classIncludes = [];
-            $('#clearclasses').prop('checked', true);
         };
         vm.classFilter = function(spell) {
             if (vm.classIncludes.length > 0) {
@@ -69,10 +59,6 @@ angular.module('spellCtrl', [])
                 vm.schoolIncludes.push(school);
             }
         };
-        vm.clearSchoolFilter = function() {
-            vm.schoolIncludes = [];
-            $('#clearschools').prop('checked', true);
-        };
         vm.schoolFilter = function(spell) {
             if (vm.schoolIncludes.length > 0) {
                 if ($.inArray(spell.school, vm.schoolIncludes) >= 0) {
@@ -92,10 +78,6 @@ angular.module('spellCtrl', [])
                 vm.sourceIncludes.push(source);
             }
         };
-        vm.clearSourceFilter = function() {
-            vm.sourceIncludes = [];
-            $('#clearsources').prop('checked', true);
-        };
         vm.sourceFilter = function(spell) {
             if (vm.sourceIncludes.length > 0) {
                 if (spell.books.length === 0)
@@ -109,6 +91,38 @@ angular.module('spellCtrl', [])
             }
             return spell;
         }
+
+        // test list
+        vm.spellLists = [
+
+            {
+                _id: 'asdfadsfasdf',
+                userid: 'jonwrona',
+                name: 'list1',
+                spells: [ '55145b1ddd87101a304cd012' ]
+            }
+
+        ];
+        vm.listIncludes = [];
+        vm.includeList = function(list) {
+            var i = $.inArray(list, vm.listIncludes);
+            if (i > -1) {
+                vm.listIncludes.splice(i, 1);
+            } else {
+                vm.listIncludes.push(list);
+            }
+        };
+        vm.listFilter = function(spell) {
+            if (vm.listIncludes.length > 0) {
+                for (i = 0; i < vm.listIncludes.length; i++) {
+                    if ($.inArray(spell._id, vm.listIncludes[i].spells) >= 0) {
+                        return spell;
+                    }
+                }
+                return;
+            }
+            return spell;
+        };
 
         vm.setSpell = function(spell) {
             vm.modalSpell = spell;

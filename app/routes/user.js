@@ -1,4 +1,5 @@
 var User = require('../models/user');
+var List = require('../models/list');
 var jwt = require('jsonwebtoken');
 var config = require('../../config');
 var mailgun = require('mailgun-js')({
@@ -115,7 +116,6 @@ module.exports = function(app, express) {
             });
         });
 
-
     userRouter.route('/register')
         .post(function(req, res) {
             var user = new User();
@@ -183,6 +183,18 @@ module.exports = function(app, express) {
             });
         });
 
+    // move below middleware
+    userRouter.route('/lists')
+        .get(function(req, res) {
+            List.find({
+                userid: req.body.userid
+            }).exec(function(err, l) {
+                res.json({
+                    lists: l
+                });
+            });
+        });
+
     userRouter.use(function(req, res, next) {
         var token = req.headers['x-access-token'];
         if (token) {
@@ -211,7 +223,6 @@ module.exports = function(app, express) {
         });
     });
 
-    // move below middleware
     userRouter.post('/sendverify', function(req, res) {
         var email = req.body.email;
         User.findOne({
@@ -322,8 +333,6 @@ module.exports = function(app, express) {
             });
         });
     });
-
-
 
     userRouter.get('/me', function(req, res) {
         res.send(req.decoded);
