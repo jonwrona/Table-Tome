@@ -149,7 +149,7 @@ module.exports = function(app, express) {
         .post(function(req, res) {
             User.findOne({
                 username: req.body.username
-            }).select('username email password verified admin').exec(function(err, user) {
+            }).select('_id username email password verified admin').exec(function(err, user) {
                 if (err) throw err;
                 if (!user) {
                     res.json({
@@ -164,7 +164,9 @@ module.exports = function(app, express) {
                             message: 'Login failed. Incorrect password.'
                         });
                     } else {
+                        console.log(user._id);
                         var token = jwt.sign({
+                            id: user._id,
                             username: user.username,
                             email: user.email,
                             verified: user.verified,
@@ -180,18 +182,6 @@ module.exports = function(app, express) {
                         });
                     }
                 }
-            });
-        });
-
-    // move below middleware
-    userRouter.route('/lists')
-        .get(function(req, res) {
-            List.find({
-                userid: req.body.userid
-            }).exec(function(err, l) {
-                res.json({
-                    lists: l
-                });
             });
         });
 
@@ -338,6 +328,143 @@ module.exports = function(app, express) {
         res.send(req.decoded);
     });
 
+    userRouter.get('/lists', function(req, res) {
+        List.find({
+            userid: req.decoded.id
+        }).exec(function(err, l) {
+            res.json({
+                lists: l
+            });
+        });
+    });
+
+    userRouter.post('/lists', function(req, res) {
+        var list = new List();
+
+        list.userid = req.decoded.id;
+        list.name = req.body.name;
+
+
+        List.find({
+            userid: req.decoded.id
+        }).exec(function(err, l) {
+            if (l.length >= 5) {
+                return res.json({
+                    success: false,
+                    message: 'List cap reached'
+                });
+            } else {
+                list.save(function(err) {
+                    if (err) {
+                        res.send(err);
+                    }
+                    res.json({
+                        success: true,
+                        message: 'List created!'
+                    });
+                });
+            }
+        });
+    });
+
+    userRouter.put('/lists', function(req, res) {
+        var listid = req.body.listid;
+        List.findOne({
+            _id: listid
+        }, function(err, list) {
+            if (err) {
+                return res.send(err);
+            }
+            if (!list) {
+                return res.json({
+                    success: false,
+                    message: 'No list with id ' + listid + ' found.'
+                });
+            }
+            if (list.userid != req.decoded.id) {
+                return res.json({
+                    success: false,
+                    message: 'User does not match list\'s creator.'
+                });
+            }
+
+            if (req.body.spellid) {
+                if (list.spells.indexOf(req.body.spellid) >= 0) {
+                    return res.json({
+                        success: false,
+                        message: 'Spell already in that list.'
+                    });
+                } else {
+                    list.spells.push(req.body.spellid);
+                }
+            }
+
+            list.save(function(err) {
+                if (err) {
+                    res.send(err);
+                }
+                return res.json({
+                    success: true,
+                    message: 'Spell added!'
+                });
+            });
+        });
+    });
+
+    userRouter.post('/lists/delete', function(req, res) {
+        var listid = req.body.listid;
+        List.findOne({ _id: listid }).remove(function(err) {
+            if (err) return res.send(err);
+            return res.json({
+                success: true,
+                message: 'Deleted list with id ' + listid + '.'
+            });
+        });
+    });
+
+    userRouter.post('/lists/remove', function(req, res) {
+        var listid = req.body.listid;
+        List.findOne({
+            _id: listid
+        }, function(err, list) {
+            if (err) {
+                return res.send(err);
+            }
+            if (!list) {
+                return res.json({
+                    success: false,
+                    message: 'No list with id ' + listid + ' found.'
+                });
+            }
+            if (list.userid != req.decoded.id) {
+                return res.json({
+                    success: false,
+                    message: 'User does not match list\'s creator.'
+                });
+            }
+            if (req.body.spellid) {
+                var ind = list.spells.indexOf(req.body.spellid);
+                if (ind >= 0) {
+                    list.spells.splice(ind, 1);
+                } else {
+                    return res.json({
+                        success: false,
+                        message: 'Spell is not in that list.'
+                    });
+                }
+            }
+            list.save(function(err) {
+                if (err) {
+                    res.send(err);
+                }
+                return res.json({
+                    success: true,
+                    message: 'Spell added!'
+                });
+            });
+        });
+    });
+
     return userRouter;
 
-}
+};

@@ -1,8 +1,26 @@
-angular.module('spellCtrl', [])
-    .controller('spellController', function($rootScope, Spells) {
+angular.module('spellCtrl', ['authService', 'spellService'])
+    .filter('spellById', function() {
+        return function(input, id) {
+            for (var i = 0; i < input.length; i++) {
+                if (input[i]._id == id) {
+                    return input[i];
+                }
+            }
+            return null;
+        }
+    }).controller('spellController', function($rootScope, $filter, Spells, SpellLists, Auth) {
         var vm = this;
 
         vm.items = Spells.spells;
+
+        vm.loaded = false;
+        vm.spellLists = [];
+        if (Auth.isLoggedIn()) {
+            SpellLists.refresh().success(function(data) {
+                vm.spellLists = data.lists;
+                vm.loaded = true;
+            });
+        }
 
         vm.predicate = 'name';
         vm.reverse = false;
@@ -92,23 +110,6 @@ angular.module('spellCtrl', [])
             return spell;
         }
 
-        // test list
-        vm.spellLists = [
-
-            {
-                _id: 'asdfadsfasdf1',
-                userid: 'jonwrona',
-                name: 'list1',
-                spells: [ '55145b1ddd87101a304cd012' ]
-            },
-            {
-                _id: 'asdfasdfasdf2',
-                userid: 'jonwrona',
-                name: 'list2',
-                spells: [ '55145b1ddd87101a304cd012' ]
-            }
-
-        ];
         vm.listIncludes = [];
         vm.includeList = function(list) {
             var i = $.inArray(list, vm.listIncludes);
@@ -132,5 +133,65 @@ angular.module('spellCtrl', [])
 
         vm.setSpell = function(spell) {
             vm.modalSpell = spell;
+        };
+
+
+        vm.createList = function() {
+            if (vm.newSpellListName) {
+                var name = vm.newSpellListName;
+                vm.newSpellListName = "";
+                SpellLists.create(name).success(function(data) {
+                    if (data.success) {
+                        SpellLists.refresh().success(function(data2) {
+                            vm.spellLists = data2.lists;
+                        });
+                    } else {
+                        alert("I'm sorry, you can only have five spell lists. If you wish to create a new list, you must delete one.");
+                    }
+                });
+            }
+        };
+
+        vm.addSpell = function(listid, spellid) {
+            SpellLists.add(listid, spellid).success(function(data) {
+                if (data.success) {
+                    SpellLists.refresh().success(function(data2) {
+                        vm.spellLists = data2.lists;
+                    });
+                } else {
+                    alert(data.message);
+                }
+            });
+        };
+
+        vm.removeSpell = function(listid, spellid) {
+            SpellLists.remove(listid, spellid).success(function(data) {
+                if (data.success) {
+                    SpellLists.refresh().success(function(data2) {
+                        vm.spellLists = data2.lists;
+                    });
+                } else {
+                    alert(data.message);
+                }
+            });
+        };
+
+        vm.deleteList = function(listid) {
+            SpellLists.del(listid).success(function(data) {
+                if (data.success) {
+                    SpellLists.refresh().success(function(data2) {
+                        vm.spellLists = data2.lists;
+                    });
+                } else {
+                    alert(data.message);
+                }
+            });
+        };
+
+        vm.findName = function(spellid) {
+            if (!vm.loaded) return "Loading...";
+            var spell = $filter('spellById')(vm.items, spellid);
+            if (!spell) return "Spell not found!";
+            return spell.name;
         };
     });

@@ -156,3 +156,24 @@ section {
 .section-paragraph {
     margin: 30px 0;
 }
+
+/* SPECIFIC THINGS
+====================== */
+
+#editSpellListsBtn {
+    margin-left: 15px;
+}
+
+.trash {
+    float: right;
+    color: #c2002b;
+    background: none;
+    border: none;
+}
+
+.edit {
+    float: right;
+    color: #3fb618;
+    background: none;
+    border: none;
+}

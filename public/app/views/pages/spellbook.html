@@ -18,7 +18,7 @@
                             <li ng-if="spellCtrl.spellLists.length <= 0">
                                 <p class="navbar-text">No spell lists.</p>
                             </li>
-                            <li class="dropdown" ng-if="spellCtrl.spellLists.length > 0">
+                            <li ng-if="spellCtrl.spellLists.length > 0">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">None <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li ng-repeat="list in spellCtrl.spellLists">
@@ -27,12 +27,16 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li>
+                                <button id="editSpellListsBtn" type="button" class="btn btn-info navbar-btn" data-toggle="modal" data-target="#listsModal">Edit Spell Lists</button>
+                            </li>
                         </ul>
-                        <form class="navbar-form navbar-right" role="create">
+                        <form class="navbar-form navbar-right" role="create" ng-submit="spellCtrl.createList()">
                             <div class="form-group input-group">
-                                <input type="text" class="form-control" placeholder="Spell List Name">
+                                <input type="text" class="form-control" placeholder="Spell List Name" ng-required="true" ng-model="spellCtrl.newSpellListName" ng-disabled="spellCtrl.spellLists.length >= 5">
                                 <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-success" title="Create spell list"><i class="fa fa-plus"></i></button>
+                                    <button type="submit" class="btn btn-success" title="Create spell list" ng-disabled="spellCtrl.spellLists.length >= 5">{{spellCtrl.spellLists.length}} / 5 <small>max</small></i>
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -242,16 +246,13 @@
                                     <li ng-repeat="class in spell.classes | orderBy:class">{{class}}</li>
                                 </ul>
                             </td>
-                            <!-- <td>{{spell.castingTime}}</td>
-                                <td>{{spell.range}}</td>
-                                <td>{{spell.duration}}</td> -->
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <!-- modal -->
+    <!-- spell modal -->
     <div class="modal fade" id="spellModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -321,16 +322,50 @@
                     <div class="btn-group" ng-if="main.loggedIn">
                         <div class="dropdown">
                             <button class="btn btn-success dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Save to List
-                                <span class="caret"></span>
+                                Save to List <i class="fa fa-caret-up"></i>
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdown">
-                                <li><a href="#">Dropdown link</a></li>
-                                <li><a href="#">Dropdown link</a></li>
+                            <ul class="dropdown-menu pull-top pull-right" aria-labelledby="dropdown">
+                                <li ng-repeat="list in spellCtrl.spellLists" ng-if="list.spells.indexOf(spellCtrl.modalSpell._id) < 0">
+                                    <a href="#" ng-click="spellCtrl.addSpell(list._id, spellCtrl.modalSpell._id)">{{list.name}}</a>
+                                </li>
+                                <li ng-repeat="list in spellCtrl.spellLists" ng-if="list.spells.indexOf(spellCtrl.modalSpell._id) >= 0">
+                                    <label>{{list.name}} <small>(already in this list!)</small></label>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- edit spell lists modal -->
+    <div class="modal fade" id="listsModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">EDIT SPELL LISTS</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-group">
+                        <p ng-if="spellCtrl.spellLists.length <= 0">
+                            You have no spell lists to edit!
+                        </p>
+                        <div class="panel panel-default" ng-repeat="list in spellCtrl.spellLists">
+                            <div class="panel-heading">
+                                <button type="button" class="trash" title="Delete {{list.name}}" ng-click="spellCtrl.deleteList(list._id)"><i class="fa fa-trash"></i></button>
+                                <button type="button" class="edit" title="Edit {{list.name}}'s name"><i class="fa fa-pencil"></i></button>
+                                <h4 class="panel-title">{{list.name}}</h4>
+                            </div>
+                            <div class="list-group">
+                                <li ng-repeat="spell in list.spells" class="list-group-item">
+                                    <button type="button" class="trash" title="Remove from {{list.name}}" ng-click="spellCtrl.removeSpell(list._id, spell)"><i class="fa fa-minus-circle"></i></button>
+                                    {{spellCtrl.findName(spell)}}
+                                </li>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
