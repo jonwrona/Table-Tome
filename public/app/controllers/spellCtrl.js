@@ -22,6 +22,8 @@ angular.module('spellCtrl', ['authService', 'spellService'])
             });
         }
 
+        vm.disp = "+";
+
         vm.predicate = 'name';
         vm.reverse = false;
 
@@ -110,6 +112,10 @@ angular.module('spellCtrl', ['authService', 'spellService'])
             return spell;
         }
 
+        vm.setSpell = function(spell) {
+            vm.modalSpell = spell;
+        };
+
         vm.listIncludes = [];
         vm.includeList = function(list) {
             var i = $.inArray(list, vm.listIncludes);
@@ -130,11 +136,6 @@ angular.module('spellCtrl', ['authService', 'spellService'])
             }
             return spell;
         };
-
-        vm.setSpell = function(spell) {
-            vm.modalSpell = spell;
-        };
-
 
         vm.createList = function() {
             if (vm.newSpellListName) {
@@ -167,6 +168,15 @@ angular.module('spellCtrl', ['authService', 'spellService'])
         vm.removeSpell = function(listid, spellid) {
             SpellLists.remove(listid, spellid).success(function(data) {
                 if (data.success) {
+                    for (var i = 0; i < vm.listIncludes.length; i++) {
+                        if (vm.listIncludes[i]._id == listid) {
+                            var ind = vm.listIncludes[i].spells.indexOf(spellid);
+                            if (ind >= 0) {
+                                vm.listIncludes[i].spells.splice(ind, 1);
+                            }
+                        }
+                    }
+                    console.log(vm.listIncludes);
                     SpellLists.refresh().success(function(data2) {
                         vm.spellLists = data2.lists;
                     });
@@ -179,6 +189,12 @@ angular.module('spellCtrl', ['authService', 'spellService'])
         vm.deleteList = function(listid) {
             SpellLists.del(listid).success(function(data) {
                 if (data.success) {
+                    for (var i = 0; i < vm.listIncludes.length; i++) {
+                        if (vm.listIncludes[i]._id == listid) {
+                            vm.listIncludes.splice(i, 1);
+                        }
+                    }
+                    console.log(vm.listIncludes);
                     SpellLists.refresh().success(function(data2) {
                         vm.spellLists = data2.lists;
                     });

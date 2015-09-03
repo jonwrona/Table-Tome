@@ -33,10 +33,9 @@
                         </ul>
                         <form class="navbar-form navbar-right" role="create" ng-submit="spellCtrl.createList()">
                             <div class="form-group input-group">
-                                <input type="text" class="form-control" placeholder="Spell List Name" ng-required="true" ng-model="spellCtrl.newSpellListName" ng-disabled="spellCtrl.spellLists.length >= 5">
+                                <input type="text" class="form-control" placeholder="New List Name" ng-required="true" ng-model="spellCtrl.newSpellListName" ng-disabled="spellCtrl.spellLists.length >= 5">
                                 <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-success" title="Create spell list" ng-disabled="spellCtrl.spellLists.length >= 5">{{spellCtrl.spellLists.length}} / 5 <small>max</small></i>
-                                    </button>
+                                    <button type="submit" class="btn btn-success" ng-disabled="spellCtrl.spellLists.length >= 5" title="You have {{spellCtrl.spellLists.length}} out of 5 maximum spell lists."><i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
                         </form>
