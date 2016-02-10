@@ -1,29 +1,25 @@
 {
-  "name": "Table-Tome",
-  "version": "0.1.0",
-  "description": "A Dungeons & Dragons 5th edition toolbox.",
+  "name": "table-tome",
+  "version": "2.0.0",
+  "description": "A DnD 5e toolbox.",
   "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jonwrona/Table-Tome.git"
+    "url": "git+https://github.com/jonwrona/Table-Tome.git"
   },
-  "author": "Jonathan Wrona",
-  "license": "The MIT License",
+  "author": "",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/jonwrona/Table-Tome/issues"
   },
-  "homepage": "http://tabletome.com",
+  "homepage": "https://github.com/jonwrona/Table-Tome#readme",
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.12.0",
-    "express": "^4.11.2",
-    "jsonwebtoken": "^3.2.2",
-    "mailgun-email-validation": "0.0.3",
-    "mailgun-js": "^0.6.9",
-    "mongoose": "3.8.23",
-    "morgan": "^1.5.1",
-    "password-generator": "^1.0.0",
-    "request": "^2.55.0",
-    "serve-favicon": "^2.2.0"
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4",
+    "letsencrypt-express": "^1.0.6",
+    "morgan": "^1.6.1"
   }
 }

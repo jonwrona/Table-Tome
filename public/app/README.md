@@ -1,1 +1,0 @@
-Angular things go in this directory.
